@@ -26,7 +26,7 @@ $ yun
 ```
 
 ## 截图
-![]()
+![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)
 
 ## License
 the MIT License (magicdawn@qq.com)

@@ -1,0 +1,32 @@
+{
+  "name": "yun-playlist-downloader",
+  "version": "0.0.1",
+  "description": "",
+  "main": "playlist downloader for NetEase CloudMusic",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin":{
+    "yun": "bin/yun"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:magicdawn/yun-playlist-downloader.git"
+  },
+  "keywords": [
+    "163",
+    "cloudmusic",
+    "yunyinyue"
+  ],
+  "author": "magicdawn",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^2.9.27",
+    "cheerio": "^0.19.0",
+    "co": "^4.5.4",
+    "lodash": "^3.9.3",
+    "minimist": "^1.1.1",
+    "superagent": "^1.2.0",
+    "superagent-bluebird-promise": "^2.0.2"
+  }
+}

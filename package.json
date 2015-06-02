@@ -19,6 +19,9 @@
     "yunyinyue"
   ],
   "author": "magicdawn",
+  "engines":{
+    "node": ">1.0.0"
+  },
   "license": "MIT",
   "dependencies": {
     "bluebird": "^2.9.27",

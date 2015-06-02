@@ -2,7 +2,7 @@
 网易云音乐 - 歌单 - 下载器
 
 ## 安装
-via 万能的npm
+via 万能的npm, iojs required
 ```sh
 $ npm i yun-playlist-downloader -g
 ```

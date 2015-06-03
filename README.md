@@ -28,5 +28,8 @@ $ yun
 ## 截图
 ![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)
 
+## TODOS
+- [ ] 下载专辑支持,url 为album/?id=xxx 页面class id与playlist 略有不同
+
 ## License
 the MIT License (magicdawn@qq.com)

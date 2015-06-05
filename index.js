@@ -1,3 +1,5 @@
+'use strict';
+
 var request = require('superagent-bluebird-promise').agent();
 var co = require('co');
 var padLeft = require('lodash').padLeft;
@@ -25,7 +27,7 @@ var getHtml = function(url) {
  * http://music.163.com/playlist?id=12583200
  */
 var normalizeUrl = function(url) {
-  return url.replace(/(https?:.*?\/)(#\/)/, '$1')
+  return url.replace(/(https?:.*?\/)(#\/)/, '$1');
 };
 
 /**
@@ -105,7 +107,7 @@ var download = function(url, file) {
         this.close(function() {
           resolve();
         });
-      })
+      });
   });
 };
 

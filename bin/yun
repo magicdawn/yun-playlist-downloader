@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
+'use strict';
+
 global.Promise = require('bluebird');
 var co = require('co');
-var lib = require('../');
+var lib = require('../lib');
 var cheerio = require('cheerio');
 var path = require('path');
 var fs = require('fs');
@@ -19,10 +21,10 @@ var argv = require('minimist')(process.argv.slice(2), {
 if (argv._.length === 0 || argv.help) {
   console.log(
     `
-  网易云音乐 歌单 下载器
+  网易云音乐 歌单/专辑 下载器
 
   使用:
-    yun [选项] <歌单地址>
+    yun [选项] <地址>
 
   示例:
     # 20首同时下载
@@ -47,8 +49,11 @@ co(function * () {
   var html = yield lib.getHtml(url);
   var $ = cheerio.load(html);
 
-  var name = lib.getPlaylistName($);
-  var songs = yield lib.getSongs($);
+  var type = lib.getType(url); // album or playlist
+  var name = lib.getTitle($, type);
+  var songs = yield lib.getSongs($, type);
+
+  // return;
 
   // directory
   var dir = path.resolve(name);
@@ -57,19 +62,25 @@ co(function * () {
   }
 
   var start = Date.now();
-  console.log('正在下载,请稍候...');
+  console.log(`正在下载『${ name }』,请稍候...`);
 
+  /**
+   * song = {
+   *   filename,url,index
+   * }
+   */
   yield Promise.map(songs, function(song) {
     var ext = path.extname(song.url);
-    var filename = path.join(dir, `${song.singer} - ${song.title}.${ ext }`);
+    var filename = path.join(dir, `${ song.filename }.${ ext }`);
+
     return lib.download(song.url, filename)
       .then(function() {
         console.log(
-          `√ ${ song.index }/${ songs.length } 下载完成 ${ song.singer } - ${ song.title }`);
+          `√ ${ song.index }/${ songs.length } 下载完成 ${ song.filename }`);
       })
       .catch(function(e) {
         console.log(
-          `× ${ song.index }/${ songs.length } 下载失败 ${ song.singer } - ${ song.title }`);
+          `× ${ song.index }/${ songs.length } 下载失败 ${ song.filename }`);
         console.error(e.stack || e);
       });
   }, {

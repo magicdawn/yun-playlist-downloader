@@ -3,3 +3,4 @@ node_modules
 .git
 yun.png
 *.log
+.jshintrc

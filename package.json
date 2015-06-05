@@ -1,8 +1,8 @@
 {
   "name": "yun-playlist-downloader",
   "version": "0.0.2",
-  "description": "",
-  "main": "playlist downloader for NetEase CloudMusic",
+  "description": "NetEase CloudMusic downloader",
+  "main": "lib/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

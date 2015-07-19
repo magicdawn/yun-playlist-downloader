@@ -73,18 +73,8 @@ co(function * () {
    */
   yield Promise.map(songs, function(song) {
     var ext = path.extname(song.url);
-    var filename = path.join(dir, `${ song.filename }.${ ext }`);
-
-    return lib.download(song.url, filename)
-      .then(function() {
-        console.log(
-          `√ ${ song.index }/${ songs.length } 下载完成 ${ song.filename }`);
-      })
-      .catch(function(e) {
-        console.log(
-          `× ${ song.index }/${ songs.length } 下载失败 ${ song.filename }`);
-        console.error(e.stack || e);
-      });
+    var filename = path.join(dir, `${ song.filename }${ ext }`);
+    return lib.downloadSong(song.url,filename,song,songs.length);
   }, {
     concurrency: concurrency
   });

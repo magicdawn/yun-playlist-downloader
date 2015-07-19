@@ -4,3 +4,4 @@ node_modules
 yun.png
 *.log
 .jshintrc
+example

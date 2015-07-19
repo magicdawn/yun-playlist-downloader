@@ -28,8 +28,11 @@ $ yun
 ## 截图
 ![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)
 
-## TODOS
-- [x] 下载专辑支持,url 为album/?id=xxx 页面class id与playlist 略有不同
+## 已知问题
+- [ ] 默认的并发为10, 最后会剩下一两首歌下不动, 就一直卡在那~ 目前解决办法是将 concurrency 设置的小一点,适应你的网速.
+
+## 更新记录
+- 2015-07-19 v0.1.0 云音乐更换歌曲地址加密方式, 但是有卵用的是页面上有playlist的json.
 
 ## License
 the MIT License (magicdawn@qq.com)

@@ -8,6 +8,7 @@ var lib = require('../lib');
 var cheerio = require('cheerio');
 var path = require('path');
 var fs = require('fs');
+var pkg = require('../package.json');
 var argv = require('minimist')(process.argv.slice(2), {
   alias: {
     h: 'help',
@@ -21,7 +22,7 @@ var argv = require('minimist')(process.argv.slice(2), {
 if (argv._.length === 0 || argv.help) {
   console.log(
     `
-  网易云音乐 歌单/专辑 下载器
+  网易云音乐 歌单/专辑 下载器 v${ pkg.version }
 
   使用:
     yun [选项] <地址>

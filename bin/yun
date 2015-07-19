@@ -47,7 +47,9 @@ var concurrency = argv.concurrency;
 co(function * () {
   url = lib.normalizeUrl(url);
   var html = yield lib.getHtml(url);
-  var $ = cheerio.load(html);
+  var $ = cheerio.load(html, {
+    decodeEntities: false
+  });
 
   var type = lib.getType(url); // album or playlist
   var name = lib.getTitle($, type);

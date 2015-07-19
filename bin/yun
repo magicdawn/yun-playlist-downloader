@@ -31,8 +31,8 @@ if (argv._.length === 0 || argv.help) {
     yun -c 20 http://music.163.com/#/playlist?id=12583200
 
   选项:
-    -h,--help           查看帮助
-    -c,--concurrency    设置同时下载数量`
+    -h,--help           查看此帮助信息
+    -c,--concurrency    设置同时下载数量, 默认10`
 
   );
   process.exit(1);

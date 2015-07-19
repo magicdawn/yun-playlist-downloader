@@ -35,4 +35,4 @@ $ yun
 - 2015-07-19 v0.1.0 云音乐更换歌曲地址加密方式, 但是有卵用的是页面上有playlist的json.
 
 ## License
-the MIT License (magicdawn@qq.com)
+the MIT License http://magicdawn.mit-license.com

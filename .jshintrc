@@ -57,7 +57,7 @@
     "laxcomma"      : false,     // true: Tolerate comma-first style coding
     "loopfunc"      : true,     // true: Tolerate functions being defined in loops
     "multistr"      : true,     // true: Tolerate multi-line strings
-    "noyield"       : false,     // true: Tolerate generator functions with no yield statement in them.
+    "noyield"       : true,     // true: Tolerate generator functions with no yield statement in them.
     "notypeof"      : false,     // true: Tolerate invalid typeof operator values
     "proto"         : true,     // true: Tolerate using the `__proto__` property
     "scripturl"     : false,     // true: Tolerate script-targeted URLs

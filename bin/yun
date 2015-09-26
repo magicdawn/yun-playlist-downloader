@@ -2,7 +2,7 @@
 
 'use strict';
 
-var Promise = require('bluebird'); // jshint -W079
+global.Promise = require('bluebird');
 var co = require('co');
 var lib = require('../lib');
 var cheerio = require('cheerio');

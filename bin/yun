@@ -7,16 +7,18 @@ var co = require('co');
 var lib = require('../lib');
 var cheerio = require('cheerio');
 var path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
 var pkg = require('../package.json');
 var debug = require('debug')('yun:cli');
 var argv = require('minimist')(process.argv.slice(2), {
   alias: {
     h: 'help',
-    c: 'concurrency'
+    c: 'concurrency',
+    f: 'format'
   },
   default: {
-    concurrency: 10
+    concurrency: 5,
+    format: ':name/:singer - :songName.:ext'
   }
 });
 
@@ -28,13 +30,14 @@ if (argv._.length === 0 || argv.help) {
   使用:
     yun [选项] <地址>
 
+  选项:
+    -h,--help         查看此帮助信息
+    -c,--concurrency  设置同时下载数量, 默认10
+    -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
+
   示例:
     # 20首同时下载
-    yun -c 20 http://music.163.com/#/playlist?id=12583200
-
-  选项:
-    -h,--help           查看此帮助信息
-    -c,--concurrency    设置同时下载数量, 默认10`
+    yun -c 20 http://music.163.com/#/playlist?id=12583200`
 
   );
   process.exit(1);
@@ -46,6 +49,9 @@ var url = argv._[0];
 // concurrency
 var concurrency = argv.concurrency;
 
+// format
+var format = argv.format;
+
 co(function*() {
   url = lib.normalizeUrl(url);
   var html = yield lib.getHtml(url);
@@ -53,30 +59,25 @@ co(function*() {
     decodeEntities: false
   });
 
-  var type = lib.getType(url); // album or playlist
-  var name = lib.getTitle($, type);
-  var songs = yield lib.getSongs($, type);
+  // 基本信息
+  var name = lib.getTitle($, url);
+  var songs = yield lib.getSongs($, url);
   debug('songs : %j', songs);
-
-  // return;
-
-  // directory
-  var dir = path.resolve(name);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
-
   var start = Date.now();
   console.log(`正在下载『${ name }』,请稍候...`);
 
-  /**
-   * song = {
-   *   filename,url,index
-   * }
-   */
+  // 开始下载
   yield Promise.map(songs, function(song) {
-    var ext = path.extname(song.url);
-    var filename = path.join(dir, `${ song.filename }${ ext }`);
+    // 根据格式获取所需文件名
+    var filename = lib.getFileName({
+      format: format,
+      song: song,
+      url: url,
+      name: name
+    });
+    // return console.log(filename);
+
+    // 下载
     return lib.downloadSong(song.url, filename, song, songs.length);
   }, {
     concurrency: concurrency

@@ -25,6 +25,21 @@ $ yun
     -c,--concurrency    设置同时下载数量
 ```
 
+### 自定义文件名
+
+|token|含义|
+|-----|---|
+|:type| = `album` or `playlist`|
+|:typeText| = `专辑` or `列表` |
+|:name| 专辑名称 or 播放列表名称 |
+|:singer| 歌手名 |
+|:songName| 歌曲名(包含扩展名) |
+|:ext| 文件后缀,如 `mp3` 不带 `.` |
+|:index| `01` , `02` ... `12` |
+|:rawIndex| `0`, `1`, ... `11` |
+
+默认值 = `:name/:singer - :songName.:ext`
+
 ## 截图
 ![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)
 

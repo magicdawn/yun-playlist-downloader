@@ -2,7 +2,7 @@
 网易云音乐 - 歌单 - 下载器
 
 ## 安装
-需要 node.js version > 4
+需要 node.js version >=4
 
 ```sh
 $ npm i yun-playlist-downloader -g

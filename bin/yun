@@ -23,8 +23,7 @@ var argv = require('minimist')(process.argv.slice(2), {
 });
 
 if (argv._.length === 0 || argv.help) {
-  console.log(
-    `
+  console.log(`
   网易云音乐 歌单/专辑 下载器 v${ pkg.version }
 
   使用:
@@ -32,14 +31,16 @@ if (argv._.length === 0 || argv.help) {
 
   选项:
     -h,--help         查看此帮助信息
-    -c,--concurrency  设置同时下载数量, 默认10
+    -c,--concurrency  设置同时下载数量, 默认5
     -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
 
   示例:
-    # 20首同时下载
-    yun -c 20 http://music.163.com/#/playlist?id=12583200`
+    # 10首同时下载
+    yun -c 10 http://music.163.com/#/playlist?id=12583200
 
-  );
+    # 下载格式为 '歌手 - 歌名'
+    yun -f ':singer - :songName.:ext' http://music.163.com/#/playlist?id=12583200
+  `);
   process.exit(1);
 }
 

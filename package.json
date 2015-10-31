@@ -35,5 +35,8 @@
     "minimist": "^1.1.1",
     "superagent": "^1.2.0",
     "superagent-bluebird-promise": "^2.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^1.8.0"
   }
 }

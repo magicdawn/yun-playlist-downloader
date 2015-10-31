@@ -3,14 +3,14 @@
 'use strict';
 
 global.Promise = require('bluebird');
-var co = require('co');
-var lib = require('../lib');
-var cheerio = require('cheerio');
-var path = require('path');
-var fs = require('fs-extra');
-var pkg = require('../package.json');
-var debug = require('debug')('yun:cli');
-var argv = require('minimist')(process.argv.slice(2), {
+const co = require('co');
+const lib = require('../lib');
+const cheerio = require('cheerio');
+const path = require('path');
+const fs = require('fs-extra');
+const pkgVersion = require('../package.json').version;
+const debug = require('debug')('yun:cli');
+let argv = require('minimist')(process.argv.slice(2), {
   alias: {
     h: 'help',
     c: 'concurrency',
@@ -24,7 +24,7 @@ var argv = require('minimist')(process.argv.slice(2), {
 
 if (argv._.length === 0 || argv.help) {
   console.log(`
-  网易云音乐 歌单/专辑 下载器 v${ pkg.version }
+  网易云音乐 歌单/专辑 下载器 v${ pkgVersion }
 
   使用:
     yun [选项] <地址>
@@ -45,32 +45,32 @@ if (argv._.length === 0 || argv.help) {
 }
 
 // url
-var url = argv._[0];
+let url = argv._[0];
 
 // concurrency
-var concurrency = argv.concurrency;
+const concurrency = argv.concurrency;
 
 // format
-var format = argv.format;
+const format = argv.format;
 
 co(function*() {
   url = lib.normalizeUrl(url);
-  var html = yield lib.getHtml(url);
-  var $ = cheerio.load(html, {
+  const html = yield lib.getHtml(url);
+  const $ = cheerio.load(html, {
     decodeEntities: false
   });
 
   // 基本信息
-  var name = lib.getTitle($, url);
-  var songs = yield lib.getSongs($, url);
+  const name = lib.getTitle($, url);
+  const songs = yield lib.getSongs($, url);
   debug('songs : %j', songs);
-  var start = Date.now();
+  const start = Date.now();
   console.log(`正在下载『${ name }』,请稍候...`);
 
   // 开始下载
   yield Promise.map(songs, function(song) {
     // 根据格式获取所需文件名
-    var filename = lib.getFileName({
+    const filename = lib.getFileName({
       format: format,
       song: song,
       url: url,

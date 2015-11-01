@@ -68,7 +68,7 @@ co(function*() {
   console.log(`正在下载『${ name }』,请稍候...`);
 
   // 开始下载
-  yield Promise.map(songs, function(song) {
+  yield Promise.map(songs, song => {
     // 根据格式获取所需文件名
     const filename = lib.getFileName({
       format: format,

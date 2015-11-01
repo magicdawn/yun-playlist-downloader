@@ -22,6 +22,11 @@
   "engines": {
     "node": ">=4.2.1"
   },
+  "files": [
+    "bin",
+    "lib"
+    "package.json"
+  ],
   "license": "MIT",
   "dependencies": {
     "bluebird": "^2.9.27",

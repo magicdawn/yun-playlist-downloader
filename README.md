@@ -1,9 +1,9 @@
 # yun-playlist-downloader
 网易云音乐 - 歌单 - 下载器
 
-[![npm version](https://img.shields.io/npm/v/yun-playlist-downloader.svg)]()
-[![node version](https://img.shields.io/node/v/yun-playlist-downloader.svg)]()
-[![license](https://img.shields.io/npm/l/yun-playlist-downloader.svg)]()
+![npm version](https://img.shields.io/npm/v/yun-playlist-downloader.svg)
+![node version](https://img.shields.io/node/v/yun-playlist-downloader.svg)
+![license](https://img.shields.io/npm/l/yun-playlist-downloader.svg)
 
 
 ## 安装

@@ -21,6 +21,7 @@ rules:
   yoda: 2 # 'blue' === sky
   no-var: 2 # ES6 let & const
   no-const-assign: 2
+  strict: [2, global] # 'use strict'
 
   # 大括号
   curly: 2 # 需要大括号

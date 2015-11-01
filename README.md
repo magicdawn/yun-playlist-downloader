@@ -1,8 +1,13 @@
 # yun-playlist-downloader
 网易云音乐 - 歌单 - 下载器
 
+[![npm version](https://img.shields.io/npm/v/yun-playlist-downloader.svg)]()
+[![node version](https://img.shields.io/node/v/yun-playlist-downloader.svg)]()
+[![license](https://img.shields.io/npm/l/yun-playlist-downloader.svg)]()
+
+
 ## 安装
-需要 node.js version >=4
+需要 node.js version >=4.2.1(Argon LTS)
 
 ```sh
 $ npm i yun-playlist-downloader -g

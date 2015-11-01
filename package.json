@@ -20,7 +20,7 @@
   ],
   "author": "magicdawn",
   "engines": {
-    "node": ">=4"
+    "node": ">=4.2.1"
   },
   "license": "MIT",
   "dependencies": {

@@ -24,7 +24,7 @@
   },
   "files": [
     "bin",
-    "lib"
+    "lib",
     "package.json"
   ],
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "yun-playlist-downloader",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "NetEase CloudMusic downloader",
   "main": "lib/index",
   "scripts": {

@@ -7,7 +7,7 @@
 
 
 ## 安装
-需要 node.js version >=4.2.1(Argon LTS)
+需要 node.js 4.x (Argon LTS)
 
 ```sh
 $ npm i yun-playlist-downloader -g

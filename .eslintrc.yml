@@ -34,12 +34,7 @@ rules:
   # space
   # 有 jsbeautify 保持风格
 
-ecmaFeatures:
-  generators: true
-  templateStrings: true
-  arrowFunctions: true
-  classes: true
-  forOf: true
-  blockBindings: true
+parserOptions:
+  ecmaVersion: 6
 
 extends: 'eslint:recommended'

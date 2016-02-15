@@ -41,6 +41,6 @@
     "superagent": "^1.7.2"
   },
   "devDependencies": {
-    "eslint": "^1.8.0"
+    "eslint": "^2.0.0"
   }
 }

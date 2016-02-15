@@ -29,17 +29,16 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^2.9.27",
+    "bluebird": "^3.3.1",
     "cheerio": "^0.19.0",
     "co": "^4.5.4",
-    "cookiejar": "^2.0.3",
     "debug": "^2.2.0",
     "fs-extra": "^0.24.0",
     "lodash": "^3.9.3",
     "log-symbols": "^1.0.2",
     "minimist": "^1.1.1",
-    "superagent": "^1.2.0",
-    "superagent-bluebird-promise": "^2.0.2"
+    "nightmare": "^2.1.6",
+    "superagent": "^1.7.2"
   },
   "devDependencies": {
     "eslint": "^1.8.0"

@@ -17,7 +17,7 @@ $ npm i yun-playlist-downloader -g
 ```sh
 $ yun
 
-  网易云音乐 歌单/专辑 下载器 v0.3.0
+  网易云音乐 歌单/专辑 下载器 v0.4.4
 
   使用:
     yun [选项] <地址>
@@ -26,6 +26,10 @@ $ yun
     -h,--help         查看此帮助信息
     -c,--concurrency  设置同时下载数量, 默认5
     -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
+    -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
+
+  帮助 & 文档:
+    https://github.com/magicdawn/yun-playlist-downloader
 
   示例:
     # 10首同时下载
@@ -65,10 +69,7 @@ $ yun
 - [x] 并发过大会导致某些一开始任务即便机器处于空闲状态也会block住, 请根据自己网速酌情设置 `concurrency` 参数
 
 ## 更新记录
-- 2015-11-01 v0.4.0 使用Node.js Argon release支持的ES6 feature(templateString arrowFunction)改写
-- 2015-09-26 v0.3.0 增加filename format 支持, 见README 自定义文件名
-- 2015-09-24 v0.2.0 直接依赖cookiejar, #3 related. 添加.jshintrc .jsbeautifyrc等.
-- 2015-07-19 v0.1.0 云音乐更换歌曲地址加密方式, 但是有卵用的是页面上有playlist的json.
+see [CHANGELOG.md](CHANGELOG.md)
 
 ## License
 the MIT License http://magicdawn.mit-license.org

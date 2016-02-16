@@ -24,7 +24,7 @@ rules:
   strict: [2, global] # 'use strict'
 
   # 大括号
-  curly: 2 # 需要大括号
+  curly: [2, multi-line] # 需要大括号
   brace-style: 2 # 左大括号同一行
 
   # disable default

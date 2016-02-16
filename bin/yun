@@ -2,7 +2,7 @@
 
 'use strict';
 
-global.Promise = require('bluebird');
+const Promise = global.Promise = require('bluebird');
 const co = require('co');
 const lib = require('../lib');
 const cheerio = require('cheerio');
@@ -14,11 +14,13 @@ let argv = require('minimist')(process.argv.slice(2), {
   alias: {
     h: 'help',
     c: 'concurrency',
-    f: 'format'
+    f: 'format',
+    q: 'quality'
   },
   default: {
     concurrency: 5,
-    format: ':name/:singer - :songName.:ext'
+    format: ':name/:singer - :songName.:ext',
+    quality: 320
   }
 });
 
@@ -33,6 +35,10 @@ if (argv._.length === 0 || argv.help) {
     -h,--help         查看此帮助信息
     -c,--concurrency  设置同时下载数量, 默认5
     -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
+    -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
+
+  帮助 & 文档:
+    https://github.com/magicdawn/yun-playlist-downloader
 
   示例:
     # 10首同时下载
@@ -53,6 +59,16 @@ const concurrency = argv.concurrency;
 // format
 const format = argv.format;
 
+// quality
+const quality = argv.quality;
+const qualityRegistry = [128, 192, 320];
+if (!~qualityRegistry.indexOf(quality)) {
+  console.log(`
+  quality参数可选值为 ${ JSON.stringify(qualityRegistry) }
+  `);
+  process.exit(1);
+}
+
 co(function*() {
   url = lib.normalizeUrl(url);
   const html = yield lib.getHtml(url);
@@ -62,7 +78,7 @@ co(function*() {
 
   // 基本信息
   const name = lib.getTitle($, url);
-  const songs = yield lib.getSongs($, url);
+  const songs = yield lib.getSongs($, url, quality);
   debug('songs : %j', songs);
   const start = Date.now();
   console.log(`正在下载『${ name }』,请稍候...`);

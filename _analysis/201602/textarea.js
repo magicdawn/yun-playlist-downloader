@@ -1,0 +1,1564 @@
+[{
+  "name": "你不是真正的快乐",
+  "id": 28341146,
+  "duration": 320056,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 7763,
+    "name": "G.E.M.邓紫棋"
+  }],
+  "copyrightId": 27001,
+  "score": 90.0,
+  "album": {
+    "id": 2774162,
+    "name": "我是歌手第二季 半决赛",
+    "picUrl": "http://p3.music.126.net/uq8Y-O1mSUSqv3zOW4sNCg==/5989039836716828.jpg",
+    "pic_str": "5989039836716828",
+    "pic": 5989039836716828
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 2,
+  "transNames": null,
+  "privilege": {
+    "id": 28341146,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "你不是真正的快乐",
+  "id": 385787,
+  "duration": 299000,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 13193,
+    "name": "五月天"
+  }],
+  "copyrightId": 1009,
+  "score": 90.0,
+  "album": {
+    "id": 38235,
+    "name": "后青春期的诗",
+    "picUrl": "http://p3.music.126.net/hd6ByJyZO_WHlot5kUtV3Q==/7794437930464215.jpg",
+    "pic_str": "7794437930464215",
+    "pic": 7794437930464215
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 3,
+  "transNames": null,
+  "privilege": {
+    "id": 385787,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 1,
+    "subp": 0,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 0
+  }
+}, {
+  "name": "如果我变成回忆",
+  "id": 150337,
+  "duration": 289000,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 5195,
+    "name": "Tank"
+  }],
+  "copyrightId": 1004,
+  "score": 90.0,
+  "album": {
+    "id": 15176,
+    "name": "第三回合",
+    "picUrl": "http://p3.music.126.net/XKwOUV7xPWnHh7CkFnNzvQ==/61572651167735.jpg",
+    "pic_str": "61572651167735",
+    "pic": 61572651167735
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 6,
+  "transNames": null,
+  "privilege": {
+    "id": 150337,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": true,
+    "maxbr": 320000,
+    "fl": 0
+  }
+}, {
+  "name": "七月七日晴",
+  "id": 307780,
+  "duration": 245894,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 9950,
+    "name": "许慧欣"
+  }],
+  "copyrightId": 7003,
+  "score": 95.0,
+  "album": {
+    "id": 30564,
+    "name": "万中选一",
+    "picUrl": "http://p3.music.126.net/7Ee57ajp-hEgmacB6S1Jbg==/64871186054465.jpg",
+    "pic_str": "64871186054465",
+    "pic": 64871186054465
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 11,
+  "transNames": null,
+  "privilege": {
+    "id": 307780,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "嘀嗒",
+  "id": 5244704,
+  "duration": 288835,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 8291,
+    "name": "侃侃"
+  }],
+  "copyrightId": 13010,
+  "score": 70.0,
+  "album": {
+    "id": 511475,
+    "name": "我们的主打歌 说好不后悔",
+    "picUrl": "http://p3.music.126.net/-tqy9UXpKQBQdvaVwxs24Q==/69269232567539.jpg",
+    "pic_str": "69269232567539",
+    "pic": 69269232567539
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 40,
+  "transNames": null,
+  "privilege": {
+    "id": 5244704,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 128000,
+    "fl": 320000
+  }
+}, {
+  "name": "独角戏",
+  "id": 307525,
+  "duration": 277293,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 9943,
+    "name": "许茹芸"
+  }],
+  "copyrightId": 22037,
+  "score": 100.0,
+  "album": {
+    "id": 30534,
+    "name": "如果云知道",
+    "picUrl": "http://p3.music.126.net/hLFl7d6uphuuXbCKE_MJtg==/126443837212194.jpg",
+    "pic_str": "126443837212194",
+    "pic": 126443837212194
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 6,
+  "transNames": null,
+  "privilege": {
+    "id": 307525,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "我很快乐",
+  "id": 255294,
+  "duration": 213629,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 8334,
+    "name": "刘惜君"
+  }],
+  "copyrightId": 0,
+  "score": 100.0,
+  "album": {
+    "id": 25499,
+    "name": "爱情花园",
+    "picUrl": "http://p3.music.126.net/aNHxGZC0H1xRQfoz7UqSpQ==/36283883730943.jpg",
+    "pic_str": "36283883730943",
+    "pic": 36283883730943
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 5,
+  "transNames": null,
+  "privilege": {
+    "id": 255294,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "一直很安静",
+  "id": 205274,
+  "duration": 250000,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 7061,
+    "name": "阿桑"
+  }],
+  "copyrightId": 1004,
+  "score": 95.0,
+  "album": {
+    "id": 20825,
+    "name": "寂寞在唱歌",
+    "picUrl": "http://p4.music.126.net/QD812C1Hq4KRX3Ha1t36vQ==/100055558133279.jpg",
+    "pic_str": "100055558133279",
+    "pic": 100055558133279
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 8,
+  "transNames": null,
+  "privilege": {
+    "id": 205274,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": true,
+    "maxbr": 999000,
+    "fl": 0
+  }
+}, {
+  "name": "海浪",
+  "id": 94689,
+  "duration": 291396,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 3079,
+    "name": "黄品源"
+  }],
+  "copyrightId": 14003,
+  "score": 80.0,
+  "album": {
+    "id": 9265,
+    "name": "海浪",
+    "picUrl": "http://p4.music.126.net/eVJ9TqcrB2FyeIa8H3TJ7Q==/108851651165690.jpg",
+    "pic_str": "108851651165690",
+    "pic": 108851651165690
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 2,
+  "transNames": null,
+  "privilege": {
+    "id": 94689,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 0
+  }
+}, {
+  "name": "羽毛",
+  "id": 297848,
+  "duration": 237296,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 9606,
+    "name": "王心凌"
+  }],
+  "copyrightId": 14028,
+  "score": 65.0,
+  "album": {
+    "id": 29562,
+    "name": "爱你",
+    "picUrl": "http://p4.music.126.net/BwB0ttY1777d1elpU85HbQ==/48378511639243.jpg",
+    "pic_str": "48378511639243",
+    "pic": 48378511639243
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 10,
+  "transNames": null,
+  "privilege": {
+    "id": 297848,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 0
+  }
+}, {
+  "name": "你那么爱她",
+  "id": 114604,
+  "duration": 252343,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 3705,
+    "name": "李圣杰"
+  }, {
+    "id": 3716,
+    "name": "林隆璇"
+  }],
+  "copyrightId": 1003,
+  "score": 80.0,
+  "album": {
+    "id": 11238,
+    "name": "关于你的歌",
+    "picUrl": "http://p4.music.126.net/TJTJNMXKtK-NVaGwJBDSWQ==/100055558132915.jpg",
+    "pic_str": "100055558132915",
+    "pic": 100055558132915
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 13,
+  "transNames": null,
+  "privilege": {
+    "id": 114604,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": true,
+    "maxbr": 320000,
+    "fl": 0
+  }
+}, {
+  "name": "撕夜",
+  "id": 60274,
+  "duration": 278854,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 1876,
+    "name": "阿杜"
+  }],
+  "copyrightId": 14026,
+  "score": 90.0,
+  "album": {
+    "id": 5863,
+    "name": "天黑",
+    "picUrl": "http://p3.music.126.net/C71BhIuR2l6pg7Dhz2MFcg==/76965813944980.jpg",
+    "pic_str": "76965813944980",
+    "pic": 76965813944980
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 6,
+  "transNames": null,
+  "privilege": {
+    "id": 60274,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "类似爱情",
+  "id": 307057,
+  "duration": 283973,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 9945,
+    "name": "萧亚轩"
+  }],
+  "copyrightId": 13009,
+  "score": 100.0,
+  "album": {
+    "id": 30491,
+    "name": "三面夏娃",
+    "picUrl": "http://p3.music.126.net/2WOyWiS4STWB8f-2hse00Q==/6674035580676721.jpg",
+    "pic_str": "6674035580676721",
+    "pic": 6674035580676721
+  },
+  "fee": 0,
+  "mvid": 470219,
+  "ftype": 0,
+  "no": 10,
+  "transNames": null,
+  "privilege": {
+    "id": 307057,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "其实很爱你",
+  "id": 327103,
+  "duration": 244219,
+  "status": 3,
+  "alias": [],
+  "artists": [{
+    "id": 10562,
+    "name": "张韶涵"
+  }],
+  "copyrightId": 1011,
+  "score": 80.0,
+  "album": {
+    "id": 32361,
+    "name": "梦里花",
+    "picUrl": "http://p4.music.126.net/N3NCeR-aC-c9qTYruCkWzg==/45079976755877.jpg",
+    "pic_str": "45079976755877",
+    "pic": 45079976755877
+  },
+  "fee": 8,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 8,
+  "transNames": null,
+  "privilege": {
+    "id": 327103,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 128000
+  }
+}, {
+  "name": "听海",
+  "id": 327584,
+  "duration": 319007,
+  "status": 0,
+  "alias": [],
+  "artists": [{
+    "id": 10559,
+    "name": "张惠妹"
+  }],
+  "copyrightId": 1010,
+  "score": 80.0,
+  "album": {
+    "id": 32413,
+    "name": "BAD BOY",
+    "picUrl": "http://p3.music.126.net/6bvC_BvSpQdkk0LfbGEliQ==/25288767440113.jpg",
+    "pic_str": "25288767440113",
+    "pic": 25288767440113
+  },
+  "fee": 8,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 5,
+  "transNames": null,
+  "privilege": {
+    "id": 327584,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 128000
+  }
+}, {
+  "name": "这该死的爱",
+  "id": 327216,
+  "duration": 297000,
+  "status": 3,
+  "alias": [],
+  "artists": [{
+    "id": 10561,
+    "name": "张靓颖"
+  }],
+  "copyrightId": 1008,
+  "score": 85.0,
+  "album": {
+    "id": 32381,
+    "name": "The One",
+    "picUrl": "http://p4.music.126.net/H4OQhykaN5jmIao40mTXiA==/63771674428031.jpg",
+    "pic_str": "63771674428031",
+    "pic": 63771674428031
+  },
+  "fee": 8,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 2,
+  "transNames": null,
+  "privilege": {
+    "id": 327216,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 128000
+  }
+}, {
+  "name": "突然好想你",
+  "id": 385781,
+  "duration": 266162,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 13193,
+    "name": "五月天"
+  }],
+  "copyrightId": 1009,
+  "score": 90.0,
+  "album": {
+    "id": 38235,
+    "name": "后青春期的诗",
+    "picUrl": "http://p3.music.126.net/hd6ByJyZO_WHlot5kUtV3Q==/7794437930464215.jpg",
+    "pic_str": "7794437930464215",
+    "pic": 7794437930464215
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 1,
+  "transNames": null,
+  "privilege": {
+    "id": 385781,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 1,
+    "subp": 0,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 0
+  }
+}, {
+  "name": "倒带",
+  "id": 209758,
+  "duration": 264699,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 7219,
+    "name": "蔡依林"
+  }],
+  "copyrightId": 7001,
+  "score": 95.0,
+  "album": {
+    "id": 21330,
+    "name": "J-Top冠军精选",
+    "picUrl": "http://p4.music.126.net/Bf3cQTz1_zI60qiW-Me2CA==/41781441867565.jpg",
+    "pic_str": "41781441867565",
+    "pic": 41781441867565
+  },
+  "fee": 0,
+  "mvid": 185054,
+  "ftype": 0,
+  "no": 21,
+  "transNames": null,
+  "privilege": {
+    "id": 209758,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "后来",
+  "id": 254574,
+  "duration": 341400,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 8326,
+    "name": "刘若英"
+  }],
+  "copyrightId": 14003,
+  "score": 85.0,
+  "album": {
+    "id": 25437,
+    "name": "我等你",
+    "picUrl": "http://p4.music.126.net/M5Gau4R-21LrhrBhmwnZ8A==/48378511639151.jpg",
+    "pic_str": "48378511639151",
+    "pic": 48378511639151
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 2,
+  "transNames": null,
+  "privilege": {
+    "id": 254574,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 0
+  }
+}, {
+  "name": "如果你也听说",
+  "id": 326904,
+  "duration": 313146,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 10559,
+    "name": "张惠妹"
+  }],
+  "copyrightId": 13009,
+  "score": 100.0,
+  "album": {
+    "id": 32338,
+    "name": "Star",
+    "picUrl": "http://p4.music.126.net/X4r7ThHc-uAcxEXvZ4G0mA==/6661940952772237.jpg",
+    "pic_str": "6661940952772237",
+    "pic": 6661940952772237
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 9,
+  "transNames": null,
+  "privilege": {
+    "id": 326904,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "恋上一个人",
+  "id": 176872,
+  "duration": 247615,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 6070,
+    "name": "游鸿明"
+  }],
+  "copyrightId": 5003,
+  "score": 75.0,
+  "album": {
+    "id": 17911,
+    "name": "恋上一个人",
+    "picUrl": "http://p3.music.126.net/DPCGLpaQi2V_sB-fvwA1tg==/60473139533040.jpg",
+    "pic_str": "60473139533040",
+    "pic": 60473139533040
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 1,
+  "transNames": null,
+  "privilege": {
+    "id": 176872,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "认真的雪",
+  "id": 169185,
+  "duration": 261616,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 5781,
+    "name": "薛之谦"
+  }],
+  "copyrightId": 7003,
+  "score": 100.0,
+  "album": {
+    "id": 17074,
+    "name": "未完成的歌",
+    "picUrl": "http://p3.music.126.net/174rUbKzjQlBp8wN5q-l6Q==/897201488265660.jpg",
+    "pic_str": "897201488265660",
+    "pic": 897201488265660
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 13,
+  "transNames": null,
+  "privilege": {
+    "id": 169185,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "看透",
+  "id": 276952,
+  "duration": 237871,
+  "status": 0,
+  "alias": [],
+  "artists": [{
+    "id": 8926,
+    "name": "莫文蔚"
+  }],
+  "copyrightId": 7001,
+  "score": 85.0,
+  "album": {
+    "id": 27503,
+    "name": "就 i Karen 莫文蔚精选",
+    "picUrl": "http://p4.music.126.net/DjyL8sXf9iU0Cik4hzs4RQ==/109951162783381.jpg",
+    "pic_str": "109951162783381",
+    "pic": 109951162783381
+  },
+  "fee": 8,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 7,
+  "transNames": null,
+  "privilege": {
+    "id": 276952,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 128000
+  }
+}, {
+  "name": "电台情歌",
+  "id": 277822,
+  "duration": 248373,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 8926,
+    "name": "莫文蔚"
+  }],
+  "copyrightId": 14003,
+  "score": 85.0,
+  "album": {
+    "id": 27581,
+    "name": "做自己 to be",
+    "picUrl": "http://p4.music.126.net/ipURyGgP3anTtFIkyo0c9w==/23089744184538.jpg",
+    "pic_str": "23089744184538",
+    "pic": 23089744184538
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 7,
+  "transNames": null,
+  "privilege": {
+    "id": 277822,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 0
+  }
+}, {
+  "name": "包袱",
+  "id": 93274,
+  "duration": 236225,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 3066,
+    "name": "胡彦斌"
+  }],
+  "copyrightId": 5003,
+  "score": 80.0,
+  "album": {
+    "id": 9156,
+    "name": "Anson Hu 同名专辑",
+    "picUrl": "http://p4.music.126.net/ilGtn7Q4XCqIAW911sodRA==/1718536674224033.jpg",
+    "pic_str": "1718536674224033",
+    "pic": 1718536674224033
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 7,
+  "transNames": null,
+  "privilege": {
+    "id": 93274,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "哈萨雅琪",
+  "id": 200537,
+  "duration": 304133,
+  "status": 3,
+  "alias": [],
+  "artists": [{
+    "id": 6652,
+    "name": "周传雄"
+  }],
+  "copyrightId": 1011,
+  "score": 65.0,
+  "album": {
+    "id": 20156,
+    "name": "小刚的花花世界",
+    "picUrl": "http://p4.music.126.net/VqQmGu-V5kJ05Mj2Qu2KHQ==/126443837207369.jpg",
+    "pic_str": "126443837207369",
+    "pic": 126443837207369
+  },
+  "fee": 8,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 1,
+  "transNames": null,
+  "privilege": {
+    "id": 200537,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 128000
+  }
+}, {
+  "name": "末班车",
+  "id": 190082,
+  "duration": 313705,
+  "status": 0,
+  "alias": [],
+  "artists": [{
+    "id": 6652,
+    "name": "周传雄"
+  }],
+  "copyrightId": 7001,
+  "score": 85.0,
+  "album": {
+    "id": 19203,
+    "name": "忘记 transfer",
+    "picUrl": "http://p4.music.126.net/zBlIrzvG4FD0KbV6u952mg==/60473139528539.jpg",
+    "pic_str": "60473139528539",
+    "pic": 60473139528539
+  },
+  "fee": 8,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 10,
+  "transNames": null,
+  "privilege": {
+    "id": 190082,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 128000
+  }
+}, {
+  "name": "其实都没有",
+  "id": 25788001,
+  "duration": 231000,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 6066,
+    "name": "杨宗纬"
+  }],
+  "copyrightId": 7003,
+  "score": 100.0,
+  "album": {
+    "id": 2321001,
+    "name": "初·爱",
+    "picUrl": "http://p4.music.126.net/LvDBXsBEuGK-ZNVs3XmRVg==/7926379325753599.jpg",
+    "pic_str": "7926379325753599",
+    "pic": 7926379325753599,
+    "alia": ["First Love"]
+  },
+  "fee": 0,
+  "mvid": 57003,
+  "ftype": 0,
+  "no": 0,
+  "transNames": null,
+  "privilege": {
+    "id": 25788001,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "我还想她",
+  "id": 108493,
+  "duration": 247507,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 3684,
+    "name": "林俊杰"
+  }],
+  "copyrightId": 14026,
+  "score": 100.0,
+  "album": {
+    "id": 10770,
+    "name": "JJ陆",
+    "picUrl": "http://p4.music.126.net/ZwStEoywWJLPKWFmDfm9Iw==/46179488371974.jpg",
+    "pic_str": "46179488371974",
+    "pic": 46179488371974
+  },
+  "fee": 0,
+  "mvid": 522351,
+  "ftype": 0,
+  "no": 10,
+  "transNames": null,
+  "privilege": {
+    "id": 108493,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "说谎",
+  "id": 108390,
+  "duration": 264159,
+  "status": -1,
+  "alias": [],
+  "artists": [{
+    "id": 3685,
+    "name": "林宥嘉"
+  }],
+  "copyrightId": 1004,
+  "score": 85.0,
+  "album": {
+    "id": 10764,
+    "name": "感官/世界",
+    "picUrl": "http://p3.music.126.net/OlYz_axSZcf3Mhoi_M9BVg==/41781441867851.jpg",
+    "pic_str": "41781441867851",
+    "pic": 41781441867851
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 6,
+  "transNames": null,
+  "privilege": {
+    "id": 108390,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": true,
+    "maxbr": 320000,
+    "fl": 0
+  }
+}, {
+  "name": "如果这都不算爱",
+  "id": 188432,
+  "duration": 215773,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 6460,
+    "name": "张学友"
+  }],
+  "copyrightId": 7003,
+  "score": 100.0,
+  "album": {
+    "id": 19076,
+    "name": "学友 热",
+    "picUrl": "http://p4.music.126.net/G92qfc92qPPsbYspqYQ1SQ==/103354093011869.jpg",
+    "pic_str": "103354093011869",
+    "pic": 103354093011869
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 4,
+  "transNames": null,
+  "privilege": {
+    "id": 188432,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "一路向北",
+  "id": 185924,
+  "duration": 295000,
+  "status": 3,
+  "alias": [],
+  "artists": [{
+    "id": 6452,
+    "name": "周杰伦"
+  }],
+  "copyrightId": 1007,
+  "score": 100.0,
+  "album": {
+    "id": 18896,
+    "name": "十一月的萧邦",
+    "picUrl": "http://p4.music.126.net/J8AsjYfu2Ugr7Q4ub0Yv0Q==/43980465123047.jpg",
+    "pic_str": "43980465123047",
+    "pic": 43980465123047
+  },
+  "fee": 8,
+  "mvid": 507143,
+  "ftype": 0,
+  "no": 12,
+  "transNames": null,
+  "privilege": {
+    "id": 185924,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 128000
+  }
+}, {
+  "name": "孤独患者",
+  "id": 64093,
+  "duration": 271000,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 2116,
+    "name": "陈奕迅"
+  }],
+  "copyrightId": 7003,
+  "score": 100.0,
+  "album": {
+    "id": 6341,
+    "name": "？",
+    "picUrl": "http://p3.music.126.net/fNxuUGzCmWi-QechSTHT_A==/111050674419069.jpg",
+    "pic_str": "111050674419069",
+    "pic": 111050674419069,
+    "alia": ["问号"]
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 1,
+  "transNames": null,
+  "privilege": {
+    "id": 64093,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "好久不见",
+  "id": 65078,
+  "duration": 252787,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 2116,
+    "name": "陈奕迅"
+  }],
+  "copyrightId": 7003,
+  "score": 90.0,
+  "album": {
+    "id": 6404,
+    "name": "1997-2007 跨世纪国语精选",
+    "picUrl": "http://p3.music.126.net/WJgLE2ImnLgqPPLQSlF7iQ==/114349209289440.jpg",
+    "pic_str": "114349209289440",
+    "pic": 114349209289440
+  },
+  "fee": 0,
+  "mvid": 281152,
+  "ftype": 0,
+  "no": 10,
+  "transNames": null,
+  "privilege": {
+    "id": 65078,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}, {
+  "name": "你不会了解",
+  "id": 168954,
+  "duration": 325000,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 5773,
+    "name": "谢霆锋"
+  }],
+  "copyrightId": 1000,
+  "score": 80.0,
+  "album": {
+    "id": 17054,
+    "name": "了解",
+    "picUrl": "http://p3.music.126.net/fmnoVwth7L4SojzwmYUkHw==/691592813882957.jpg",
+    "pic_str": "691592813882957",
+    "pic": 691592813882957
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 1,
+  "transNames": null,
+  "privilege": {
+    "id": 168954,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "趁早",
+  "id": 326997,
+  "duration": 324989,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 10559,
+    "name": "张惠妹"
+  }],
+  "copyrightId": 7002,
+  "score": 95.0,
+  "album": {
+    "id": 32344,
+    "name": "爱的力量 10年情歌最精选 ",
+    "picUrl": "http://p3.music.126.net/WoybHfawR7c1gmXJQDHviw==/32985348845360.jpg",
+    "pic_str": "32985348845360",
+    "pic": 32985348845360
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 38,
+  "transNames": null,
+  "privilege": {
+    "id": 326997,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "有没有人告诉你",
+  "id": 25795016,
+  "duration": 344842,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 2124,
+    "name": "陈楚生"
+  }],
+  "copyrightId": 14008,
+  "score": 90.0,
+  "album": {
+    "id": 2324006,
+    "name": "快乐男声陈楚生歌曲",
+    "picUrl": "http://p3.music.126.net/7PtKBsXVEiASww1F8DTVkw==/2263894441606697.jpg",
+    "pic_str": "2263894441606697",
+    "pic": 2263894441606697
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 0,
+  "transNames": null,
+  "privilege": {
+    "id": 25795016,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 128000,
+    "fl": 320000
+  }
+}, {
+  "name": "一个人的冬天",
+  "id": 66452,
+  "duration": 315220,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 2124,
+    "name": "陈楚生"
+  }],
+  "copyrightId": 0,
+  "score": 80.0,
+  "album": {
+    "id": 6514,
+    "name": "一个人的冬天",
+    "picUrl": "http://p3.music.126.net/FTOwD35SGTnILvlnYKywbw==/95657511628669.jpg",
+    "pic_str": "95657511628669",
+    "pic": 95657511628669
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 1,
+  "transNames": null,
+  "privilege": {
+    "id": 66452,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 320000
+  }
+}, {
+  "name": "孤单心事",
+  "id": 4874932,
+  "duration": 268000,
+  "status": -1,
+  "alias": ["《终极一班》插曲"],
+  "artists": [{
+    "id": 8328,
+    "name": "蓝又时"
+  }],
+  "copyrightId": 1004,
+  "score": 90.0,
+  "album": {
+    "id": 489900,
+    "name": "终极一班 电视原声带",
+    "picUrl": "http://p3.music.126.net/_zw0rOXCk2Oh6cejmtEPQQ==/80264348844498.jpg",
+    "pic_str": "80264348844498",
+    "pic": 80264348844498
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 7,
+  "transNames": null,
+  "privilege": {
+    "id": 4874932,
+    "fee": 0,
+    "payed": 0,
+    "st": -200,
+    "pl": 0,
+    "dl": 0,
+    "sp": 0,
+    "cp": 0,
+    "subp": 0,
+    "cs": true,
+    "maxbr": 999000,
+    "fl": 0
+  }
+}, {
+  "name": "Can You Feel My World",
+  "id": 25642136,
+  "duration": 295732,
+  "status": 3,
+  "alias": [],
+  "artists": [{
+    "id": 5346,
+    "name": "王力宏"
+  }],
+  "copyrightId": 7001,
+  "score": 90.0,
+  "album": {
+    "id": 2263099,
+    "name": "火力全开(新歌+精选)",
+    "picUrl": "http://p3.music.126.net/rT5KaG8fUG9AseQSEVTvQg==/666304046473315.jpg",
+    "pic_str": "666304046473315",
+    "pic": 666304046473315
+  },
+  "fee": 8,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 9,
+  "transNames": null,
+  "privilege": {
+    "id": 25642136,
+    "fee": 8,
+    "payed": 0,
+    "st": 0,
+    "pl": 128000,
+    "dl": 0,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 320000,
+    "fl": 128000
+  }
+}, {
+  "name": "想太多",
+  "id": 109196,
+  "duration": 216613,
+  "status": 1,
+  "alias": [],
+  "artists": [{
+    "id": 3689,
+    "name": "李玖哲"
+  }],
+  "copyrightId": 5003,
+  "score": 100.0,
+  "album": {
+    "id": 10826,
+    "name": "想太多",
+    "picUrl": "http://p3.music.126.net/rseQHt6MVwmyLMpY_f5bOQ==/131941395346293.jpg",
+    "pic_str": "131941395346293",
+    "pic": 131941395346293
+  },
+  "fee": 0,
+  "mvid": 0,
+  "ftype": 0,
+  "no": 1,
+  "transNames": null,
+  "privilege": {
+    "id": 109196,
+    "fee": 0,
+    "payed": 0,
+    "st": 0,
+    "pl": 320000,
+    "dl": 320000,
+    "sp": 7,
+    "cp": 1,
+    "subp": 1,
+    "cs": false,
+    "maxbr": 999000,
+    "fl": 320000
+  }
+}]

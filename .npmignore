@@ -1,7 +1,17 @@
-node_modules
-.gitignore
-.git
-yun.png
+# npm
 *.log
-.jshintrc
+node_modules
+
+# git
+.git
+.gitignore
+
+# project files
+yun.png
 example
+_analysis
+
+# dev
+.jshintrc
+.eslintrc.*
+.eslintignore

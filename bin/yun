@@ -60,7 +60,7 @@ const concurrency = argv.concurrency;
 const format = argv.format;
 
 // quality
-const quality = argv.quality;
+let quality = argv.quality;
 const qualityRegistry = [128, 192, 320];
 if (!~qualityRegistry.indexOf(quality)) {
   console.log(`
@@ -68,6 +68,7 @@ if (!~qualityRegistry.indexOf(quality)) {
   `);
   process.exit(1);
 }
+quality = quality * 1000;
 
 co(function*() {
   url = lib.normalizeUrl(url);

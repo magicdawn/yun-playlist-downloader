@@ -35,7 +35,7 @@ $ yun
     yun -f ':singer - :songName.:ext' http://music.163.com/#/playlist?id=12583200
 ```
 
-### 自定义文件名
+### 自定义文件名 -f,--format
 
 |token|含义|
 |-----|---|
@@ -49,6 +49,14 @@ $ yun
 |:rawIndex| `0`, `1`, ... `11` |
 
 默认值 = `:name/:singer - :songName.:ext`
+
+### 自定义下载音质 -q,--quality
+
+|取值|含义|备注|
+|---|---|---|
+|128| 128kbits/s | |
+|192| 192kbits/s | |
+|320| 320kbits/s | 默认 |
 
 ## 截图
 ![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)

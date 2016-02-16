@@ -7,11 +7,13 @@ node_modules
 .gitignore
 
 # project files
-yun.png
-example
 _analysis
+example
+README.md
+yun.png
 
 # dev
 .jshintrc
+.jsbeautifyrc
 .eslintrc.*
 .eslintignore

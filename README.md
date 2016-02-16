@@ -67,9 +67,10 @@ $ yun
 
 ## 已知问题
 - [x] 并发过大会导致某些一开始任务即便机器处于空闲状态也会block住, 请根据自己网速酌情设置 `concurrency` 参数
+- [ ] 使用了类似Phantom.js的Nightmare来计算下载参数, 安装的时候要装一遍Electron, 程序体积比较大. 见谅.
 
 ## 更新记录
-see [CHANGELOG.md](CHANGELOG.md)
+[CHANGELOG.md](CHANGELOG.md)
 
 ## License
 the MIT License http://magicdawn.mit-license.org

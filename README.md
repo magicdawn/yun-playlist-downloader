@@ -17,7 +17,7 @@ $ npm i yun-playlist-downloader -g
 ```sh
 $ yun
 
-  网易云音乐 歌单/专辑 下载器 v0.4.4
+  网易云音乐 歌单/专辑 下载器 v0.5.1
 
   使用:
     yun [选项] <地址>
@@ -27,6 +27,8 @@ $ yun
     -c,--concurrency  设置同时下载数量, 默认5
     -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
     -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
+    -t,--timeout      设置下载超时, 单位为分, 默认5分钟
+    --max-times       设置下载重试次数, 需要与timeout搭配使用,默认3次
 
   帮助 & 文档:
     https://github.com/magicdawn/yun-playlist-downloader
@@ -61,6 +63,12 @@ $ yun
 |128| 128kbits/s | |
 |192| 192kbits/s | |
 |320| 320kbits/s | 默认 |
+
+### 下载超时, -t,--timeout
+设置下载超时, 单位为分, 默认5分钟
+
+### 重试次数, --max-times
+置下载重试次数, 需要与timeout搭配使用,默认3次
 
 ## 截图
 ![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)

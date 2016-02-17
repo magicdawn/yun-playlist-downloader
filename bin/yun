@@ -15,12 +15,15 @@ let argv = require('minimist')(process.argv.slice(2), {
     h: 'help',
     c: 'concurrency',
     f: 'format',
-    q: 'quality'
+    q: 'quality',
+    t: 'timeout'
   },
   default: {
     concurrency: 5,
     format: ':name/:singer - :songName.:ext',
-    quality: 320
+    quality: 320,
+    timeout: 5, // 5 mins
+    'max-times': 3 // 3 times
   }
 });
 
@@ -36,6 +39,8 @@ if (argv._.length === 0 || argv.help) {
     -c,--concurrency  设置同时下载数量, 默认5
     -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
     -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
+    -t,--timeout      设置下载超时, 单位为分, 默认5分钟
+    --max-times       设置下载重试次数, 需要与timeout搭配使用,默认3次
 
   帮助 & 文档:
     https://github.com/magicdawn/yun-playlist-downloader
@@ -70,6 +75,10 @@ if (!~qualityRegistry.indexOf(quality)) {
 }
 quality = quality * 1000;
 
+// timeout & maxTimes
+const timeout = argv.timeout * 60 * 1000; // ms
+const maxTimes = argv['max-times'];
+
 co(function*() {
   url = lib.normalizeUrl(url);
   const html = yield lib.getHtml(url);
@@ -96,7 +105,7 @@ co(function*() {
     // return console.log(filename);
 
     // 下载
-    return lib.downloadSong(song.url, filename, song, songs.length);
+    return lib.tryDownloadSong(song.url, filename, song, songs.length, timeout, maxTimes);
   }, {
     concurrency: concurrency
   });

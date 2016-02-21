@@ -10,7 +10,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const pkgVersion = require('../package.json').version;
 const debug = require('debug')('yun:cli');
-let argv = require('minimist')(process.argv.slice(2), {
+const argv = require('minimist')(process.argv.slice(2), {
   alias: {
     h: 'help',
     c: 'concurrency',
@@ -111,4 +111,4 @@ co(function*() {
   });
 
   console.log('下载完成,耗时%s秒', (Date.now() - start) / 1000);
-});
+}).catch(e => console.error(e.stack || e));

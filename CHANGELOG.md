@@ -2,6 +2,7 @@
 
 ## 2016-03-09 v0.6.1
 - 使用ES6 原生Promise, 以及其他 `promise.map` `promise.ify` 等组件
+- 升级nightmare@2.2.0
 
 ## 2016-02-17 v0.6.0
 - 加入下载超时 & 重试次数控制

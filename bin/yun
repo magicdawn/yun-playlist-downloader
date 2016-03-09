@@ -2,12 +2,13 @@
 
 'use strict';
 
-const Promise = global.Promise = require('bluebird');
+const kit = require('needle-kit');
 const co = require('co');
 const lib = require('../lib');
 const cheerio = require('cheerio');
 const path = require('path');
-const fs = require('fs-extra');
+const fs = kit.fs;
+const map = require('promise.map');
 const pkgVersion = require('../package.json').version;
 const debug = require('debug')('yun:cli');
 const argv = require('minimist')(process.argv.slice(2), {
@@ -94,7 +95,7 @@ co(function*() {
   console.log(`正在下载『${ name }』,请稍候...`);
 
   // 开始下载
-  yield Promise.map(songs, song => {
+  yield map(songs, song => {
     // 根据格式获取所需文件名
     const filename = lib.getFileName({
       format: format,
@@ -106,9 +107,7 @@ co(function*() {
 
     // 下载
     return lib.tryDownloadSong(song.url, filename, song, songs.length, timeout, maxTimes);
-  }, {
-    concurrency: concurrency
-  });
+  }, concurrency);
 
   console.log('下载完成,耗时%s秒', (Date.now() - start) / 1000);
 }).catch(e => console.error(e.stack || e));

@@ -20,7 +20,7 @@
   ],
   "author": "magicdawn",
   "engines": {
-    "node": "4.x"
+    "node": ">=4"
   },
   "files": [
     "bin",
@@ -29,18 +29,17 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.3.1",
-    "cheerio": "^0.19.0",
-    "co": "^4.5.4",
+    "cheerio": "^0.20.0",
+    "co": "^4.6.0",
     "debug": "^2.2.0",
-    "fs-extra": "^0.24.0",
-    "lodash": "^3.9.3",
+    "lodash": "^4.6.1",
     "log-symbols": "^1.0.2",
     "minimist": "^1.1.1",
-    "nightmare": "^2.1.6",
-    "superagent": "^1.7.2"
+    "needle-kit": "^1.2.0",
+    "nightmare": "^2.2.0",
+    "promise.map": "0.0.1"
   },
   "devDependencies": {
-    "eslint": "^2.0.0"
+    "eslint": "^2.3.0"
   }
 }

@@ -22,8 +22,8 @@ const argv = require('minimist')(process.argv.slice(2), {
   default: {
     concurrency: 5,
     format: ':name/:singer - :songName.:ext',
-    quality: 320,
-    timeout: 5, // 5 mins
+    quality: 128,
+    timeout: 3, // 3 mins
     'max-times': 3 // 3 times
   }
 });
@@ -39,9 +39,9 @@ if (argv._.length === 0 || argv.help) {
     -h,--help         查看此帮助信息
     -c,--concurrency  设置同时下载数量, 默认5
     -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
-    -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
-    -t,--timeout      设置下载超时, 单位为分, 默认5分钟
-    --max-times       设置下载重试次数, 需要与timeout搭配使用,默认3次
+    -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认128
+    -t,--timeout      设置下载超时, 单位为分, 默认3分钟
+    --max-times       设置下载重试次数, 需要与timeout搭配使用, 默认3次
 
   帮助 & 文档:
     https://github.com/magicdawn/yun-playlist-downloader

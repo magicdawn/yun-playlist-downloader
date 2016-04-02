@@ -94,6 +94,9 @@ co(function*() {
   const start = Date.now();
   console.log(`正在下载『${ name }』,请稍候...`);
 
+  // FIXME
+  // process.exit();
+
   // 开始下载
   yield map(songs, song => {
     // 根据格式获取所需文件名

@@ -12,24 +12,28 @@ const map = require('promise.map');
 const pkgVersion = require('../package.json').version;
 const debug = require('debug')('yun:cli');
 const argv = require('minimist')(process.argv.slice(2), {
+  boolean: ['skip'],
   alias: {
     h: 'help',
     c: 'concurrency',
     f: 'format',
     q: 'quality',
-    t: 'timeout'
+    t: 'timeout',
+    s: 'skip'
   },
   default: {
     concurrency: 5,
     format: ':name/:singer - :songName.:ext',
     quality: 128,
     timeout: 3, // 3 mins
-    'max-times': 3 // 3 times
+    'max-times': 3, // 3 times
+    skip: true
   }
 });
 
 if (argv._.length === 0 || argv.help) {
-  console.log(`
+  console.log(
+    `
   网易云音乐 歌单/专辑 下载器 v${ pkgVersion }
 
   使用:
@@ -42,6 +46,7 @@ if (argv._.length === 0 || argv.help) {
     -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认128
     -t,--timeout      设置下载超时, 单位为分, 默认3分钟
     --max-times       设置下载重试次数, 需要与timeout搭配使用, 默认3次
+    -s,--skip         设置对于已存在文件且大于1MB, 则跳过, 默认启用
 
   帮助 & 文档:
     https://github.com/magicdawn/yun-playlist-downloader
@@ -52,7 +57,8 @@ if (argv._.length === 0 || argv.help) {
 
     # 下载格式为 '歌手 - 歌名'
     yun -f ':singer - :songName.:ext' http://music.163.com/#/playlist?id=12583200
-  `);
+  `
+  );
   process.exit(1);
 }
 
@@ -80,7 +86,10 @@ quality = quality * 1000;
 const timeout = argv.timeout * 60 * 1000; // ms
 const maxTimes = argv['max-times'];
 
-co(function*() {
+// 是否跳过已存在
+const skipExists = argv.skip;
+
+co(function * () {
   url = lib.normalizeUrl(url);
   const html = yield lib.getHtml(url);
   const $ = cheerio.load(html, {
@@ -109,7 +118,10 @@ co(function*() {
     // return console.log(filename);
 
     // 下载
-    return lib.tryDownloadSong(song.url, filename, song, songs.length, timeout, maxTimes);
+    return lib.tryDownloadSong(
+      song.url, filename, song, songs.length,
+      timeout, maxTimes, skipExists
+    );
   }, concurrency);
 
   console.log('下载完成,耗时%s秒', (Date.now() - start) / 1000);

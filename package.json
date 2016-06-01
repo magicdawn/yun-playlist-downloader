@@ -40,6 +40,8 @@
     "promise.map": "0.0.1"
   },
   "devDependencies": {
+    "esformatter": "^0.9.3",
+    "esformatter-curly": "^0.0.1",
     "eslint": "^2.3.0"
   }
 }

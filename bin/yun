@@ -115,7 +115,6 @@ co(function * () {
       url: url,
       name: name
     });
-    // return console.log(filename);
 
     // 下载
     return lib.tryDownloadSong(

@@ -46,7 +46,7 @@ if (argv._.length === 0 || argv.help) {
     -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
     -t,--timeout      设置下载超时, 单位为分, 默认3分钟
     --max-times       设置下载重试次数, 需要与timeout搭配使用, 默认3次
-    -s,--skip         设置对于已存在文件且大于1MB, 则跳过, 默认启用
+    -s,--skip         设置对于已存在文件且大小合适则跳过, 默认启用
 
   帮助 & 文档:
     https://github.com/magicdawn/yun-playlist-downloader

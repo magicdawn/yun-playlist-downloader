@@ -32,12 +32,15 @@
     "cheerio": "^0.20.0",
     "co": "^4.6.0",
     "debug": "^2.2.0",
+    "humanize-duration": "^3.8.0",
     "lodash": "^4.6.1",
     "log-symbols": "^1.0.2",
     "minimist": "^1.1.1",
+    "moment": "^2.13.0",
     "needle-kit": "^1.2.0",
     "nightmare": "^2.2.0",
-    "promise.map": "0.0.1"
+    "promise.map": "^0.0.2",
+    "superagent": "^2.0.0"
   },
   "devDependencies": {
     "esformatter": "^0.9.3",

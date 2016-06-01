@@ -2,15 +2,15 @@
 
 'use strict';
 
-const kit = require('needle-kit');
-const co = require('co');
-const lib = require('../lib');
-const cheerio = require('cheerio');
 const path = require('path');
-const fs = kit.fs;
-const map = require('promise.map');
-const pkgVersion = require('../package.json').version;
+const fs = require('needle-kit').fs;
+const co = require('co');
+const cheerio = require('cheerio');
+const pmap = require('promise.map');
 const debug = require('debug')('yun:cli');
+const humanizeDuration = require('humanize-duration');
+const lib = require('../lib');
+const pkgVersion = require('../package.json').version;
 const argv = require('minimist')(process.argv.slice(2), {
   boolean: ['skip'],
   alias: {
@@ -24,7 +24,7 @@ const argv = require('minimist')(process.argv.slice(2), {
   default: {
     concurrency: 5,
     format: ':name/:singer - :songName.:ext',
-    quality: 128,
+    quality: 320,
     timeout: 3, // 3 mins
     'max-times': 3, // 3 times
     skip: true
@@ -43,7 +43,7 @@ if (argv._.length === 0 || argv.help) {
     -h,--help         查看此帮助信息
     -c,--concurrency  设置同时下载数量, 默认5
     -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
-    -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认128
+    -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
     -t,--timeout      设置下载超时, 单位为分, 默认3分钟
     --max-times       设置下载重试次数, 需要与timeout搭配使用, 默认3次
     -s,--skip         设置对于已存在文件且大于1MB, 则跳过, 默认启用
@@ -89,7 +89,7 @@ const maxTimes = argv['max-times'];
 // 是否跳过已存在
 const skipExists = argv.skip;
 
-co(function * () {
+co(function*() {
   url = lib.normalizeUrl(url);
   const html = yield lib.getHtml(url);
   const $ = cheerio.load(html, {
@@ -107,7 +107,7 @@ co(function * () {
   // process.exit();
 
   // 开始下载
-  yield map(songs, song => {
+  yield pmap(songs, song => {
     // 根据格式获取所需文件名
     const filename = lib.getFileName({
       format: format,
@@ -123,5 +123,8 @@ co(function * () {
     );
   }, concurrency);
 
-  console.log('下载完成,耗时%s秒', (Date.now() - start) / 1000);
+  const dur = humanizeDuration(Date.now() - start, {
+    language: 'zh_CN'
+  });
+  console.log('下载完成, 耗时%s', dur);
 }).catch(e => console.error(e.stack || e));

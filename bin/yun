@@ -9,8 +9,19 @@ const cheerio = require('cheerio');
 const pmap = require('promise.map');
 const debug = require('debug')('yun:cli');
 const humanizeDuration = require('humanize-duration');
+const _ = require('lodash');
 const lib = require('../lib');
 const pkgVersion = require('../package.json').version;
+
+// get config
+const config = require('rc')('yun', {
+  concurrency: 5,
+  format: ':name/:singer - :songName.:ext',
+  quality: 320,
+  timeout: 3, // 3 mins
+  'max-times': 3, // 3 times
+  skip: true
+});
 const argv = require('minimist')(process.argv.slice(2), {
   boolean: ['skip'],
   alias: {
@@ -21,14 +32,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     t: 'timeout',
     s: 'skip'
   },
-  default: {
-    concurrency: 5,
-    format: ':name/:singer - :songName.:ext',
-    quality: 320,
-    timeout: 3, // 3 mins
-    'max-times': 3, // 3 times
-    skip: true
-  }
+  default: config
 });
 
 if (argv._.length === 0 || argv.help) {
@@ -88,6 +92,17 @@ const maxTimes = argv['max-times'];
 
 // 是否跳过已存在
 const skipExists = argv.skip;
+
+// 打印
+console.log((`
+当前参数
+concurrency: ${ argv.concurrency }
+timeout: ${ argv.timeout }
+max-times: ${ argv['max-times'] }
+quality: ${ argv.quality }
+format: ${ argv.format }
+skip: ${ argv.skip }
+`));
 
 co(function*() {
   url = lib.normalizeUrl(url);

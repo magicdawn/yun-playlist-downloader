@@ -77,6 +77,18 @@ $ yun
 ### 重试次数, --max-times
 置下载重试次数, 需要与timeout搭配使用,默认3次
 
+### 下载并发, -c, --concurrency
+下载并发
+
+### 是否跳过下载, --skip
+- 对于文件已存在, 而且文件大小与要下载的网络文件的 `content-length` 大小一致, 则跳过下载
+- 默认启用
+- 使用 `--skip false` 关闭该特性
+
+## `.yunrc`
+该工具使用了 `rc` 模块, 会去遍历读取 `.yunrc` 配置文件
+具体规则见 `rc` 模块 README https://github.com/dominictarr/rc#standards
+
 ## 截图
 ![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)
 

@@ -11,7 +11,7 @@ const debug = require('debug')('yun:cli');
 const humanizeDuration = require('humanize-duration');
 const _ = require('lodash');
 const lib = require('../lib');
-const pkgVersion = require('../package.json').version;
+const pkgVersion = require('../package').version;
 
 // get config
 const config = require('rc')('yun', {

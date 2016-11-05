@@ -1,5 +1,8 @@
 # 更新记录
 
+## 2016-11-05 v0.10.1
+- 修复 #8, 给文件名进行 `sanitize`, 去除特殊字符
+
 ## 2016-11-05 v0.10.0
 - 使用 `request` & `request-promise` 重写
 - eslint 使用 no semi

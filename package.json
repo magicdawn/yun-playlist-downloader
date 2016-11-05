@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "cheerio": "^0.20.0",
+    "cheerio": "^0.22.0",
     "co": "^4.6.0",
     "debug": "^2.2.0",
     "humanize-duration": "^3.8.0",
@@ -36,8 +36,8 @@
     "log-symbols": "^1.0.2",
     "minimist": "^1.1.1",
     "moment": "^2.13.0",
-    "needle-kit": "^1.2.0",
-    "nightmare": "^2.2.0",
+    "needle-kit": "^2.0.0",
+    "nightmare": "^2.8.1",
     "promise.map": "^0.0.2",
     "promise.retry": "^0.1.0",
     "rc": "^1.1.6",
@@ -45,6 +45,6 @@
     "request-promise": "^4.1.1"
   },
   "devDependencies": {
-    "eslint": "^2.3.0"
+    "eslint": "^3.9.1"
   }
 }

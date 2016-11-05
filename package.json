@@ -2,12 +2,16 @@
   "name": "yun-playlist-downloader",
   "version": "0.9.0",
   "description": "NetEase CloudMusic downloader",
-  "main": "lib/index",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "lib/index.js",
+  "files": [
+    "bin",
+    "lib"
+  ],
   "bin": {
     "yun": "bin/yun"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -22,11 +26,6 @@
   "engines": {
     "node": ">=4"
   },
-  "files": [
-    "bin",
-    "lib",
-    "package.json"
-  ],
   "license": "MIT",
   "dependencies": {
     "cheerio": "^0.20.0",
@@ -43,12 +42,9 @@
     "promise.retry": "^0.1.0",
     "rc": "^1.1.6",
     "request": "^2.75.0",
-    "request-promise": "^4.1.1",
-    "superagent": "^2.0.0"
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
-    "esformatter": "^0.9.3",
-    "esformatter-curly": "^0.0.1",
     "eslint": "^2.3.0"
   }
 }

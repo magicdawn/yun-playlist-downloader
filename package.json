@@ -42,7 +42,8 @@
     "promise.retry": "^0.1.0",
     "rc": "^1.1.6",
     "request": "^2.75.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "sanitize-filename": "^1.6.1"
   },
   "devDependencies": {
     "eslint": "^3.9.1"

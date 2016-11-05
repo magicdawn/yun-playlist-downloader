@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-'use strict';
+'use strict'
 
-const path = require('path');
-const fs = require('needle-kit').fs;
-const co = require('co');
-const cheerio = require('cheerio');
-const pmap = require('promise.map');
-const debug = require('debug')('yun:cli');
-const humanizeDuration = require('humanize-duration');
-const _ = require('lodash');
-const lib = require('../lib');
-const pkgVersion = require('../package').version;
+const path = require('path')
+const fs = require('needle-kit').fs
+const co = require('co')
+const cheerio = require('cheerio')
+const pmap = require('promise.map')
+const debug = require('debug')('yun:cli')
+const humanizeDuration = require('humanize-duration')
+const _ = require('lodash')
+const lib = require('../lib')
+const pkgVersion = require('../package').version
 
 // get config
 const config = require('rc')('yun', {
@@ -21,7 +21,7 @@ const config = require('rc')('yun', {
   timeout: 3, // 3 mins
   'max-times': 3, // 3 times
   skip: true
-});
+})
 const argv = require('minimist')(process.argv.slice(2), {
   boolean: ['skip'],
   alias: {
@@ -33,7 +33,7 @@ const argv = require('minimist')(process.argv.slice(2), {
     s: 'skip'
   },
   default: config
-});
+})
 
 if (argv._.length === 0 || argv.help) {
   console.log(
@@ -62,36 +62,36 @@ if (argv._.length === 0 || argv.help) {
     # 下载格式为 '歌手 - 歌名'
     yun -f ':singer - :songName.:ext' http://music.163.com/#/playlist?id=12583200
   `
-  );
-  process.exit(1);
+  )
+  process.exit(1)
 }
 
 // url
-let url = argv._[0];
+let url = argv._[0]
 
 // concurrency
-const concurrency = argv.concurrency;
+const concurrency = argv.concurrency
 
 // format
-const format = argv.format;
+const format = argv.format
 
 // quality
-let quality = argv.quality;
-const qualityRegistry = [128, 192, 320];
+let quality = argv.quality
+const qualityRegistry = [128, 192, 320]
 if (!~qualityRegistry.indexOf(quality)) {
   console.log(`
   quality参数可选值为 ${ JSON.stringify(qualityRegistry) }
-  `);
-  process.exit(1);
+  `)
+  process.exit(1)
 }
-quality = quality * 1000;
+quality = quality * 1000
 
 // timeout & maxTimes
-const timeout = argv.timeout * 60 * 1000; // ms
-const maxTimes = argv['max-times'];
+const timeout = argv.timeout * 60 * 1000 // ms
+const maxTimes = argv['max-times']
 
 // 是否跳过已存在
-const skipExists = argv.skip;
+const skipExists = argv.skip
 
 // 打印
 console.log((`
@@ -102,24 +102,24 @@ max-times: ${ argv['max-times'] }
 quality: ${ argv.quality }
 format: ${ argv.format }
 skip: ${ argv.skip }
-`));
+`))
 
 co(function*() {
-  url = lib.normalizeUrl(url);
-  const html = yield lib.getHtml(url);
+  url = lib.normalizeUrl(url)
+  const html = yield lib.getHtml(url)
   const $ = cheerio.load(html, {
     decodeEntities: false
-  });
+  })
 
   // 基本信息
-  const name = lib.getTitle($, url);
-  const songs = yield lib.getSongs($, url, quality);
-  debug('songs : %j', songs);
-  const start = Date.now();
-  console.log(`正在下载『${ name }』,请稍候...`);
+  const name = lib.getTitle($, url)
+  const songs = yield lib.getSongs($, url, quality)
+  debug('songs : %j', songs)
+  const start = Date.now()
+  console.log(`正在下载『${ name }』,请稍候...`)
 
   // FIXME
-  // process.exit();
+  process.exit()
 
   // 开始下载
   yield pmap(songs, song => {
@@ -129,17 +129,17 @@ co(function*() {
       song: song,
       url: url,
       name: name
-    });
+    })
 
     // 下载
     return lib.tryDownloadSong(
       song.url, filename, song, songs.length,
       timeout, maxTimes, skipExists
-    );
-  }, concurrency);
+    )
+  }, concurrency)
 
   const dur = humanizeDuration(Date.now() - start, {
     language: 'zh_CN'
-  });
-  console.log('下载完成, 耗时%s', dur);
-}).catch(e => console.error(e.stack || e));
+  })
+  console.log('下载完成, 耗时%s', dur)
+}).catch(e => console.error(e.stack || e))

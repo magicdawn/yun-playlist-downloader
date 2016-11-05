@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2016-11-05 v0.10.0
+- 使用 `request` & `request-promise` 重写
+- eslint 使用 no semi
+- 移除 `.npmignore`, package.json files 只留 `lib` & `bin`
+
 ## 2016-06-04 v0.9.0
 - 增加 `.yunrc` 配置支持, 使用 `rc` 模块
 

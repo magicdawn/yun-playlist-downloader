@@ -42,6 +42,8 @@
     "promise.map": "^0.0.2",
     "promise.retry": "^0.1.0",
     "rc": "^1.1.6",
+    "request": "^2.75.0",
+    "request-promise": "^4.1.1",
     "superagent": "^2.0.0"
   },
   "devDependencies": {

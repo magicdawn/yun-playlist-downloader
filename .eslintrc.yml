@@ -1,6 +1,3 @@
-# use babel
-# parser: babel-eslint
-
 # root
 root: true
 
@@ -13,27 +10,30 @@ env:
 # rules
 rules:
   # basic
-  semi: [2, always] # ;
-  indent: [2, 2]
-  quotes: [2, single] # '' | ""
-  eqeqeq: 2 # ===
-  camelcase: 2
-  radix: 2 # parseInt('100', 10)
-  yoda: 2 # 'blue' === sky
-  no-var: 2 # ES6 let & const
-  no-const-assign: 2
-  strict: [2, global] # 'use strict'
+  semi: [error, never]
+  quotes: [error, single]
+  eqeqeq: error
+  camelcase: error
+  radix: error
+  yoda: error
+  no-var: error
+  no-const-assign: error
+  strict: [error, global]
+  comma-dangle: [error, only-multiline]
 
-  # 大括号
-  curly: [2, multi-line] # 需要大括号
-  brace-style: 2 # 左大括号同一行
+  # indent
+  indent: [error, 2, { SwitchCase: 1 }]
+
+  # brace
+  curly: [error, multi-line]
+  brace-style: error
 
   # disable default
-  no-unused-vars: 0 # 已定义, 未使用
-  no-console: 0 # console
-
-  # space
-  # 有 jsbeautify 保持风格
+  no-unused-vars: off
+  no-console: off
+  no-unreachable: off
+  require-yield: off
+  no-constant-condition: off
 
 parserOptions:
   ecmaVersion: 6

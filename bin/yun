@@ -12,6 +12,7 @@ const humanizeDuration = require('humanize-duration')
 const _ = require('lodash')
 const lib = require('../lib')
 const pkgVersion = require('../package').version
+require('loud-rejection')()
 
 // get config
 const config = require('rc')('yun', {
@@ -104,16 +105,16 @@ format: ${ argv.format}
 skip: ${ argv.skip}
 `))
 
-co(function*() {
+async function main() {
   url = lib.normalizeUrl(url)
-  const html = yield lib.getHtml(url)
+  const html = await lib.getHtml(url)
   const $ = cheerio.load(html, {
     decodeEntities: false
   })
 
   // 基本信息
   const name = lib.getTitle($, url)
-  const songs = yield lib.getSongs($, url, quality)
+  const songs = await lib.getSongs($, url, quality)
   debug('songs : %j', songs)
   const start = Date.now()
   console.log(`正在下载『${name}』,请稍候...`)
@@ -122,7 +123,7 @@ co(function*() {
   // process.exit()
 
   // 开始下载
-  yield pmap(songs, song => {
+  await pmap(songs, song => {
     // 根据格式获取所需文件名
     const filename = lib.getFileName({
       format: format,
@@ -142,4 +143,6 @@ co(function*() {
     language: 'zh_CN'
   })
   console.log('下载完成, 耗时%s', dur)
-}).catch(e => console.error(e.stack || e))
+}
+
+main()

@@ -36,6 +36,6 @@ rules:
   no-constant-condition: off
 
 parserOptions:
-  ecmaVersion: 6
+  ecmaVersion: 8
 
 extends: 'eslint:recommended'

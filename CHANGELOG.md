@@ -1,5 +1,12 @@
 # 更新记录
 
+## 2017-07-19 v1.0.0
+
+- 使用 async/await, 要求 node >= 7.6.0
+- 去除 needle-kit, 使用 fs-extra
+- 去除 jsbeautifyrc, 使用 prettier
+- 更新 .eslintrc.yml
+
 ## 2017-02-19 v0.11.0
 - 升级依赖, nightmare 依赖 electron
 

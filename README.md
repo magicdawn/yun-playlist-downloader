@@ -13,7 +13,7 @@
 - [x] 自定义文件名
 
 ## 安装
-需要 node.js 4.x (Argon LTS)
+需要 node.js >= 7.6.0 async/await 支持
 
 ```sh
 $ npm i yun-playlist-downloader -g

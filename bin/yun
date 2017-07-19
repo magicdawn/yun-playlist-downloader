@@ -97,11 +97,11 @@ const skipExists = argv.skip
 console.log(`
 当前参数
 concurrency: ${argv.concurrency}
-timeout: ${argv.timeout}
-max-times: ${argv['max-times']}
-quality: ${argv.quality}
-format: ${argv.format}
-skip: ${argv.skip}
+timeout:     ${argv.timeout}
+max-times:   ${argv['max-times']}
+quality:     ${argv.quality}
+format:      ${argv.format}
+skip:        ${argv.skip}
 `)
 
 async function main() {

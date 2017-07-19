@@ -29,23 +29,23 @@
   "license": "MIT",
   "dependencies": {
     "cheerio": "^0.22.0",
-    "debug": "^2.6.1",
+    "debug": "^2.6.8",
     "humanize-duration": "^3.10.0",
     "lodash": "^4.17.4",
     "log-symbols": "^1.0.2",
     "loud-rejection": "^1.6.0",
     "minimist": "^1.1.1",
-    "moment": "^2.17.1",
+    "moment": "^2.18.1",
     "needle-kit": "^2.0.0",
     "nightmare": "^2.9.1",
     "promise.map": "^0.0.2",
     "promise.retry": "^0.1.0",
-    "rc": "^1.1.7",
-    "request": "^2.79.0",
-    "request-promise": "^4.1.1",
+    "rc": "^1.2.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
     "sanitize-filename": "^1.6.1"
   },
   "devDependencies": {
-    "eslint": "^3.16.1"
+    "eslint": "^4.2.0"
   }
 }

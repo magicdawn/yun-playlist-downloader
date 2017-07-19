@@ -12,7 +12,7 @@ const humanizeDuration = require('humanize-duration')
 const _ = require('lodash')
 const lib = require('../lib')
 const pkgVersion = require('../package').version
-require('loud-rejection')()
+require('log-reject-error')()
 
 // get config
 const config = require('rc')('yun', {

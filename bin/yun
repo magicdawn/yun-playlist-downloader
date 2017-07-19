@@ -3,7 +3,6 @@
 'use strict'
 
 const path = require('path')
-const fs = require('needle-kit').fs
 const co = require('co')
 const cheerio = require('cheerio')
 const pmap = require('promise.map')

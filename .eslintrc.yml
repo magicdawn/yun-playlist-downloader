@@ -11,7 +11,7 @@ env:
 rules:
   # basic
   semi: [error, never]
-  quotes: [error, single]
+  quotes: [error, single, { allowTemplateLiterals: true }]
   eqeqeq: error
   camelcase: error
   radix: error

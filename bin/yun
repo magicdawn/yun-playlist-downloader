@@ -21,7 +21,7 @@ const config = require('rc')('yun', {
   quality: 320,
   timeout: 3, // 3 mins
   'max-times': 3, // 3 times
-  skip: true
+  skip: true,
 })
 const argv = require('minimist')(process.argv.slice(2), {
   boolean: ['skip'],
@@ -31,15 +31,15 @@ const argv = require('minimist')(process.argv.slice(2), {
     f: 'format',
     q: 'quality',
     t: 'timeout',
-    s: 'skip'
+    s: 'skip',
   },
-  default: config
+  default: config,
 })
 
 if (argv._.length === 0 || argv.help) {
   console.log(
     `
-  网易云音乐 歌单/专辑 下载器 v${ pkgVersion}
+  网易云音乐 歌单/专辑 下载器 v${pkgVersion}
 
   使用:
     yun [选项] <地址>
@@ -81,7 +81,7 @@ let quality = argv.quality
 const qualityRegistry = [128, 192, 320]
 if (!~qualityRegistry.indexOf(quality)) {
   console.log(`
-  quality参数可选值为 ${ JSON.stringify(qualityRegistry)}
+  quality参数可选值为 ${JSON.stringify(qualityRegistry)}
   `)
   process.exit(1)
 }
@@ -95,21 +95,21 @@ const maxTimes = argv['max-times']
 const skipExists = argv.skip
 
 // 打印
-console.log((`
+console.log(`
 当前参数
-concurrency: ${ argv.concurrency}
-timeout: ${ argv.timeout}
-max-times: ${ argv['max-times']}
-quality: ${ argv.quality}
-format: ${ argv.format}
-skip: ${ argv.skip}
-`))
+concurrency: ${argv.concurrency}
+timeout: ${argv.timeout}
+max-times: ${argv['max-times']}
+quality: ${argv.quality}
+format: ${argv.format}
+skip: ${argv.skip}
+`)
 
 async function main() {
   url = lib.normalizeUrl(url)
   const html = await lib.getHtml(url)
   const $ = cheerio.load(html, {
-    decodeEntities: false
+    decodeEntities: false,
   })
 
   // 基本信息
@@ -123,24 +123,33 @@ async function main() {
   // process.exit()
 
   // 开始下载
-  await pmap(songs, song => {
-    // 根据格式获取所需文件名
-    const filename = lib.getFileName({
-      format: format,
-      song: song,
-      url: url,
-      name: name
-    })
+  await pmap(
+    songs,
+    song => {
+      // 根据格式获取所需文件名
+      const filename = lib.getFileName({
+        format: format,
+        song: song,
+        url: url,
+        name: name,
+      })
 
-    // 下载
-    return lib.tryDownloadSong(
-      song.url, filename, song, songs.length,
-      timeout, maxTimes, skipExists
-    )
-  }, concurrency)
+      // 下载
+      return lib.tryDownloadSong(
+        song.url,
+        filename,
+        song,
+        songs.length,
+        timeout,
+        maxTimes,
+        skipExists
+      )
+    },
+    concurrency
+  )
 
   const dur = humanizeDuration(Date.now() - start, {
-    language: 'zh_CN'
+    language: 'zh_CN',
   })
   console.log('下载完成, 耗时%s', dur)
 }

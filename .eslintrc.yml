@@ -6,6 +6,7 @@ env:
   node: true
   mocha: true
   es6: true
+  browser: true
 
 # rules
 rules:
@@ -18,11 +19,11 @@ rules:
   yoda: error
   no-var: error
   no-const-assign: error
-  strict: [error, global]
+  # strict: [error, global]
   comma-dangle: [error, only-multiline]
 
-  # indent
-  indent: [error, 2, { SwitchCase: 1 }]
+  # indent use prettier
+  # indent: [error, 2, { SwitchCase: 1 }]
 
   # brace
   curly: [error, multi-line]
@@ -34,8 +35,11 @@ rules:
   no-unreachable: off
   require-yield: off
   no-constant-condition: off
+  no-extra-semi: off
 
 parserOptions:
   ecmaVersion: 8
 
-extends: 'eslint:recommended'
+extends:
+  - 'eslint:recommended'
+  # .eslintrc.custom.yml

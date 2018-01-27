@@ -41,7 +41,6 @@
     "log-symbols": "^2.1.0",
     "minimist": "^1.1.1",
     "moment": "^2.18.1",
-    "nightmare": "^2.9.1",
     "promise.map": "^0.0.2",
     "promise.retry": "^0.1.0",
     "rc": "^1.2.1",

@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2018-01-28 v1.2.0
+
+- 移除 nightmare
+- 使用 music-api 包获取 playlist/album 详情, 音频文件链接
+- 使用 ES6 class 组织 adapter
+
 ## 2018-01-19 v1.1.0
 
 - 应对云音乐修改

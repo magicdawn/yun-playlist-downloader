@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2018-02-16 v1.3.0
+
+- 使用 yargs 代替 minimist
+- 修复 package.json 未声明 co, bin 中require co 的问题
+
 ## 2018-01-28 v1.2.0
 
 - 移除 nightmare

@@ -46,7 +46,8 @@
     "rc": "^1.2.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "sanitize-filename": "^1.6.1"
+    "sanitize-filename": "^1.6.1",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "eslint": "^4.2.0"

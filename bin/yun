@@ -9,6 +9,7 @@ const pmap = require('promise.map')
 const debug = require('debug')('yun:cli')
 const humanizeDuration = require('humanize-duration')
 const _ = require('lodash')
+const yargs = require('yargs')
 const lib = require('../lib')
 const pkgVersion = require('../package').version
 require('log-reject-error')()
@@ -22,83 +23,94 @@ const config = require('rc')('yun', {
   'max-times': 3, // 3 times
   skip: true,
 })
-const argv = require('minimist')(process.argv.slice(2), {
-  boolean: ['skip'],
-  alias: {
-    h: 'help',
-    c: 'concurrency',
-    f: 'format',
-    q: 'quality',
-    t: 'timeout',
-    s: 'skip',
-  },
-  default: config,
-})
 
-if (argv._.length === 0 || argv.help) {
-  console.log(
-    `
-  网易云音乐 歌单/专辑 下载器 v${pkgVersion}
+let argv = yargs.command(
+  '$0 <url>',
+  '网易云音乐 歌单/专辑 下载器',
+  // builder
+  yargs => {
+    yargs
+      .usage('Usage: $0 <url> [options]')
+      .positional('url', { describe: '歌单/专辑的链接', type: 'string' })
+      .alias({
+        h: 'help',
+        v: 'version',
+        c: 'concurrency',
+        f: 'format',
+        q: 'quality',
+        t: 'timeout',
+        s: 'skip',
+      })
+      .option({
+        concurrency: {
+          desc: '同时下载数量',
+          type: 'number',
+          default: 5,
+        },
 
-  使用:
-    yun [选项] <地址>
+        format: {
+          desc: '文件格式',
+          type: 'string',
+          default: ':name/:singer - :songName.:ext',
+        },
 
-  选项:
-    -h,--help         查看此帮助信息
-    -c,--concurrency  设置同时下载数量, 默认5
-    -f,--format       设置文件格式, 默认 ':name/:singer - :songName.:ext'
-    -q,--quality      设置音质, 可选值为 128,192,320(kbits/s), 默认320
-    -t,--timeout      设置下载超时, 单位为分, 默认3分钟
-    --max-times       设置下载重试次数, 需要与timeout搭配使用, 默认3次
-    -s,--skip         设置对于已存在文件且大小合适则跳过, 默认启用
+        quality: {
+          desc: '音质',
+          type: 'number',
+          default: 320,
+          choices: [128, 192, 320],
+        },
 
-  帮助 & 文档:
-    https://github.com/magicdawn/yun-playlist-downloader
+        timeout: {
+          desc: '下载超时(分)',
+          type: 'number',
+          default: 3,
+        },
 
-  示例:
-    # 10首同时下载
-    yun -c 10 http://music.163.com/#/playlist?id=12583200
+        maxTimes: {
+          desc: '下载重试次数',
+          type: 'number',
+          default: 3,
+        },
 
-    # 下载格式为 '歌手 - 歌名'
-    yun -f ':singer - :songName.:ext' http://music.163.com/#/playlist?id=12583200
-  `
-  )
-  process.exit(1)
-}
+        skip: {
+          desc: '对于已存在文件且大小合适则跳过',
+          type: 'boolean',
+          default: true,
+        },
+      })
+      .config(config)
+      .example('$0 -c 10 <url>', '10首同时下载')
+      .example(
+        'yun -f ":singer - :songName.:ext" <url>',
+        '下载格式为 "歌手 - 歌名"'
+      )
+      .epilog(
+        '帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader'
+      )
+  }
+).argv
 
 // url
-let url = argv._[0]
+let {
+  url,
+  concurrency,
+  format,
+  quality,
+  timeout,
+  maxTimes,
+  skip: skipExists,
+} = argv
 
-// concurrency
-const concurrency = argv.concurrency
-
-// format
-const format = argv.format
-
-// quality
-let quality = argv.quality
-const qualityRegistry = [128, 192, 320]
-if (!~qualityRegistry.indexOf(quality)) {
-  console.log(`
-  quality参数可选值为 ${JSON.stringify(qualityRegistry)}
-  `)
-  process.exit(1)
-}
-quality = quality * 1000
-
-// timeout & maxTimes
-const timeout = argv.timeout * 60 * 1000 // ms
-const maxTimes = argv['max-times']
-
-// 是否跳过已存在
-const skipExists = argv.skip
+quality *= 1000
+timeout *= 60 * 1000 // minute -> ms
 
 // 打印
 console.log(`
 当前参数
 concurrency: ${argv.concurrency}
 timeout:     ${argv.timeout}
-max-times:   ${argv['max-times']}
+max-times:   ${argv.maxTimes}
 quality:     ${argv.quality}
 format:      ${argv.format}
 skip:        ${argv.skip}

@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-'use strict'
-
+require('log-reject-error')()
 const path = require('path')
 const cheerio = require('cheerio')
 const pmap = require('promise.map')
@@ -11,7 +10,6 @@ const _ = require('lodash')
 const yargs = require('yargs')
 const lib = require('../lib')
 const pkgVersion = require('../package').version
-require('log-reject-error')()
 
 // get config
 const config = require('rc')('yun', {
@@ -28,7 +26,7 @@ let argv = yargs.command(
   '网易云音乐 歌单/专辑 下载器',
   // builder
   yargs => {
-    yargs
+    return yargs
       .usage('Usage: $0 <url> [options]')
       .positional('url', { describe: '歌单/专辑的链接', type: 'string' })
       .alias({
@@ -145,7 +143,7 @@ async function main() {
       })
 
       // 下载
-      return lib.tryDownloadSong(
+      return lib.downloadSong(
         song.url,
         filename,
         song,

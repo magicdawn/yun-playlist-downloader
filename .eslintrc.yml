@@ -1,45 +1,5 @@
 # root
 root: true
 
-# code env
-env:
-  node: true
-  mocha: true
-  es6: true
-  browser: true
-
-# rules
-rules:
-  # basic
-  semi: [error, never]
-  quotes: [error, single, { allowTemplateLiterals: true }]
-  eqeqeq: error
-  camelcase: error
-  radix: error
-  yoda: error
-  no-var: error
-  no-const-assign: error
-  # strict: [error, global]
-  comma-dangle: [error, only-multiline]
-
-  # indent use prettier
-  # indent: [error, 2, { SwitchCase: 1 }]
-
-  # brace
-  curly: [error, multi-line]
-  brace-style: error
-
-  # disable default
-  no-unused-vars: off
-  no-console: off
-  no-unreachable: off
-  require-yield: off
-  no-constant-condition: off
-  no-extra-semi: off
-
-parserOptions:
-  ecmaVersion: 8
-
 extends:
-  - 'eslint:recommended'
-  # .eslintrc.custom.yml
+  - plugin:magicdawn/base

@@ -14,7 +14,9 @@
     "yun": "bin/yun"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "test-cover": "nyc --reporter=lcov --reporter=text mocha",
+    "report-cover": "codecov"
   },
   "repository": {
     "type": "git",
@@ -33,23 +35,28 @@
   "dependencies": {
     "@magicdawn/music-api": "^0.3.11",
     "cheerio": "^0.22.0",
-    "debug": "^3.1.0",
-    "fs-extra": "^5.0.0",
+    "debug": "^4.1.1",
+    "dl-vampire": "^0.0.3",
+    "filenamify": "^4.1.0",
+    "fs-extra": "^8.0.1",
     "humanize-duration": "^3.10.0",
     "lodash": "^4.17.4",
     "log-reject-error": "^0.0.2",
-    "log-symbols": "^2.1.0",
+    "log-symbols": "^3.0.0",
     "moment": "^2.18.1",
     "nightmare": "^3.0.1",
     "promise.map": "^0.0.2",
-    "promise.retry": "^0.1.0",
+    "promise.retry": "^0.2.0",
     "rc": "^1.2.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "sanitize-filename": "^1.6.1",
-    "yargs": "^11.0.0"
+    "yargs": "^13.2.4"
   },
   "devDependencies": {
-    "eslint": "^4.2.0"
+    "eslint": "^5.16.0",
+    "eslint-plugin-magicdawn": "^0.0.5",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "should": "^13.2.3"
   }
 }

@@ -8,17 +8,19 @@ const debug = require('debug')('yun:cli')
 const humanizeDuration = require('humanize-duration')
 const _ = require('lodash')
 const yargs = require('yargs')
+const ms = require('ms')
 const lib = require('../lib')
 const pkgVersion = require('../package').version
 
 // get config
 const config = require('rc')('yun', {
-  concurrency: 5,
-  format: ':name/:singer - :songName.:ext',
-  quality: 320,
-  timeout: 3, // 3 mins
-  'max-times': 3, // 3 times
-  skip: true,
+  'concurrency': 5,
+  'format': ':name/:singer - :songName.:ext',
+  'quality': 320,
+  'retry-timeout': 3, // 3 mins
+  'retry-times': 3, // 3 times
+  'skip': true,
+  'progress': true,
 })
 
 let argv = yargs.command(
@@ -35,8 +37,8 @@ let argv = yargs.command(
         c: 'concurrency',
         f: 'format',
         q: 'quality',
-        t: 'timeout',
         s: 'skip',
+        p: 'progress',
       })
       .option({
         concurrency: {
@@ -58,13 +60,13 @@ let argv = yargs.command(
           choices: [128, 192, 320],
         },
 
-        timeout: {
+        retryTimeout: {
           desc: '下载超时(分)',
           type: 'number',
           default: 3,
         },
 
-        maxTimes: {
+        retryTimes: {
           desc: '下载重试次数',
           type: 'number',
           default: 3,
@@ -75,16 +77,17 @@ let argv = yargs.command(
           type: 'boolean',
           default: true,
         },
+
+        progress: {
+          desc: '是否显示进度条',
+          type: 'boolean',
+          default: true,
+        },
       })
       .config(config)
       .example('$0 -c 10 <url>', '10首同时下载')
-      .example(
-        'yun -f ":singer - :songName.:ext" <url>',
-        '下载格式为 "歌手 - 歌名"'
-      )
-      .epilog(
-        '帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader'
-      )
+      .example('yun -f ":singer - :songName.:ext" <url>', '下载格式为 "歌手 - 歌名"')
+      .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
   }
 ).argv
 
@@ -94,24 +97,27 @@ let {
   concurrency,
   format,
   quality,
-  timeout,
-  maxTimes,
+  retryTimeout,
+  retryTimes,
   skip: skipExists,
+  progress,
 } = argv
-
-quality *= 1000
-timeout *= 60 * 1000 // minute -> ms
 
 // 打印
 console.log(`
 当前参数
-concurrency: ${argv.concurrency}
-timeout:     ${argv.timeout}
-max-times:   ${argv.maxTimes}
-quality:     ${argv.quality}
-format:      ${argv.format}
-skip:        ${argv.skip}
+concurrency:    ${concurrency}
+format:         ${format}
+retry-timeout:  ${retryTimeout} (分钟)
+retry-times:    ${retryTimes} (次)
+quality:        ${quality}
+skip:           ${skipExists}
+progress:       ${progress}
 `)
+
+// process argv
+quality *= 1000
+retryTimeout = ms(`${retryTimeout} minutes`)
 
 async function main() {
   url = lib.normalizeUrl(url)
@@ -135,7 +141,7 @@ async function main() {
     songs,
     song => {
       // 根据格式获取所需文件名
-      const filename = lib.getFileName({
+      const file = lib.getFileName({
         format: format,
         song: song,
         url: url,
@@ -143,22 +149,25 @@ async function main() {
       })
 
       // 下载
-      return lib.downloadSong(
-        song.url,
-        filename,
+      return lib.downloadSong({
+        url: song.url,
+        file,
         song,
-        songs.length,
-        timeout,
-        maxTimes,
-        skipExists
-      )
+        totalLength: songs.length,
+        retryTimeout,
+        retryTimes,
+        skipExists,
+        progress,
+      })
     },
     concurrency
   )
 
-  const dur = humanizeDuration(Date.now() - start, {
-    language: 'zh_CN',
+  await new Promise(r => {
+    process.nextTick(r)
   })
+
+  const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
   console.log('下载完成, 耗时%s', dur)
 }
 

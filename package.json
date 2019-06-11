@@ -45,6 +45,7 @@
     "log-reject-error": "^0.0.2",
     "log-symbols": "^3.0.0",
     "moment": "^2.18.1",
+    "ms": "^2.1.2",
     "nightmare": "^3.0.1",
     "promise.map": "^0.0.2",
     "promise.retry": "^0.2.0",

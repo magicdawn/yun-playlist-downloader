@@ -58,6 +58,20 @@
     "eslint-plugin-magicdawn": "^0.0.5",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "husky": "latest",
+    "prettier": "latest",
+    "lint-staged": "latest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,less,vue}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

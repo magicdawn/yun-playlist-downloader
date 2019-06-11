@@ -41,44 +41,44 @@ let argv = yargs.command(
         p: 'progress',
       })
       .option({
-        concurrency: {
+        'concurrency': {
           desc: '同时下载数量',
           type: 'number',
           default: 5,
         },
 
-        format: {
+        'format': {
           desc: '文件格式',
           type: 'string',
           default: ':name/:singer - :songName.:ext',
         },
 
-        quality: {
+        'quality': {
           desc: '音质',
           type: 'number',
           default: 320,
           choices: [128, 192, 320],
         },
 
-        retryTimeout: {
+        'retry-timeout': {
           desc: '下载超时(分)',
           type: 'number',
           default: 3,
         },
 
-        retryTimes: {
+        'retry-times': {
           desc: '下载重试次数',
           type: 'number',
           default: 3,
         },
 
-        skip: {
+        'skip': {
           desc: '对于已存在文件且大小合适则跳过',
           type: 'boolean',
           default: true,
         },
 
-        progress: {
+        'progress': {
           desc: '是否显示进度条',
           type: 'boolean',
           default: true,

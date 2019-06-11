@@ -1,5 +1,13 @@
 # 更新记录
 
+## 2019-06-11 v2.0.0
+
+- 使用 filenamify 代替 sanitize-filename
+- 添加 prettier git hook
+- 添加 dl-vampire 作为下载器
+- 添加 `-p, --progress` 显示进度条
+- 重命名参数 `--timeout` -> `--retry-timeout`, `--max-times` -> `--retry-times`
+
 ## 2018-08-26 v1.4.0
 
 - music-api 无法使用, 经排查, 获取下载地址接口需要带 cookie 访问, 暂时切回 nightmare

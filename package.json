@@ -58,7 +58,6 @@
     "@magicdawn/eslint-config": "^0.0.1",
     "@magicdawn/prettier-config": "^0.0.1",
     "eslint": "^6.6.0",
-    "eslint-plugin-magicdawn": "^0.0.5",
     "husky": "latest",
     "lint-staged": "latest",
     "mocha": "^6.1.4",

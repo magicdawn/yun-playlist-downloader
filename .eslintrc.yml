@@ -2,4 +2,4 @@
 root: true
 
 extends:
-  - plugin:magicdawn/base
+  - '@magicdawn'

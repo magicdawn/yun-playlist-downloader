@@ -9,7 +9,14 @@ const humanizeDuration = require('humanize-duration')
 const _ = require('lodash')
 const yargs = require('yargs')
 const ms = require('ms')
-const lib = require('../lib')
+const {
+  getHtml,
+  normalizeUrl,
+  getTitle,
+  getSongs,
+  getFileName,
+  downloadSong,
+} = require('../lib')
 const pkgVersion = require('../package').version
 
 // get config
@@ -30,7 +37,7 @@ let argv = yargs.command(
   yargs => {
     return yargs
       .usage('Usage: $0 <url> [options]')
-      .positional('url', { describe: '歌单/专辑的链接', type: 'string' })
+      .positional('url', {describe: '歌单/专辑的链接', type: 'string'})
       .alias({
         h: 'help',
         v: 'version',
@@ -86,8 +93,13 @@ let argv = yargs.command(
       })
       .config(config)
       .example('$0 -c 10 <url>', '10首同时下载')
-      .example('yun -f ":singer - :songName.:ext" <url>', '下载格式为 "歌手 - 歌名"')
-      .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
+      .example(
+        'yun -f ":singer - :songName.:ext" <url>',
+        '下载格式为 "歌手 - 歌名"'
+      )
+      .epilog(
+        '帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader'
+      )
   }
 ).argv
 
@@ -120,15 +132,15 @@ quality *= 1000
 retryTimeout = ms(`${retryTimeout} minutes`)
 
 async function main() {
-  url = lib.normalizeUrl(url)
-  const html = await lib.getHtml(url)
+  url = normalizeUrl(url)
+  const html = await getHtml(url)
   const $ = cheerio.load(html, {
     decodeEntities: false,
   })
 
   // 基本信息
-  const name = lib.getTitle($, url)
-  const songs = await lib.getSongs($, url, quality)
+  const name = getTitle($, url)
+  const songs = await getSongs($, url, quality)
   debug('songs : %j', songs)
   const start = Date.now()
   console.log(`正在下载『${name}』,请稍候...`)
@@ -141,7 +153,7 @@ async function main() {
     songs,
     song => {
       // 根据格式获取所需文件名
-      const file = lib.getFileName({
+      const file = getFileName({
         format: format,
         song: song,
         url: url,
@@ -149,7 +161,7 @@ async function main() {
       })
 
       // 下载
-      return lib.downloadSong({
+      return downloadSong({
         url: song.url,
         file,
         song,
@@ -167,7 +179,7 @@ async function main() {
     process.nextTick(r)
   })
 
-  const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
+  const dur = humanizeDuration(Date.now() - start, {language: 'zh_CN'})
   console.log('下载完成, 耗时%s', dur)
 }
 

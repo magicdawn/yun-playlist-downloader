@@ -1,4 +1,4 @@
-const programDetail = require('../../../lib/api/program/detail.js')
+const programDetail = require('../../lib/api/program-detail.js')
 
 describe('API/program/detail', function() {
   it('it works', async () => {

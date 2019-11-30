@@ -15,6 +15,7 @@ const pkgVersion = require('../package').version
 
 let DEFAULT_FORMAT = ':name/:singer - :songName.:ext'
 if (process.argv.some(s => s.match(/djradio/))) {
+  // e.g
   // https://music.163.com/#/program?id=2064329279
   // 等什么君/2019-11-27 - 第56期 - 琴师(Cover:音频怪物)
   DEFAULT_FORMAT = ':name/:programDate 第:programOrder期 - :songName.:ext'

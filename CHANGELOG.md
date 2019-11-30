@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2019-12-01 v2.1.0
+
+- 添加电台支持
+- 使用 umi-request 代替 `superagent` / `axios` / `request` / `request-promise` / `@magicdawn/rp` 等等库
+
 ## 2019-11-21 v2.0.1
 
 - 使用 `@magicdawn/ascii-progress` 导致无法安装的问题, see https://github.com/bubkoo/ascii-progress/issues/31

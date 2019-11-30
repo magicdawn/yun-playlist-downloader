@@ -35,6 +35,7 @@
   "dependencies": {
     "@magicdawn/ascii-progress": "^1.0.8",
     "@magicdawn/music-api": "^0.3.11",
+    "@magicdawn/rp": "^0.1.0",
     "cheerio": "^0.22.0",
     "debug": "^4.1.1",
     "dl-vampire": "^0.0.4",
@@ -52,6 +53,7 @@
     "rc": "^1.2.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
+    "umi-request": "^1.2.11",
     "yargs": "^15.0.2"
   },
   "devDependencies": {

@@ -9,20 +9,21 @@ const humanizeDuration = require('humanize-duration')
 const _ = require('lodash')
 const yargs = require('yargs')
 const ms = require('ms')
-const {
-  getHtml,
-  normalizeUrl,
-  getTitle,
-  getSongs,
-  getFileName,
-  downloadSong,
-} = require('../lib')
+const {getHtml, normalizeUrl} = require('../lib/util.js')
+const {getTitle, getSongs, getFileName, downloadSong} = require('../lib')
 const pkgVersion = require('../package').version
+
+let DEFAULT_FORMAT = ':name/:singer - :songName.:ext'
+if (process.argv.some(s => s.match(/djradio/))) {
+  // https://music.163.com/#/program?id=2064329279
+  // 等什么君/2019-11-27 - 第56期 - 琴师(Cover:音频怪物)
+  DEFAULT_FORMAT = ':name/:programDate 第:programOrder期 - :songName.:ext'
+}
 
 // get config
 const config = require('rc')('yun', {
   'concurrency': 5,
-  'format': ':name/:singer - :songName.:ext',
+  'format': DEFAULT_FORMAT,
   'quality': 320,
   'retry-timeout': 3, // 3 mins
   'retry-times': 3, // 3 times
@@ -57,7 +58,7 @@ let argv = yargs.command(
         'format': {
           desc: '文件格式',
           type: 'string',
-          default: ':name/:singer - :songName.:ext',
+          default: DEFAULT_FORMAT,
         },
 
         'quality': {

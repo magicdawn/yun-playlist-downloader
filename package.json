@@ -1,6 +1,6 @@
 {
   "name": "yun-playlist-downloader",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "NetEase CloudMusic downloader",
   "main": "lib/index.js",
   "files": [
@@ -33,11 +33,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@magicdawn/ascii-progress": "^1.0.8",
     "@magicdawn/music-api": "^0.3.11",
-    "ascii-progress": "^1.0.5",
     "cheerio": "^0.22.0",
     "debug": "^4.1.1",
-    "dl-vampire": "^0.0.3",
+    "dl-vampire": "^0.0.4",
     "filenamify": "^4.1.0",
     "fs-extra": "^8.0.1",
     "humanize-duration": "^3.10.0",
@@ -52,17 +52,18 @@
     "rc": "^1.2.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "yargs": "^13.2.4"
+    "yargs": "^15.0.2"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-plugin-magicdawn": "^0.0.5",
+    "@magicdawn/eslint-config": "^0.0.1",
+    "@magicdawn/prettier-config": "^0.0.1",
+    "eslint": "^6.6.0",
+    "husky": "latest",
+    "lint-staged": "latest",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
-    "should": "^13.2.3",
-    "husky": "latest",
     "prettier": "latest",
-    "lint-staged": "latest"
+    "should": "^13.2.3"
   },
   "husky": {
     "hooks": {

@@ -33,7 +33,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@magicdawn/ascii-progress": "^1.0.8",
     "@magicdawn/music-api": "^0.3.11",
     "cheerio": "^0.22.0",
     "debug": "^4.1.1",
@@ -52,6 +51,9 @@
     "rc": "^1.2.1",
     "umi-request": "^1.2.11",
     "yargs": "^15.0.2"
+  },
+  "optionalDependencies": {
+    "@magicdawn/ascii-progress": "^1.0.8"
   },
   "devDependencies": {
     "@magicdawn/eslint-config": "^0.0.1",

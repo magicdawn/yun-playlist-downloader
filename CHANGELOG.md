@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2019-12-03 v2.2.0
+
+- ascii-progress 移动为 optionalDependencies, 使用 `-p false` 禁用掉调用 ascii-progress 的代码,
+  see https://github.com/magicdawn/yun-playlist-downloader/issues/34
+
 ## 2019-12-01 v2.1.0
 
 - 添加电台支持

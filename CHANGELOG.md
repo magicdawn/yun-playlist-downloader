@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2019-12-28 v2.3.0
+
+- djradio 新增多页支持, 做功能开发看的都是少于 100 期的, 这次新增多页支持, 并新增了 DjradioAdapter 的单测
+
 ## 2019-12-03 v2.2.0
 
 - ascii-progress 移动为 optionalDependencies, 使用 `-p false` 禁用掉调用 ascii-progress 的代码,

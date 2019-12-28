@@ -9,7 +9,7 @@ const humanizeDuration = require('humanize-duration')
 const _ = require('lodash')
 const yargs = require('yargs')
 const ms = require('ms')
-const {getHtml, normalizeUrl} = require('../lib/util.js')
+const {getHtml, normalizeUrl, get$} = require('../lib/util.js')
 const {getTitle, getSongs, getFileName, downloadSong} = require('../lib')
 const pkgVersion = require('../package').version
 
@@ -134,11 +134,7 @@ quality *= 1000
 retryTimeout = ms(`${retryTimeout} minutes`)
 
 async function main() {
-  url = normalizeUrl(url)
-  const html = await getHtml(url)
-  const $ = cheerio.load(html, {
-    decodeEntities: false,
-  })
+  const $ = await get$(url)
 
   // 基本信息
   const name = getTitle($, url)

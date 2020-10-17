@@ -27,6 +27,7 @@ export interface SongForFormat extends Song {
 
 export type PlaylistJson = Playlist
 export type SongJson = Track
+export {SongPlayUrlInfo} from './api/response/song-url-info'
 
 export interface SongJsonWithAjaxdata extends SongJson {
   ajaxData: {

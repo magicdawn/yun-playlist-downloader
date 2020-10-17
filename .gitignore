@@ -5,3 +5,6 @@ example
 # test cover
 .nyc_output
 coverage
+
+# tsc
+lib

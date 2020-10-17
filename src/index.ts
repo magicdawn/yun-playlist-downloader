@@ -5,6 +5,7 @@ import filenamify from 'filenamify'
 import dl from 'dl-vampire'
 import getPlayurl from './api/playurl'
 import {SongForFormat, SongJsonWithAjaxdata} from './common'
+import * as yun from 'NeteaseCloudMusicApi'
 
 const debug = debugFactory('yun:index')
 
@@ -16,6 +17,7 @@ import BaseAdapter from './adapter/base'
 import PlaylistAdapter from './adapter/playlist'
 import AlbumAdapter from './adapter/album'
 import DjradioAdapter from './adapter/djradio'
+import {SongPlayUrlInfo} from './api/response/song-url-info'
 
 interface Type {
   type: string
@@ -210,9 +212,11 @@ export const getSongs = async function ($, url, quality) {
 
   // 获取下载链接
   const ids = songs.map((s) => s.id)
-  let json = await getPlayurl(ids, quality) // 0-29有链接, max 30? 没有链接都是下线的
+  // let json = await getPlayurl(ids, quality) // 0-29有链接, max 30? 没有链接都是下线的
+
+  const songUrlRes = await yun.song_url({id: ids.join(',')})
+  let json = songUrlRes.body.data as SongPlayUrlInfo[]
   json = json.filter((s) => s.url) // remove 版权保护没有链接的
-  console.log(json)
 
   // 移除版权限制在json中没有数据的歌曲
   const removed = []
@@ -231,6 +235,10 @@ export const getSongs = async function ($, url, quality) {
 
   const removedIds = _.map(removed, 'id')
   songs = _.reject(songs, (s) => _.includes(removedIds, s.id))
+
+  console.log('没有版权')
+  console.log(removedIds)
+  console.log('-------')
 
   // 根据详细信息获取歌曲
   return adapter.getSongs(songs)

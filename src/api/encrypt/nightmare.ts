@@ -26,7 +26,7 @@ export default async function encryptViaNightmare(reqbody) {
     await night.goto('http://music.163.com')
     body = await night.evaluate((args) => {
       /* eslint-env browser */
-      return window.asrsea.apply(window, args)
+      return (window as any).asrsea.apply(window, args)
     }, args)
     cookies = await night.cookies.get()
     await night.end()

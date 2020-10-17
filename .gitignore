@@ -8,3 +8,4 @@ coverage
 
 # tsc
 lib
+tsconfig.tsbuildinfo

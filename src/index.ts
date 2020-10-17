@@ -4,7 +4,7 @@ import debugFactory from 'debug'
 import filenamify from 'filenamify'
 import dl from 'dl-vampire'
 import getPlayurl from './api/playurl'
-import {SongForFormat, SongJsonWithAjaxdata} from './common'
+import {Song, SongJsonWithAjaxdata} from './common'
 import * as yun from 'NeteaseCloudMusicApi'
 
 const debug = debugFactory('yun:index')
@@ -255,7 +255,7 @@ export const getFileName = ({
   name,
 }: {
   format: string
-  song: SongForFormat
+  song: Song
   url: string
   name: string
 }) => {

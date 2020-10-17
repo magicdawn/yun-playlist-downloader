@@ -12,9 +12,7 @@ export interface Song {
 
   // raw data
   raw?: any
-}
 
-export interface SongForFormat extends Song {
   // extension
   ext: string
 

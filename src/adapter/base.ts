@@ -3,7 +3,7 @@ import {padStart, trimStart} from 'lodash'
 import _ from 'lodash'
 import debugFactory from 'debug'
 import {getId} from '../util'
-import {Song, SongForFormat, SongJson} from '../common'
+import {Song, SongJson} from '../common'
 
 const debug = debugFactory('yun:adapter:base')
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
@@ -53,7 +53,7 @@ export default class BaseAdapter {
    * @param {Array} [songs] songs
    */
 
-  getSongs(songs): SongForFormat[] {
+  getSongs(songs): Song[] {
     // e.g 100 songs -> len = 3
     const len = String(songs.length).length
 

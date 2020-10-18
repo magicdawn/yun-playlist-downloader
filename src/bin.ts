@@ -142,11 +142,12 @@ async function main() {
   const adapter = getAdapter($, url)
 
   // 基本信息
-  const name = adapter.getTitle()
+  const name = await adapter.getTitle()
   console.log(`正在下载『${name}』,请稍候...`)
 
   const songs = await adapter.getSongs(quality)
   debug('songs : %j', songs)
+  // debug('songs : %O', songs[0].raw.playUrlInfo)
 
   const removed = songs.filter((x) => !x.url)
   const keeped = songs.filter((x) => x.url)

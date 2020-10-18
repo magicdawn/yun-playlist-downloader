@@ -4,7 +4,6 @@ import debugFactory from 'debug'
 import filenamify from 'filenamify'
 import dl from 'dl-vampire'
 import {Song} from './common'
-import * as yun from 'NeteaseCloudMusicApi'
 
 const debug = debugFactory('yun:index')
 
@@ -15,7 +14,7 @@ const debug = debugFactory('yun:index')
 import BaseAdapter from './adapter/base'
 import PlaylistAdapter from './adapter/playlist'
 import AlbumAdapter from './adapter/album'
-import DjradioAdapter from './adapter/djradio'
+import DjradioAdapter, {ProgramSong} from './adapter/djradio'
 
 interface Type {
   type: string
@@ -221,50 +220,6 @@ export const getAdapter = ($: cheerio.Root, url: string) => {
 }
 
 /**
- * 获取歌曲
- */
-
-// export const getSongs = async function ($, url, quality) {
-//   const adapter = getAdapter($, url)
-
-//   // 基本信息
-//   let songs = await adapter.getDetail(quality)
-
-//   // 获取下载链接
-//   const ids = songs.map((s) => s.id)
-//   // let json = await getPlayurl(ids, quality) // 0-29有链接, max 30? 没有链接都是下线的
-
-//   const songUrlRes = await yun.song_url({id: ids.join(',')})
-//   let json = songUrlRes.body.data as SongPlayUrlInfo[]
-//   json = json.filter((s) => s.url) // remove 版权保护没有链接的
-
-//   // 移除版权限制在json中没有数据的歌曲
-//   const removed = []
-//   for (let song of songs) {
-//     const id = song.id
-//     const ajaxData = _.find(json, ['id', id])
-
-//     if (!ajaxData) {
-//       // 版权受限
-//       removed.push(song)
-//     } else {
-//       // we are ok
-//       ;(song as SongJsonWithAjaxdata).ajaxData = ajaxData
-//     }
-//   }
-
-//   const removedIds = _.map(removed, 'id')
-//   songs = _.reject(songs, (s) => _.includes(removedIds, s.id))
-
-//   console.log('没有版权')
-//   console.log(removedIds)
-//   console.log('-------')
-
-//   // 根据详细信息获取歌曲
-//   return adapter.getSongs(songs)
-// }
-
-/**
  * 获取歌曲文件表示
  */
 export const getFileName = ({
@@ -300,19 +255,17 @@ export const getFileName = ({
 
   // djradio only
   if (typesItem.type === 'djradio') {
-    const programDate = _.get(song, 'raw.programUi.date')
+    const {programDate, programOrder} = song as ProgramSong
     if (programDate) {
       format = format.replace(
         new RegExp(':programDate'),
         filenamify(programDate)
       )
     }
-
-    const programOrder = _.get(song, 'raw.programUi.programOrder')
     if (programOrder) {
       format = format.replace(
         new RegExp(':programOrder'),
-        filenamify(programOrder)
+        filenamify(programOrder.toString())
       )
     }
   }

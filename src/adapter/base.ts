@@ -5,6 +5,7 @@ import debugFactory from 'debug'
 import {getId} from '../util'
 import {Song, SongData, SongDataFull} from '../common'
 import {songDetail, songUrl} from '../api'
+import {SongPlayUrlInfo} from '../api/quicktype/song-url-info'
 
 const debug = debugFactory('yun:adapter:base')
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
@@ -36,7 +37,7 @@ export default class BaseAdapter {
    * get title for a page
    */
 
-  getTitle(): string {
+  async getTitle(): Promise<string> {
     throw new Error(NOT_IMPLEMENTED)
   }
 
@@ -51,7 +52,9 @@ export default class BaseAdapter {
    * get songs detail
    */
 
-  getSongsFromData(songDatas: SongDataFull[]): Song[] {
+  getSongsFromData<T extends {name: string; playUrlInfo?: SongPlayUrlInfo}>(
+    songDatas: T[]
+  ): Song[] {
     // e.g 100 songDatas -> len = 3
     const len = String(songDatas.length).length
 
@@ -84,13 +87,16 @@ export default class BaseAdapter {
     })
   }
 
-  async filterSongs(
-    songDatas: SongData[],
+  async filterSongs<
+    T extends {id: number},
+    O extends T & {playUrlInfo?: SongPlayUrlInfo}
+  >(
+    songDatas: T[],
     quality: number
   ): Promise<{
-    songs: SongDataFull[]
-    removed: SongDataFull[]
-    all: SongDataFull[]
+    songs: O[]
+    removed: O[]
+    all: O[]
   }> {
     // 获取下载链接
     const ids = songDatas.map((s) => s.id).join(',')
@@ -101,7 +107,7 @@ export default class BaseAdapter {
       const {id} = songData
       const info = playUrlInfos.find((x) => String(x.id) === String(id))
 
-      const songDataFull = songData as SongDataFull
+      const songDataFull = songData as O
       songDataFull.playUrlInfo = info
       ret.all.push(songDataFull)
 

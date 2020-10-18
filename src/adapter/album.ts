@@ -1,17 +1,29 @@
 import API = require('@magicdawn/music-api')
 import debugFactory from 'debug'
+import {album} from '../api'
+import {Album} from '../api/quicktype/album'
+import {SongData, Song} from '../common'
 import BaseAdapter from './base'
 
 const debug = debugFactory('yun:adapter:album')
 
 export default class AlbumAdapter extends BaseAdapter {
-  getTitle() {
-    return this.$('h2.f-ff2').text()
+  #detail: {album: Album; songs: SongData[]}
+  private async getDetail() {
+    if (this.#detail) {
+      return this.#detail
+    }
+    this.#detail = await album(this.id)
   }
 
-  async getDetail(quality) {
-    const id = this.id
-    const ret = await API.getAlbum('netease', {id, raw: true})
-    return ret.songs
+  async getTitle() {
+    await this.getDetail()
+    return this.#detail.album.name
+  }
+
+  async getSongs(quality: number): Promise<Song[]> {
+    await this.getDetail()
+    const {all: songDatas} = await this.filterSongs(this.#detail.songs, quality)
+    return this.getSongsFromData(songDatas)
   }
 }

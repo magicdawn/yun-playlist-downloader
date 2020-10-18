@@ -2,16 +2,27 @@ const API = require('@magicdawn/music-api')
 import debugNew from 'debug'
 import BaseAdapter from './base'
 import {playlistDetail, songDetail} from '../api'
+import {Playlist} from '../api/quicktype/playlist-detail'
 
 const debug = debugNew('yun:adapter:playlist')
 
 export default class PlaylistAdapter extends BaseAdapter {
-  getTitle() {
-    return this.$('h2.f-ff2.f-brk').text()
+  #playlist: Playlist
+
+  private async getPlaylist() {
+    if (!this.#playlist) {
+      this.#playlist = await playlistDetail(this.id)
+    }
+    return this.#playlist
+  }
+
+  async getTitle() {
+    await this.getPlaylist()
+    return this.#playlist.name
   }
 
   async getSongDatas() {
-    const playlist = await playlistDetail(this.id)
+    const playlist = await this.getPlaylist()
     const trackIds = playlist.trackIds.map((x) => x.id)
     const songDatas = await songDetail(trackIds.join(','))
     return songDatas

@@ -14,7 +14,7 @@
     "yun": "bin/yun"
   },
   "scripts": {
-		"tsc": "tsc -b --incremental",
+    "tsc": "tsc -b --incremental",
     "test": "mocha",
     "test-cover": "nyc --reporter=lcov --reporter=text mocha",
     "report-cover": "codecov"
@@ -47,7 +47,6 @@
     "log-symbols": "^4.0.0",
     "moment": "^2.29.1",
     "ms": "^2.1.2",
-    "nightmare": "^3.0.1",
     "promise.map": "^0.3.1",
     "promise.retry": "^0.3.1",
     "rc": "^1.2.1",
@@ -68,7 +67,6 @@
     "@types/lodash": "^4.14.162",
     "@types/mocha": "^8.0.3",
     "@types/ms": "^0.7.31",
-    "@types/nightmare": "^2.10.4",
     "@types/prettier": "2.1.5",
     "@types/rc": "^1.1.0",
     "@types/yargs": "^15.0.9",

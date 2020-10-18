@@ -1,6 +1,6 @@
 {
   "name": "yun-playlist-downloader",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "NetEase CloudMusic downloader",
   "main": "lib/index.js",
   "files": [
@@ -14,8 +14,8 @@
     "yun": "bin/yun"
   },
   "scripts": {
-		"tsc": "tsc -b --incremental",
-		"prepublishOnly": "rm -rf lib; tsc",
+    "tsc": "tsc -b --incremental",
+    "prepublishOnly": "rm -rf lib; tsc",
     "test": "mocha",
     "test-cover": "nyc --reporter=lcov --reporter=text mocha",
     "report-cover": "codecov"

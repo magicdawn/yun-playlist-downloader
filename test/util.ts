@@ -1,6 +1,7 @@
-const {normalizeUrl, getId} = require('../lib/util.js')
+import {normalizeUrl, getId} from '../src/util'
+import 'should'
 
-describe('util', function() {
+describe('util', function () {
   it('normalizeUrl', () => {
     let url = 'http://music.163.com/#/playlist?id=12583200'
     url = normalizeUrl(url)

@@ -69,6 +69,7 @@ export async function djradioPrograms(id: StringOrNumber) {
   do {
     const res = await Api.dj_program({
       rid: id,
+      limit: pagesize,
       offset: (pagenum - 1) * pagesize,
       asc: 'false', // lastest published first
     })

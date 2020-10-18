@@ -1,13 +1,14 @@
 import {extname} from 'path'
-import {padStart, remove, trimStart} from 'lodash'
+import {padStart, trimStart} from 'lodash'
 import _ from 'lodash'
-import debugFactory from 'debug'
 import {getId} from '../util'
-import {Song, SongData, SongDataFull} from '../common'
-import {songDetail, songUrl} from '../api'
+import {Song} from '../common'
+import {songUrl} from '../api'
 import {SongPlayUrlInfo} from '../api/quicktype/song-url-info'
 
-const debug = debugFactory('yun:adapter:base')
+// import debugFactory from 'debug'
+// const debug = debugFactory('yun:adapter:base')
+
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
 
 interface AdapterOptions {

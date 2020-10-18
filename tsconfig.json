@@ -11,6 +11,7 @@
     "target": "es2019",
     "module": "CommonJS",
     "strict": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "noUnusedLocals": true
   }
 }

@@ -1,10 +1,9 @@
-const API = require('@magicdawn/music-api')
-import debugNew from 'debug'
 import BaseAdapter from './base'
 import {playlistDetail, songDetail} from '../api'
 import {Playlist} from '../api/quicktype/playlist-detail'
 
-const debug = debugNew('yun:adapter:playlist')
+// import debugNew from 'debug'
+// const debug = debugNew('yun:adapter:playlist')
 
 export default class PlaylistAdapter extends BaseAdapter {
   #playlist: Playlist

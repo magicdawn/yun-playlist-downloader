@@ -1,8 +1,8 @@
-import debugFactory from 'debug'
 import cheerio from 'cheerio'
 import {umi} from './singleton'
 
-const debug = debugFactory('yun:util')
+// import debugFactory from 'debug'
+// const debug = debugFactory('yun:util')
 
 /**
  * 获取html

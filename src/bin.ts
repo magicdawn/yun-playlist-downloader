@@ -1,8 +1,6 @@
 #!/usr/bin/env ts-node-script
 
 import 'log-reject-error/register'
-import path from 'path'
-import cheerio from 'cheerio'
 import pmap from 'promise.map'
 import debugFactory from 'debug'
 import humanizeDuration from 'humanize-duration'

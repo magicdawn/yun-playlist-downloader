@@ -1,11 +1,11 @@
 import _ from 'lodash'
 import symbols from 'log-symbols'
-import debugFactory from 'debug'
 import filenamify from 'filenamify'
 import dl from 'dl-vampire'
 import {Song} from './common'
 
-const debug = debugFactory('yun:index')
+// import debugFactory from 'debug'
+// const debug = debugFactory('yun:index')
 
 /**
  * page type

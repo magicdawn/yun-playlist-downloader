@@ -1,15 +1,11 @@
-import API from '@magicdawn/music-api'
-import pmap from 'promise.map'
-import {normalizeUrl, getId, get$} from '../util'
-import programDetail from '../api/program-detail'
-import debugFactory from 'debug'
 import BaseAdapter from './base'
 import {Song} from '../common'
 import {djradioPrograms} from '../api'
-import {create} from 'lodash'
 import moment from 'moment'
+import {DjradioProgram} from '../api/quicktype/djradio'
 
-const debug = debugFactory('yun:adapter:djradio')
+// import debugFactory from 'debug'
+// const debug = debugFactory('yun:adapter:djradio')
 
 export interface ProgramSong extends Song {
   // 日期
@@ -19,18 +15,23 @@ export interface ProgramSong extends Song {
 }
 
 export default class DjradioAdapter extends BaseAdapter {
-  #detail: any
-  private getDetail() {
-    // if()
+  #programs: DjradioProgram[]
+
+  async getAllPrograms() {
+    if (!this.#programs) {
+      const allPrograms = await djradioPrograms(this.id)
+      this.#programs = allPrograms
+    }
+    return this.#programs
   }
 
   async getTitle() {
-    return this.$('h2.f-ff2').text()
+    await this.getAllPrograms()
+    return this.#programs[0].radio.name
   }
 
   async getSongs(quality: number): Promise<ProgramSong[]> {
-    const allPrograms = await djradioPrograms(this.id)
-
+    const allPrograms = await this.getAllPrograms()
     const mainSongs = allPrograms.map((x) => x.mainSong)
     const {all} = await this.filterSongs(mainSongs, quality)
     const songs = this.getSongsFromData(all)

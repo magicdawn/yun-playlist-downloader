@@ -1,11 +1,10 @@
-import API = require('@magicdawn/music-api')
-import debugFactory from 'debug'
 import {album} from '../api'
 import {Album} from '../api/quicktype/album'
 import {SongData, Song} from '../common'
 import BaseAdapter from './base'
 
-const debug = debugFactory('yun:adapter:album')
+// import debugFactory from 'debug'
+// const debug = debugFactory('yun:adapter:album')
 
 export default class AlbumAdapter extends BaseAdapter {
   #detail: {album: Album; songs: SongData[]}

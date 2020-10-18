@@ -1,4 +1,5 @@
-import {Playlist, Track} from './api/response/playlist-detail'
+import {Track} from './api/quicktype/playlist-detail'
+import {SongPlayUrlInfo} from './api/quicktype/song-url-info'
 
 export interface Song {
   // 歌手
@@ -23,12 +24,8 @@ export interface Song {
   rawIndex: number
 }
 
-export type PlaylistJson = Playlist
-export type SongJson = Track
-export {SongPlayUrlInfo} from './api/response/song-url-info'
+export type SongData = Track
 
-export interface SongJsonWithAjaxdata extends SongJson {
-  ajaxData: {
-    url: string
-  }
+export interface SongDataFull extends SongData {
+  playUrlInfo?: SongPlayUrlInfo
 }

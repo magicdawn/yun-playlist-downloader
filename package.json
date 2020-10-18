@@ -14,6 +14,7 @@
     "yun": "bin/yun"
   },
   "scripts": {
+		"tsc": "tsc -b --incremental",
     "test": "mocha",
     "test-cover": "nyc --reporter=lcov --reporter=text mocha",
     "report-cover": "codecov"

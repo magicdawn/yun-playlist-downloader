@@ -1,9 +1,10 @@
 import {extname} from 'path'
-import {padStart, trimStart} from 'lodash'
+import {padStart, remove, trimStart} from 'lodash'
 import _ from 'lodash'
 import debugFactory from 'debug'
 import {getId} from '../util'
-import {Song, SongJson} from '../common'
+import {Song, SongData, SongDataFull} from '../common'
+import {songDetail, songUrl} from '../api'
 
 const debug = debugFactory('yun:adapter:base')
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
@@ -40,36 +41,36 @@ export default class BaseAdapter {
   }
 
   /**
-   * get detail
+   * get songs
    */
-
-  getDetail(quality: string): Promise<SongJson[]> {
+  getSongs(quality: number): Promise<Song[]> {
     throw new Error(NOT_IMPLEMENTED)
   }
 
   /**
    * get songs detail
-   *
-   * @param {Array} [songs] songs
    */
 
-  getSongs(songs): Song[] {
-    // e.g 100 songs -> len = 3
-    const len = String(songs.length).length
+  getSongsFromData(songDatas: SongDataFull[]): Song[] {
+    // e.g 100 songDatas -> len = 3
+    const len = String(songDatas.length).length
 
-    return songs.map(function (song, index) {
+    return songDatas.map(function (songData, index) {
+      const url = songData.playUrlInfo?.url
+
       return {
         // 歌手
-        singer: _.get(song, 'ar.0.name') || _.get(song, 'artists.0.name'),
+        singer:
+          _.get(songData, 'ar.0.name') || _.get(songData, 'artists.0.name'),
 
         // 歌曲名
-        songName: song.name,
+        songName: songData.name,
 
         // url for download
-        url: song.ajaxData.url,
+        url,
 
         // extension
-        ext: trimStart(extname(song.ajaxData.url), '.'),
+        ext: url && trimStart(extname(url), '.'),
 
         // index, first as 01
         index: padStart(String(index + 1), len, '0'),
@@ -78,8 +79,40 @@ export default class BaseAdapter {
         rawIndex: index,
 
         // raw
-        raw: song,
+        raw: songData,
       }
     })
+  }
+
+  async filterSongs(
+    songDatas: SongData[],
+    quality: number
+  ): Promise<{
+    songs: SongDataFull[]
+    removed: SongDataFull[]
+    all: SongDataFull[]
+  }> {
+    // 获取下载链接
+    const ids = songDatas.map((s) => s.id).join(',')
+    const playUrlInfos = await songUrl(ids, quality)
+    const ret = {songs: [], removed: [], all: []}
+
+    for (let songData of songDatas) {
+      const {id} = songData
+      const info = playUrlInfos.find((x) => String(x.id) === String(id))
+
+      const songDataFull = songData as SongDataFull
+      songDataFull.playUrlInfo = info
+      ret.all.push(songDataFull)
+
+      // 版权受限
+      if (!info || !info.url) {
+        ret.removed.push(songDataFull)
+      } else {
+        ret.songs.push(songDataFull)
+      }
+    }
+
+    return ret
   }
 }

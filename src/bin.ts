@@ -10,9 +10,9 @@ import _ from 'lodash'
 import yargs from 'yargs'
 import ms from 'ms'
 import {get$} from './util'
-import {getSongs, getFileName, downloadSong, getAdapter} from './index'
+import {getFileName, downloadSong, getAdapter} from './index'
+import logSymbols from 'log-symbols'
 
-const {version: pkgVersion} = require('../package.json')
 const debug = debugFactory('yun:cli')
 
 let DEFAULT_FORMAT = ':name/:singer - :songName.:ext'
@@ -40,6 +40,7 @@ let argv = yargs.command(
   // builder
   (yargs) => {
     return yargs
+      .scriptName('yun')
       .usage('Usage: $0 <url> [options]')
       .positional('url', {describe: '歌单/专辑的链接', type: 'string'})
       .alias({
@@ -51,45 +52,45 @@ let argv = yargs.command(
         s: 'skip',
         p: 'progress',
       })
-      .option({
-        'concurrency': {
+      .options({
+        concurrency: {
           desc: '同时下载数量',
           type: 'number',
           default: 5,
         },
 
-        'format': {
+        format: {
           desc: '文件格式',
           type: 'string',
           default: DEFAULT_FORMAT,
         },
 
-        'quality': {
+        quality: {
           desc: '音质',
           type: 'number',
           default: 320,
           choices: [128, 192, 320],
         },
 
-        'retry-timeout': {
+        retryTimeout: {
           desc: '下载超时(分)',
           type: 'number',
           default: 3,
         },
 
-        'retry-times': {
+        retryTimes: {
           desc: '下载重试次数',
           type: 'number',
           default: 3,
         },
 
-        'skip': {
+        skip: {
           desc: '对于已存在文件且大小合适则跳过',
           type: 'boolean',
           default: true,
         },
 
-        'progress': {
+        progress: {
           desc: '是否显示进度条',
           type: 'boolean',
           default: true,
@@ -98,7 +99,7 @@ let argv = yargs.command(
       .config(config)
       .example('$0 -c 10 <url>', '10首同时下载')
       .example(
-        'yun -f ":singer - :songName.:ext" <url>',
+        '$0 -f ":singer - :songName.:ext" <url>',
         '下载格式为 "歌手 - 歌名"'
       )
       .epilog(
@@ -133,27 +134,39 @@ progress:       ${progress}
 
 // process argv
 quality *= 1000
-retryTimeout = ms(`${retryTimeout} minutes`)
+retryTimeout = ms(`${retryTimeout} minutes`) as number
 
 async function main() {
+  const start = Date.now()
   const $ = await get$(url)
-
   const adapter = getAdapter($, url)
 
   // 基本信息
   const name = adapter.getTitle()
-  const songs = await getSongs($, url, quality)
-
-  debug('songs : %j', songs)
-  const start = Date.now()
   console.log(`正在下载『${name}』,请稍候...`)
+
+  const songs = await adapter.getSongs(quality)
+  debug('songs : %j', songs)
+
+  const removed = songs.filter((x) => !x.url)
+  const keeped = songs.filter((x) => x.url)
+
+  if (removed.length) {
+    console.log(
+      `${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`
+    )
+    for (let i of removed) {
+      console.log(`  ${i.singer} - ${i.songName}`)
+    }
+  }
 
   // FIXME
   // process.exit()
 
   // 开始下载
+  console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
   await pmap(
-    songs,
+    keeped,
     (song) => {
       // 根据格式获取所需文件名
       const file = getFileName({

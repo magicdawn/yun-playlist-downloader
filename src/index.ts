@@ -3,8 +3,7 @@ import symbols from 'log-symbols'
 import debugFactory from 'debug'
 import filenamify from 'filenamify'
 import dl from 'dl-vampire'
-import getPlayurl from './api/playurl'
-import {Song, SongJsonWithAjaxdata} from './common'
+import {Song} from './common'
 import * as yun from 'NeteaseCloudMusicApi'
 
 const debug = debugFactory('yun:index')
@@ -17,7 +16,6 @@ import BaseAdapter from './adapter/base'
 import PlaylistAdapter from './adapter/playlist'
 import AlbumAdapter from './adapter/album'
 import DjradioAdapter from './adapter/djradio'
-import {SongPlayUrlInfo} from './api/response/song-url-info'
 
 interface Type {
   type: string
@@ -47,8 +45,20 @@ export const types: Type[] = [
  * 下载一首歌曲
  */
 
-export const downloadSong = async function (options = {}) {
-  const {progress} = options as any
+interface DownloadSongOptions {
+  url: string
+  file: string
+  song: Song
+  totalLength: number
+  retryTimeout: number
+  retryTimes: number
+  skipExists: boolean
+}
+
+export const downloadSong = async function (
+  options: DownloadSongOptions & {progress?: boolean}
+) {
+  const {progress} = options
   if (progress) {
     return downloadSongWithProgress(options)
   } else {
@@ -56,7 +66,9 @@ export const downloadSong = async function (options = {}) {
   }
 }
 
-export const downloadSongWithProgress = async function (options) {
+export const downloadSongWithProgress = async function (
+  options: DownloadSongOptions
+) {
   const ProgressBar = require('@magicdawn/ascii-progress')
   const {
     url,
@@ -68,7 +80,7 @@ export const downloadSongWithProgress = async function (options) {
     skipExists,
   } = options
 
-  let bar
+  let bar: any
   const initBar = () => {
     bar = new ProgressBar({
       schema: `:symbol ${song.index}/${totalLength} [:bar] :postText`,
@@ -82,7 +94,10 @@ export const downloadSongWithProgress = async function (options) {
 
   // 成功
   const success = () => {
-    bar.update(1, {symbol: symbols.success, postText: `下载成功 ${file}`})
+    bar.update(1, {
+      symbol: symbols.success,
+      postText: `${skip ? '下载跳过' : '下载成功'} ${file}`,
+    })
   }
 
   // 失败
@@ -104,8 +119,9 @@ export const downloadSongWithProgress = async function (options) {
   initBar()
   downloading(0)
 
+  let skip = false
   try {
-    await dl({
+    ;({skip} = await dl({
       url,
       file,
       skipExists,
@@ -124,7 +140,7 @@ export const downloadSongWithProgress = async function (options) {
           retry(i)
         },
       },
-    })
+    }))
   } catch (e) {
     fail()
     return
@@ -144,8 +160,10 @@ export const downloadSongPlain = async function (options) {
     skipExists,
   } = options
 
+  let skip = false
+
   try {
-    await dl({
+    ;({skip} = await dl({
       url,
       file,
       skipExists,
@@ -160,7 +178,7 @@ export const downloadSongPlain = async function (options) {
           )
         },
       },
-    })
+    }))
   } catch (e) {
     console.log(
       `${symbols.error} ${song.index}/${totalLength} 下载失败 ${file}`
@@ -170,7 +188,9 @@ export const downloadSongPlain = async function (options) {
   }
 
   console.log(
-    `${symbols.success} ${song.index}/${totalLength} 下载完成 ${file}`
+    `${symbols.success} ${song.index}/${totalLength} ${
+      skip ? '下载跳过' : '下载成功'
+    } ${file}`
   )
 }
 
@@ -204,45 +224,45 @@ export const getAdapter = ($: cheerio.Root, url: string) => {
  * 获取歌曲
  */
 
-export const getSongs = async function ($, url, quality) {
-  const adapter = getAdapter($, url)
+// export const getSongs = async function ($, url, quality) {
+//   const adapter = getAdapter($, url)
 
-  // 基本信息
-  let songs = await adapter.getDetail(quality)
+//   // 基本信息
+//   let songs = await adapter.getDetail(quality)
 
-  // 获取下载链接
-  const ids = songs.map((s) => s.id)
-  // let json = await getPlayurl(ids, quality) // 0-29有链接, max 30? 没有链接都是下线的
+//   // 获取下载链接
+//   const ids = songs.map((s) => s.id)
+//   // let json = await getPlayurl(ids, quality) // 0-29有链接, max 30? 没有链接都是下线的
 
-  const songUrlRes = await yun.song_url({id: ids.join(',')})
-  let json = songUrlRes.body.data as SongPlayUrlInfo[]
-  json = json.filter((s) => s.url) // remove 版权保护没有链接的
+//   const songUrlRes = await yun.song_url({id: ids.join(',')})
+//   let json = songUrlRes.body.data as SongPlayUrlInfo[]
+//   json = json.filter((s) => s.url) // remove 版权保护没有链接的
 
-  // 移除版权限制在json中没有数据的歌曲
-  const removed = []
-  for (let song of songs) {
-    const id = song.id
-    const ajaxData = _.find(json, ['id', id])
+//   // 移除版权限制在json中没有数据的歌曲
+//   const removed = []
+//   for (let song of songs) {
+//     const id = song.id
+//     const ajaxData = _.find(json, ['id', id])
 
-    if (!ajaxData) {
-      // 版权受限
-      removed.push(song)
-    } else {
-      // we are ok
-      ;(song as SongJsonWithAjaxdata).ajaxData = ajaxData
-    }
-  }
+//     if (!ajaxData) {
+//       // 版权受限
+//       removed.push(song)
+//     } else {
+//       // we are ok
+//       ;(song as SongJsonWithAjaxdata).ajaxData = ajaxData
+//     }
+//   }
 
-  const removedIds = _.map(removed, 'id')
-  songs = _.reject(songs, (s) => _.includes(removedIds, s.id))
+//   const removedIds = _.map(removed, 'id')
+//   songs = _.reject(songs, (s) => _.includes(removedIds, s.id))
 
-  console.log('没有版权')
-  console.log(removedIds)
-  console.log('-------')
+//   console.log('没有版权')
+//   console.log(removedIds)
+//   console.log('-------')
 
-  // 根据详细信息获取歌曲
-  return adapter.getSongs(songs)
-}
+//   // 根据详细信息获取歌曲
+//   return adapter.getSongs(songs)
+// }
 
 /**
  * 获取歌曲文件表示

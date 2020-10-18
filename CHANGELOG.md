@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2020-10-18 v3.0.0
+
+- 使用 TypeScript 重构.
+- 使用 NeteaseCloudMusicApi.
+- 修复 playlist 未登录状态只能看到前几首歌的问题.
+
 ## 2019-12-28 v2.3.0
 
 - djradio 新增多页支持, 做功能开发看的都是少于 100 期的, 这次新增多页支持, 并新增了 DjradioAdapter 的单测

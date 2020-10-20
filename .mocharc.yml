@@ -1,10 +1,10 @@
 extension: [ts]
 
-# spec: 'test/**/*.spec.ts'
-
 require:
   - ts-node/register
   - should
 
 recursive: true
-timeout: 10000
+
+# travis -> 163
+timeout: 20000

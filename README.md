@@ -4,7 +4,8 @@
 
 [![Build Status](https://img.shields.io/travis/magicdawn/yun-playlist-downloader.svg?style=flat-square)](https://travis-ci.org/magicdawn/yun-playlist-downloader)
 [![Coverage Status](https://img.shields.io/codecov/c/github/magicdawn/yun-playlist-downloader.svg?style=flat-square)](https://codecov.io/gh/magicdawn/yun-playlist-downloader)
-[![npm version](https://img.shields.io/npm/v/yun-playlist-downloader.svg?style=flat-square)](#)
+[![npm version](https://img.shields.io/npm/v/yun-playlist-downloader.svg?style=flat-square)](https://www.npmjs.com/package/yun-playlist-downloader)
+[![npm downloads](https://img.shields.io/npm/dm/yun-playlist-downloader.svg?style=flat-square)](https://www.npmjs.com/package/yun-playlist-downloader)
 [![node version](https://img.shields.io/node/v/yun-playlist-downloader.svg?style=flat-square)](#)
 [![license](https://img.shields.io/npm/l/yun-playlist-downloader.svg?style=flat-square)](#)
 

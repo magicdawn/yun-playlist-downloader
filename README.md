@@ -2,6 +2,8 @@
 
 网易云音乐 - 歌单 - 下载器
 
+[![Build Status](https://img.shields.io/travis/magicdawn/yun-playlist-downloader.svg?style=flat-square)](https://travis-ci.org/magicdawn/yun-playlist-downloader)
+[![Coverage Status](https://img.shields.io/codecov/c/github/magicdawn/yun-playlist-downloader.svg?style=flat-square)](https://codecov.io/gh/magicdawn/yun-playlist-downloader)
 [![npm version](https://img.shields.io/npm/v/yun-playlist-downloader.svg?style=flat-square)](#)
 [![node version](https://img.shields.io/node/v/yun-playlist-downloader.svg?style=flat-square)](#)
 [![license](https://img.shields.io/npm/l/yun-playlist-downloader.svg?style=flat-square)](#)
@@ -15,8 +17,6 @@
 - [x] 下载进度显示
 
 ## 安装
-
-需要 node.js >= 7.6.0 async/await 支持
 
 ```sh
 $ npm i yun-playlist-downloader -g

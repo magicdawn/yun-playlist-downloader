@@ -1,15 +1,18 @@
 #!/usr/bin/env ts-node-script
 
 import 'log-reject-error/register'
+import path from 'path'
 import pmap from 'promise.map'
 import debugFactory from 'debug'
 import humanizeDuration from 'humanize-duration'
 import _ from 'lodash'
 import yargs from 'yargs'
 import ms from 'ms'
+import logSymbols from 'log-symbols'
+import filenamify from 'filenamify'
 import {get$} from './util'
 import {getFileName, downloadSong, getAdapter} from './index'
-import logSymbols from 'log-symbols'
+import dl from 'dl-vampire'
 
 const debug = debugFactory('yun:cli')
 
@@ -93,6 +96,12 @@ let argv = yargs.command(
           type: 'boolean',
           default: true,
         },
+
+        cover: {
+          desc: '下载封面',
+          type: 'boolean',
+          default: false,
+        },
       })
       .config(config)
       .example('$0 -c 10 <url>', '10首同时下载')
@@ -116,6 +125,7 @@ let {
   retryTimes,
   skip: skipExists,
   progress,
+  cover,
 } = argv
 
 // 打印
@@ -128,6 +138,7 @@ retry-times:    ${retryTimes} (次)
 quality:        ${quality}
 skip:           ${skipExists}
 progress:       ${progress}
+cover:          ${cover}
 `)
 
 // process argv
@@ -142,6 +153,19 @@ async function main() {
   // 基本信息
   const name = await adapter.getTitle()
   console.log(`正在下载『${name}』,请稍候...`)
+
+  // 封面
+  if (cover) {
+    const coverUrl = await adapter.getCover()
+    if (!coverUrl) {
+      console.log(`${logSymbols.warning} [cover]: 没有找到封面`)
+    } else {
+      const coverExt = path.extname(coverUrl) || '.jpg'
+      const coverFile = `${filenamify(name)}/cover${coverExt}`
+      await dl({url: coverUrl, file: coverFile})
+      console.log(`${logSymbols.success} [cover]: 封面已下载 ${coverFile}`)
+    }
+  }
 
   const songs = await adapter.getSongs(quality)
   debug('songs : %j', songs)

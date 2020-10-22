@@ -20,6 +20,11 @@ export default class PlaylistAdapter extends BaseAdapter {
     return this.#playlist.name
   }
 
+  async getCover() {
+    await this.getPlaylist()
+    return this.#playlist.coverImgUrl
+  }
+
   async getSongDatas() {
     const playlist = await this.getPlaylist()
     const trackIds = playlist.trackIds.map((x) => x.id)

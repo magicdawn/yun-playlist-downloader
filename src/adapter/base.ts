@@ -43,6 +43,14 @@ export default class BaseAdapter {
   }
 
   /**
+   * get cover
+   */
+
+  async getCover(): Promise<string> {
+    return ''
+  }
+
+  /**
    * get songs
    */
   getSongs(quality: number): Promise<Song[]> {

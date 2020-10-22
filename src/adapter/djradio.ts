@@ -25,9 +25,18 @@ export default class DjradioAdapter extends BaseAdapter {
     return this.#programs
   }
 
+  get radio() {
+    return this.#programs?.[0]?.radio
+  }
+
   async getTitle() {
     await this.getAllPrograms()
-    return this.#programs[0].radio.name
+    return this.radio?.name
+  }
+
+  async getCover() {
+    await this.getAllPrograms()
+    return this.radio.picUrl
   }
 
   async getSongs(quality: number): Promise<ProgramSong[]> {

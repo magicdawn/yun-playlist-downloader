@@ -10,9 +10,10 @@ import yargs from 'yargs'
 import ms from 'ms'
 import logSymbols from 'log-symbols'
 import filenamify from 'filenamify'
+import dl from 'dl-vampire'
+import fse from 'fs-extra'
 import {get$} from './util'
 import {getFileName, downloadSong, getAdapter} from './index'
-import dl from 'dl-vampire'
 
 const debug = debugFactory('yun:cli')
 
@@ -33,6 +34,8 @@ const config = require('rc')('yun', {
   'retry-times': 3, // 3 times
   'skip': true,
   'progress': true,
+  'cover': false,
+  'playlist-file': false,
 })
 
 let argv = yargs.command(
@@ -102,6 +105,12 @@ let argv = yargs.command(
           type: 'boolean',
           default: false,
         },
+
+        playlistFile: {
+          desc: '创建播放列表文件',
+          type: 'boolean',
+          default: false,
+        },
       })
       .config(config)
       .example('$0 -c 10 <url>', '10首同时下载')
@@ -110,7 +119,8 @@ let argv = yargs.command(
         '下载格式为 "歌手 - 歌名"'
       )
       .epilog(
-        '帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader'
+        '帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader\n' +
+          '播放列表文件使用示例 https://sspai.com/post/44085'
       )
   }
 ).argv
@@ -126,6 +136,7 @@ let {
   skip: skipExists,
   progress,
   cover,
+  playlistFile,
 } = argv
 
 // 打印
@@ -139,6 +150,7 @@ quality:        ${quality}
 skip:           ${skipExists}
 progress:       ${progress}
 cover:          ${cover}
+playlist-file:  ${playlistFile}
 `)
 
 // process argv
@@ -188,6 +200,7 @@ async function main() {
 
   // 开始下载
   console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
+  const files = []
   await pmap(
     keeped,
     (song) => {
@@ -198,6 +211,7 @@ async function main() {
         url: url,
         name: name,
       })
+      files.push(file)
 
       // 下载
       return downloadSong({
@@ -213,6 +227,24 @@ async function main() {
     },
     concurrency
   )
+
+  // 播放列表文件
+  if (playlistFile) {
+    const lines = []
+    lines.push(
+      '位置,名称,艺人,作曲,专辑,归类,作品,乐章编号,乐章,乐章名称,类型,大小,时间,光盘编号,光盘统计,音轨编号,音轨统计,年份,修改日期,添加日期,比特,采样速率,音量调整,种类,均衡,注释,播放次数,上次播放时间,跳过次数,上次跳过时间,我的评分'
+    )
+    files.forEach((f) => {
+      lines.push(`${path.resolve(f)},`)
+    })
+
+    const file = `${filenamify(name)}/playlist.txt`
+    const content = lines.join('\n')
+    await fse.outputFile(file, content, 'utf8')
+    console.log(
+      `${logSymbols.success} [platlist-file]: 播放列表文件已生成 ${file}`
+    )
+  }
 
   await new Promise((r) => {
     process.nextTick(r)

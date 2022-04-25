@@ -17,7 +17,7 @@ import dl from 'dl-vampire'
 const debug = debugFactory('yun:cli')
 
 let DEFAULT_FORMAT = ':name/:singer - :songName.:ext'
-if (process.argv.some((s) => s.match(/djradio/))) {
+if (process.argv.some((s) => s.match(/(dj)?radio/))) {
   // e.g
   // https://music.163.com/#/program?id=2064329279
   // 等什么君/2019-11-27 - 第56期 - 琴师(Cover:音频怪物)

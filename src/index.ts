@@ -182,6 +182,11 @@ export function getType(url: string) {
   const item = _.find(types, (item) => url.indexOf(item.type) > -1)
   if (item) return item
 
+  // #/radio & #/djradio 是一样的
+  if (/#\/radio/.exec(url)) {
+    return _.find(types, (item) => item.type === 'djradio')
+  }
+
   const msg = 'unsupported type'
   throw new Error(msg)
 }

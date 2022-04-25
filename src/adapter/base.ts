@@ -1,10 +1,10 @@
-import {extname} from 'path'
-import {padStart, trimStart} from 'lodash'
+import { extname } from 'path'
+import { padStart, trimStart } from 'lodash'
 import _ from 'lodash'
-import {getId} from '../util'
-import {Song} from '../common'
-import {songUrl} from '../api'
-import {SongPlayUrlInfo} from '../api/quicktype/song-url-info'
+import { getId } from '../util'
+import { Song } from '../common'
+import { songUrl } from '../api'
+import { SongPlayUrlInfo } from '../api/quicktype/song-url-info'
 
 // import debugFactory from 'debug'
 // const debug = debugFactory('yun:adapter:base')
@@ -61,7 +61,7 @@ export default class BaseAdapter {
    * get songs detail
    */
 
-  getSongsFromData<T extends {name: string; playUrlInfo?: SongPlayUrlInfo}>(
+  getSongsFromData<T extends { name: string; playUrlInfo?: SongPlayUrlInfo }>(
     songDatas: T[]
   ): Song[] {
     // e.g 100 songDatas -> len = 3
@@ -72,8 +72,7 @@ export default class BaseAdapter {
 
       return {
         // 歌手
-        singer:
-          _.get(songData, 'ar.0.name') || _.get(songData, 'artists.0.name'),
+        singer: _.get(songData, 'ar.0.name') || _.get(songData, 'artists.0.name'),
 
         // 歌曲名
         songName: songData.name,
@@ -96,10 +95,7 @@ export default class BaseAdapter {
     })
   }
 
-  async filterSongs<
-    T extends {id: number},
-    O extends T & {playUrlInfo?: SongPlayUrlInfo}
-  >(
+  async filterSongs<T extends { id: number }, O extends T & { playUrlInfo?: SongPlayUrlInfo }>(
     songDatas: T[],
     quality: number
   ): Promise<{
@@ -110,10 +106,10 @@ export default class BaseAdapter {
     // 获取下载链接
     const ids = songDatas.map((s) => s.id).join(',')
     const playUrlInfos = await songUrl(ids, quality)
-    const ret = {songs: [], removed: [], all: []}
+    const ret = { songs: [], removed: [], all: [] }
 
     for (let songData of songDatas) {
-      const {id} = songData
+      const { id } = songData
       const info = playUrlInfos.find((x) => String(x.id) === String(id))
 
       const songDataFull = songData as O

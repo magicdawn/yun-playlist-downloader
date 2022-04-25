@@ -14,6 +14,7 @@
     "yun": "bin/yun"
   },
   "scripts": {
+    "prepare": "husky install",
     "tsc": "tsc -b --incremental",
     "prepublishOnly": "rm -rf lib; tsc",
     "test": "mocha",
@@ -58,8 +59,8 @@
     "@magicdawn/ascii-progress": "^1.0.8"
   },
   "devDependencies": {
-    "@magicdawn/eslint-config": "^0.0.3",
-    "@magicdawn/prettier-config": "^0.0.1",
+    "@magicdawn/eslint-config": "^0.0.6",
+    "@magicdawn/prettier-config": "^0.0.2",
     "@types/cheerio": "^0.22.22",
     "@types/debug": "^4.1.5",
     "@types/eslint": "^7.2.4",
@@ -71,25 +72,21 @@
     "@types/prettier": "2.1.5",
     "@types/rc": "^1.1.0",
     "@types/yargs": "^15.0.9",
-    "codecov": "^3.8.0",
+    "codecov": "^3.8.3",
     "eslint": "^7.11.0",
-    "husky": "latest",
-    "lint-staged": "latest",
+    "husky": "^7.0.0",
+    "lint-staged": "^12.4.0",
     "mocha": "^8.2.0",
     "nyc": "^15.1.0",
-    "prettier": "latest",
+    "prettier": "^2.6.2",
     "should": "^13.2.3",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "ts-node": "^9.1.1",
+    "typescript": "^4.6.3"
   },
   "lint-staged": {
-    "*.{js,less,vue}": [
+    "*.{ts,json,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "prettier": "@magicdawn/prettier-config"
 }

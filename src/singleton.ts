@@ -1,4 +1,4 @@
-import {extend} from 'umi-request'
+import { extend } from 'umi-request'
 import encrypt from './api/encrypt'
 
 const CHROME_UA =
@@ -31,11 +31,11 @@ umi.interceptors.request.use((url, options) => {
       data: encrypt(options.data),
     }
   }
-  return {url, options}
+  return { url, options }
 })
 
 /**
  * exports
  */
 
-export {CHROME_UA, umi}
+export { CHROME_UA, umi }

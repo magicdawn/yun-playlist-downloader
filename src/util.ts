@@ -1,5 +1,5 @@
 import cheerio from 'cheerio'
-import {umi} from './singleton'
+import { umi } from './singleton'
 
 // import debugFactory from 'debug'
 // const debug = debugFactory('yun:util')
@@ -36,8 +36,7 @@ export const get$ = async (url: string) => {
  * http://music.163.com/playlist?id=12583200
  */
 
-export const normalizeUrl = (url: string) =>
-  url.replace(/(https?:.*?\/)(#\/)/, '$1')
+export const normalizeUrl = (url: string) => url.replace(/(https?:.*?\/)(#\/)/, '$1')
 
 /**
  * getId

@@ -1,5 +1,5 @@
-import {Track} from './api/quicktype/playlist-detail'
-import {SongPlayUrlInfo} from './api/quicktype/song-url-info'
+import { Track } from './api/quicktype/playlist-detail'
+import { SongPlayUrlInfo } from './api/quicktype/song-url-info'
 
 export interface Song {
   // 歌手

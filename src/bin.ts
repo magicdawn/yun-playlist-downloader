@@ -10,8 +10,8 @@ import yargs from 'yargs'
 import ms from 'ms'
 import logSymbols from 'log-symbols'
 import filenamify from 'filenamify'
-import {get$} from './util'
-import {getFileName, downloadSong, getAdapter} from './index'
+import { get$ } from './util'
+import { getFileName, downloadSong, getAdapter } from './index'
 import dl from 'dl-vampire'
 
 const debug = debugFactory('yun:cli')
@@ -43,7 +43,7 @@ let argv = yargs.command(
     return yargs
       .scriptName('yun')
       .usage('Usage: $0 <url> [options]')
-      .positional('url', {describe: '歌单/专辑的链接', type: 'string'})
+      .positional('url', { describe: '歌单/专辑的链接', type: 'string' })
       .alias({
         h: 'help',
         v: 'version',
@@ -105,13 +105,8 @@ let argv = yargs.command(
       })
       .config(config)
       .example('$0 -c 10 <url>', '10首同时下载')
-      .example(
-        '$0 -f ":singer - :songName.:ext" <url>',
-        '下载格式为 "歌手 - 歌名"'
-      )
-      .epilog(
-        '帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader'
-      )
+      .example('$0 -f ":singer - :songName.:ext" <url>', '下载格式为 "歌手 - 歌名"')
+      .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
   }
 ).argv
 
@@ -162,7 +157,7 @@ async function main() {
     } else {
       const coverExt = path.extname(coverUrl) || '.jpg'
       const coverFile = `${filenamify(name)}/cover${coverExt}`
-      await dl({url: coverUrl, file: coverFile})
+      await dl({ url: coverUrl, file: coverFile })
       console.log(`${logSymbols.success} [cover]: 封面已下载 ${coverFile}`)
     }
   }
@@ -175,9 +170,7 @@ async function main() {
   const keeped = songs.filter((x) => x.url)
 
   if (removed.length) {
-    console.log(
-      `${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`
-    )
+    console.log(`${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`)
     for (let i of removed) {
       console.log(`  ${i.singer} - ${i.songName}`)
     }
@@ -218,7 +211,7 @@ async function main() {
     process.nextTick(r)
   })
 
-  const dur = humanizeDuration(Date.now() - start, {language: 'zh_CN'})
+  const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
   console.log('下载完成, 耗时%s', dur)
 }
 

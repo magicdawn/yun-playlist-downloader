@@ -1,6 +1,6 @@
 import BaseAdapter from './base'
-import {playlistDetail, songDetail} from '../api'
-import {Playlist} from '../api/quicktype/playlist-detail'
+import { playlistDetail, songDetail } from '../api'
+import { Playlist } from '../api/quicktype/playlist-detail'
 
 // import debugNew from 'debug'
 // const debug = debugNew('yun:adapter:playlist')
@@ -34,7 +34,7 @@ export default class PlaylistAdapter extends BaseAdapter {
 
   async getSongs(quality: number) {
     const songDatas = await this.getSongDatas()
-    const {all} = await this.filterSongs(songDatas, quality)
+    const { all } = await this.filterSongs(songDatas, quality)
     const songs = this.getSongsFromData(all)
     return songs
   }

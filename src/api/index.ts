@@ -1,9 +1,9 @@
 import * as Api from 'NeteaseCloudMusicApi'
-import {SongData} from '../common'
-import {Album} from './quicktype/album'
-import {DjradioProgram} from './quicktype/djradio'
-import {Playlist} from './quicktype/playlist-detail'
-import {SongPlayUrlInfo} from './quicktype/song-url-info'
+import { SongData } from '../common'
+import { Album } from './quicktype/album'
+import { DjradioProgram } from './quicktype/djradio'
+import { Playlist } from './quicktype/playlist-detail'
+import { SongPlayUrlInfo } from './quicktype/song-url-info'
 
 export type StringOrNumber = string | number
 
@@ -12,7 +12,7 @@ export type StringOrNumber = string | number
  */
 
 export async function playlistDetail(id: string) {
-  const res = await Api.playlist_detail({id})
+  const res = await Api.playlist_detail({ id })
   const playlist = res.body.playlist as Playlist
   return playlist
 }
@@ -22,7 +22,7 @@ export async function playlistDetail(id: string) {
  */
 
 export async function songDetail(ids: string) {
-  const res = await Api.song_detail({ids})
+  const res = await Api.song_detail({ ids })
   const songDatas = res.body.songs as SongData[]
   return songDatas
 }
@@ -38,7 +38,7 @@ export async function songUrl(
   if (Array.isArray(id)) {
     id = id.join(',')
   }
-  const res = await Api.song_url({id, br: quality})
+  const res = await Api.song_url({ id, br: quality })
   const infos = res.body.data as SongPlayUrlInfo[]
   return infos
 }
@@ -48,10 +48,10 @@ export async function songUrl(
  */
 
 export async function album(id: StringOrNumber) {
-  const res = await Api.album({id})
+  const res = await Api.album({ id })
   const album = res.body.album as Album
   const songs = res.body.songs as SongData[]
-  return {album, songs}
+  return { album, songs }
 }
 
 /**

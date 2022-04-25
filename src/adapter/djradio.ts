@@ -1,8 +1,8 @@
 import BaseAdapter from './base'
-import {Song} from '../common'
-import {djradioPrograms} from '../api'
+import { Song } from '../common'
+import { djradioPrograms } from '../api'
 import moment from 'moment'
-import {DjradioProgram} from '../api/quicktype/djradio'
+import { DjradioProgram } from '../api/quicktype/djradio'
 
 // import debugFactory from 'debug'
 // const debug = debugFactory('yun:adapter:djradio')
@@ -42,10 +42,10 @@ export default class DjradioAdapter extends BaseAdapter {
   async getSongs(quality: number): Promise<ProgramSong[]> {
     const allPrograms = await this.getAllPrograms()
     const mainSongs = allPrograms.map((x) => x.mainSong)
-    const {all} = await this.filterSongs(mainSongs, quality)
+    const { all } = await this.filterSongs(mainSongs, quality)
     const songs = this.getSongsFromData(all)
     const programsSongs = songs.map((i, index) => {
-      const {createTime} = allPrograms[index]
+      const { createTime } = allPrograms[index]
       const programDate = moment(createTime).format('YYYY-MM-DD')
       const programOrder = allPrograms.length - index
       return {

@@ -2,7 +2,7 @@ import _ from 'lodash'
 import symbols from 'log-symbols'
 import filenamify from 'filenamify'
 import dl from 'dl-vampire'
-import {Song} from './common'
+import { Song } from './common'
 
 // import debugFactory from 'debug'
 // const debug = debugFactory('yun:index')
@@ -14,7 +14,7 @@ import {Song} from './common'
 import BaseAdapter from './adapter/base'
 import PlaylistAdapter from './adapter/playlist'
 import AlbumAdapter from './adapter/album'
-import DjradioAdapter, {ProgramSong} from './adapter/djradio'
+import DjradioAdapter, { ProgramSong } from './adapter/djradio'
 
 interface Type {
   type: string
@@ -54,10 +54,8 @@ interface DownloadSongOptions {
   skipExists: boolean
 }
 
-export const downloadSong = async function (
-  options: DownloadSongOptions & {progress?: boolean}
-) {
-  const {progress} = options
+export const downloadSong = async function (options: DownloadSongOptions & { progress?: boolean }) {
+  const { progress } = options
   if (progress) {
     return downloadSongWithProgress(options)
   } else {
@@ -65,19 +63,9 @@ export const downloadSong = async function (
   }
 }
 
-export const downloadSongWithProgress = async function (
-  options: DownloadSongOptions
-) {
+export const downloadSongWithProgress = async function (options: DownloadSongOptions) {
   const ProgressBar = require('@magicdawn/ascii-progress')
-  const {
-    url,
-    file,
-    song,
-    totalLength,
-    retryTimeout,
-    retryTimes,
-    skipExists,
-  } = options
+  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
 
   let bar: any
   const initBar = () => {
@@ -101,17 +89,17 @@ export const downloadSongWithProgress = async function (
 
   // 失败
   const fail = () => {
-    bar.update(0, {symbol: symbols.error, postText: `下载失败 ${file}`})
+    bar.update(0, { symbol: symbols.error, postText: `下载失败 ${file}` })
     bar.terminate()
   }
 
   // 下载中
   const downloading = (percent) =>
-    bar.update(percent, {symbol: symbols.info, postText: `  下载中 ${file}`})
+    bar.update(percent, { symbol: symbols.info, postText: `  下载中 ${file}` })
 
   // 重试
   const retry = (i) => {
-    bar.tick(0, {symbol: symbols.warning, postText: ` ${i + 1}次失败 ${file}`})
+    bar.tick(0, { symbol: symbols.warning, postText: ` ${i + 1}次失败 ${file}` })
   }
 
   // init state
@@ -120,12 +108,12 @@ export const downloadSongWithProgress = async function (
 
   let skip = false
   try {
-    ;({skip} = await dl({
+    ;({ skip } = await dl({
       url,
       file,
       skipExists,
       onprogress(p) {
-        const {percent} = p
+        const { percent } = p
         if (percent === 1) {
           success()
         } else {
@@ -149,20 +137,12 @@ export const downloadSongWithProgress = async function (
 }
 
 export const downloadSongPlain = async function (options) {
-  const {
-    url,
-    file,
-    song,
-    totalLength,
-    retryTimeout,
-    retryTimes,
-    skipExists,
-  } = options
+  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
 
   let skip = false
 
   try {
-    ;({skip} = await dl({
+    ;({ skip } = await dl({
       url,
       file,
       skipExists,
@@ -170,26 +150,18 @@ export const downloadSongPlain = async function (options) {
         timeout: retryTimeout,
         times: retryTimes,
         onerror: function (e, i) {
-          console.log(
-            `${symbols.warning} ${song.index}/${totalLength}  ${
-              i + 1
-            }次失败 ${file}`
-          )
+          console.log(`${symbols.warning} ${song.index}/${totalLength}  ${i + 1}次失败 ${file}`)
         },
       },
     }))
   } catch (e) {
-    console.log(
-      `${symbols.error} ${song.index}/${totalLength} 下载失败 ${file}`
-    )
+    console.log(`${symbols.error} ${song.index}/${totalLength} 下载失败 ${file}`)
     console.error(e.stack || e)
     return
   }
 
   console.log(
-    `${symbols.success} ${song.index}/${totalLength} ${
-      skip ? '下载跳过' : '下载成功'
-    } ${file}`
+    `${symbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`
   )
 }
 
@@ -215,8 +187,8 @@ export const getType = (url: string) => {
  */
 
 export const getAdapter = ($: cheerio.Root, url: string) => {
-  const {adapter} = getType(url)
-  return new adapter({$, url})
+  const { adapter } = getType(url)
+  return new adapter({ $, url })
 }
 
 /**
@@ -255,18 +227,12 @@ export const getFileName = ({
 
   // djradio only
   if (typesItem.type === 'djradio') {
-    const {programDate, programOrder} = song as ProgramSong
+    const { programDate, programOrder } = song as ProgramSong
     if (programDate) {
-      format = format.replace(
-        new RegExp(':programDate'),
-        filenamify(programDate)
-      )
+      format = format.replace(new RegExp(':programDate'), filenamify(programDate))
     }
     if (programOrder) {
-      format = format.replace(
-        new RegExp(':programOrder'),
-        filenamify(programOrder.toString())
-      )
+      format = format.replace(new RegExp(':programOrder'), filenamify(programOrder.toString()))
     }
   }
 

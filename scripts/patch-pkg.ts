@@ -1,4 +1,4 @@
-#!ts-node
+#!/usr/bin/env ts-node
 
 import type { PackageJson } from 'type-fest'
 import fse from 'fs-extra'

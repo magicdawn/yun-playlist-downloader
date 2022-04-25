@@ -32,15 +32,17 @@ Usage: yun <url> [options]
   url  歌单/专辑的链接                                                  [字符串]
 
 选项：
-  --retry-timeout    下载超时(分)                             [数字] [默认值: 3]
-  --retry-times      下载重试次数                             [数字] [默认值: 3]
-  -h, --help         显示帮助信息                                         [布尔]
-  -v, --version      显示版本号                                           [布尔]
-  -c, --concurrency  同时下载数量                             [数字] [默认值: 5]
-  -f, --format       文件格式[字符串] [默认值: ":name/:singer - :songName.:ext"]
-  -q, --quality      音质                                   [数字] [默认值: 320]
-  -s, --skip         对于已存在文件且大小合适则跳过        [布尔] [默认值: true]
-  -p, --progress     是否显示进度条                        [布尔] [默认值: true]
+      --retryTimeout  下载超时(分)                            [数字] [默认值: 3]
+      --retryTimes    下载重试次数                            [数字] [默认值: 3]
+      --cover         下载封面                            [布尔] [默认值: false]
+      --cookie        cookie文件             [字符串] [默认值: "yun.cookie.txt"]
+  -h, --help          显示帮助信息                                        [布尔]
+  -v, --version       显示版本号                                          [布尔]
+  -c, --concurrency   同时下载数量                                        [数字]
+  -f, --format        文件格式                                          [字符串]
+  -q, --quality       音质                                                [数字]
+  -s, --skip          对于已存在文件且大小合适则跳过                      [布尔]
+  -p, --progress      是否显示进度条                                      [布尔]
 
 示例：
   yun -c 10 <url>                          10首同时下载
@@ -56,6 +58,14 @@ Usage: yun <url> [options]
 ### `--retry-times` 重试次数
 
 设置下载重试次数, 需要与 `--retry-timeout` 搭配使用,默认 3 次
+
+### `--cover` 下载封面
+
+默认不下载
+
+### `--cookie` 已登录 cookie 存放地址
+
+见 [docs/cookie.md](docs/cookie.md)
 
 ### `-c, --concurrency` 下载并发
 

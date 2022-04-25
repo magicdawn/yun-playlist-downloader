@@ -3,7 +3,6 @@ lockfileVersion: 5.3
 specifiers:
   '@magicdawn/ascii-progress': ^1.0.8
   '@magicdawn/eslint-config': ^0.0.6
-  '@magicdawn/music-api': ^0.3.11
   '@magicdawn/prettier-config': ^0.0.2
   '@swc/core': ^1.2.171
   '@swc/helpers': ^0.3.8
@@ -19,7 +18,7 @@ specifiers:
   '@types/prettier': 2.1.5
   '@types/rc': ^1.1.0
   '@types/yargs': ^15.0.9
-  NeteaseCloudMusicApi: ^3.44.0
+  NeteaseCloudMusicApi: ^3.47.5
   cheerio: ^0.22.0
   codecov: ^3.8.3
   debug: ^4.2.0
@@ -48,7 +47,6 @@ specifiers:
   yargs: ^16.1.0
 
 dependencies:
-  '@magicdawn/music-api': 0.3.11
   NeteaseCloudMusicApi: 3.47.5_debug@4.3.4
   cheerio: 0.22.0
   debug: 4.3.4
@@ -407,17 +405,6 @@ packages:
       nan: 2.15.0
     dev: false
     optional: true
-
-  /@magicdawn/music-api/0.3.11:
-    resolution: {integrity: sha512-evVfzweF8X5XzA1jyTLwyp/9cKphb2Kda4LiKuoumZiW3u8d1HE5P5kPggcWJ2He8l1kltCVNOPf3YEWxTLZow==}
-    dependencies:
-      big-integer: 1.6.17
-      es6-promise: 4.1.1
-      isomorphic-fetch: 2.2.1
-      querystring: 0.2.0
-      string: 3.3.3
-      xml-js: 1.4.1
-    dev: false
 
   /@magicdawn/prettier-config/0.0.2:
     resolution: {integrity: sha512-ZyJ9S6lV6i6AgfF2QCm9EoKZZm6RKYDcxL89Sps3KQfM7PdTc5iNX3fXBKBY5fQX3N0a2a0s8XGKovepn8qb9g==}
@@ -930,11 +917,6 @@ packages:
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
-
-  /big-integer/1.6.17:
-    resolution: {integrity: sha512-ly8WmwKOXF3ustquejZGtPkn5IyBpmKcmmNJJ2kaZA8M1G+2uVoXhuIUknCkV6Sgdw8DoMklHB7l8yfKVyDEdw==}
-    engines: {node: '>=0.6'}
-    dev: false
 
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
@@ -1562,10 +1544,6 @@ packages:
   /es6-error/4.1.1:
     resolution: {integrity: sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==}
     dev: true
-
-  /es6-promise/4.1.1:
-    resolution: {integrity: sha512-OaU1hHjgJf+b0NzsxCg7NdIYERD6Hy/PEmFLTjw+b65scuisG3Kt4QoTvJ66BBkPZ581gr0kpoVzKnxniM8nng==}
-    dev: false
 
   /escalade/3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
@@ -3490,12 +3468,6 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
-  /querystring/0.2.0:
-    resolution: {integrity: sha512-X/xY82scca2tau62i9mDyU9K+I+djTMUsvwf7xnUX5GLvVzgJybOJf4Y6o9Zx3oJK/LSXg5tTZBjwzqVPaPO2g==}
-    engines: {node: '>=0.4.x'}
-    deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
-    dev: false
-
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
@@ -3669,10 +3641,6 @@ packages:
 
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-    dev: false
-
-  /sax/1.2.4:
-    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: false
 
   /semver/6.3.0:
@@ -3952,10 +3920,6 @@ packages:
       define-properties: 1.1.4
     dev: true
     optional: true
-
-  /string/3.3.3:
-    resolution: {integrity: sha512-LbvprpPZT/39QKfNrlPX9vXtS7If80vqbPQ7clnHQb5oVOM5hz/cs3iQCCZjvQDwsAWl+HpLQX3gRgN6IC8t3g==}
-    dev: false
 
   /string_decoder/0.10.31:
     resolution: {integrity: sha512-ev2QzSzWPYmy9GuqfIVildA4OdcGLeFZQrq5ys6RtiuF+RQQiZWr8TZNyAcuVXyQRYfEO+MsoB/1BuQVhOJuoQ==}
@@ -4394,13 +4358,6 @@ packages:
       signal-exit: 3.0.7
       typedarray-to-buffer: 3.1.5
     dev: true
-
-  /xml-js/1.4.1:
-    resolution: {integrity: sha512-yJguAa8sKHDSjTzCGlVgB/agnZ4zFaQ+KYclqLdg1Hc3lDvD0+wyAqxFKZpIG6ZUR/khZDEmP6fm9nrjwD+R5Q==}
-    hasBin: true
-    dependencies:
-      sax: 1.2.4
-    dev: false
 
   /xregexp/2.0.0:
     resolution: {integrity: sha512-xl/50/Cf32VsGq/1R8jJE5ajH1yMCQkpmoS10QbFZWl2Oor4H0Me64Pu2yxvsRWK3m6soJbmGfzSR7BYmDcWAA==}

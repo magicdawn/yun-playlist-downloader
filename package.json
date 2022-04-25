@@ -37,8 +37,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@magicdawn/music-api": "^0.3.11",
-    "NeteaseCloudMusicApi": "^3.44.0",
+    "NeteaseCloudMusicApi": "^3.47.5",
     "cheerio": "^0.22.0",
     "debug": "^4.2.0",
     "dl-vampire": "^0.5.0",

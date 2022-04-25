@@ -1,5 +1,5 @@
 import cheerio from 'cheerio'
-import { umi } from './singleton'
+import { request } from './singleton'
 
 // import debugFactory from 'debug'
 // const debug = debugFactory('yun:util')
@@ -9,7 +9,7 @@ import { umi } from './singleton'
  */
 
 export function getHtml(url: string): Promise<string> {
-  return umi.get(url, {
+  return request.get(url, {
     prefix: '',
     responseType: 'text',
   })

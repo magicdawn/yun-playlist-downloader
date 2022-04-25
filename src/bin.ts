@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node-script
+#!ts-node
 
 import 'log-reject-error/register'
 import path from 'path'

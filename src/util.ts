@@ -8,7 +8,7 @@ import { umi } from './singleton'
  * 获取html
  */
 
-export const getHtml = (url: string): Promise<string> => {
+export function getHtml(url: string): Promise<string> {
   return umi.get(url, {
     prefix: '',
     responseType: 'text',
@@ -19,7 +19,7 @@ export const getHtml = (url: string): Promise<string> => {
  * get cheerio instance
  */
 
-export const get$ = async (url: string) => {
+export async function get$(url: string) {
   url = normalizeUrl(url)
   const html = await getHtml(url)
   const $ = cheerio.load(html, {
@@ -36,14 +36,16 @@ export const get$ = async (url: string) => {
  * http://music.163.com/playlist?id=12583200
  */
 
-export const normalizeUrl = (url: string) => url.replace(/(https?:.*?\/)(#\/)/, '$1')
+export function normalizeUrl(url: string) {
+  return url.replace(/(https?:.*?\/)(#\/)/, '$1')
+}
 
 /**
  * getId
  */
 
 export const getId = function (url: string) {
-  url = exports.normalizeUrl(url) // remove #
+  url = normalizeUrl(url) // remove #
   const u = new URL(url)
   const id = u.searchParams.get('id')
   return id

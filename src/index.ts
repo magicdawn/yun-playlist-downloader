@@ -54,16 +54,25 @@ interface DownloadSongOptions {
   skipExists: boolean
 }
 
-export const downloadSong = async function (options: DownloadSongOptions & { progress?: boolean }) {
+export async function downloadSong(options: DownloadSongOptions & { progress?: boolean }) {
   const { progress } = options
-  if (progress) {
+
+  let hasProgressBar = false
+  try {
+    require('@magicdawn/ascii-progress')
+    hasProgressBar = true
+  } catch (e) {
+    // noop
+  }
+
+  if (progress && hasProgressBar) {
     return downloadSongWithProgress(options)
   } else {
     return downloadSongPlain(options)
   }
 }
 
-export const downloadSongWithProgress = async function (options: DownloadSongOptions) {
+export async function downloadSongWithProgress(options: DownloadSongOptions) {
   const ProgressBar = require('@magicdawn/ascii-progress')
   const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
 
@@ -94,11 +103,11 @@ export const downloadSongWithProgress = async function (options: DownloadSongOpt
   }
 
   // 下载中
-  const downloading = (percent) =>
+  const downloading = (percent: number) =>
     bar.update(percent, { symbol: symbols.info, postText: `  下载中 ${file}` })
 
   // 重试
-  const retry = (i) => {
+  const retry = (i: number) => {
     bar.tick(0, { symbol: symbols.warning, postText: ` ${i + 1}次失败 ${file}` })
   }
 
@@ -136,7 +145,7 @@ export const downloadSongWithProgress = async function (options: DownloadSongOpt
   success()
 }
 
-export const downloadSongPlain = async function (options) {
+export async function downloadSongPlain(options: DownloadSongOptions) {
   const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
 
   let skip = false
@@ -169,7 +178,7 @@ export const downloadSongPlain = async function (options) {
  * check page type
  */
 
-export const getType = (url: string) => {
+export function getType(url: string) {
   const item = _.find(types, (item) => url.indexOf(item.type) > -1)
   if (item) return item
 
@@ -186,7 +195,7 @@ export const getType = (url: string) => {
  * }
  */
 
-export const getAdapter = ($: cheerio.Root, url: string) => {
+export function getAdapter($: cheerio.Root, url: string) {
   const { adapter } = getType(url)
   return new adapter({ $, url })
 }
@@ -194,7 +203,7 @@ export const getAdapter = ($: cheerio.Root, url: string) => {
 /**
  * 获取歌曲文件表示
  */
-export const getFileName = ({
+export function getFileName({
   format,
   song,
   url,
@@ -205,7 +214,7 @@ export const getFileName = ({
   song: Song
   url: string
   name: string
-}) => {
+}) {
   const typesItem = getType(url)
 
   // 从 type 中取值, 先替换 `长的`
@@ -215,11 +224,10 @@ export const getFileName = ({
   })
 
   // 从 `song` 中取值
-  ;['songName', 'singer', 'rawIndex', 'index', 'ext'].forEach((t) => {
-    // t -> token
+  ;['songName', 'singer', 'rawIndex', 'index', 'ext'].forEach((token) => {
     // rawIndex 为 number, sanitize(number) error
-    const val = filenamify(String(song[t]))
-    format = format.replace(new RegExp(':' + t, 'ig'), val)
+    const val = filenamify(String(song[token]))
+    format = format.replace(new RegExp(':' + token, 'ig'), val)
   })
 
   // name

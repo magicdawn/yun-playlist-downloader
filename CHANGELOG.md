@@ -2,7 +2,9 @@
 
 ## 2022-04-25 v3.1.0
 
-- 有些歌单, 比如「自己喜欢的歌单」需要登录查看, 使用 `--cookie` 默认读取 `yun.cookie.txt` 文件
+- 支持 `--cookie` 默认读取 `yun.cookie.txt` 文件
+- fix `#/radio` 网址
+- 清理没有用到的 music-api encrypt 函数
 
 ## 2020-10-22 v3.0.1
 

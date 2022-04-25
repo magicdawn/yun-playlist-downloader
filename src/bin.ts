@@ -1,18 +1,20 @@
 #!ts-node
 
 import 'log-reject-error/register'
-import path from 'path'
+import path, { resolve } from 'path'
+import fs, { readFileSync } from 'fs'
 import pmap from 'promise.map'
 import debugFactory from 'debug'
 import humanizeDuration from 'humanize-duration'
 import _ from 'lodash'
-import yargs from 'yargs'
+import yargs, { onFinishCommand } from 'yargs'
 import ms from 'ms'
 import logSymbols from 'log-symbols'
 import filenamify from 'filenamify'
 import { get$ } from './util'
 import { getFileName, downloadSong, getAdapter } from './index'
 import dl from 'dl-vampire'
+import { DEFAULT_COOKIE_FILE, readCookie } from './auth/cookie'
 
 const debug = debugFactory('yun:cli')
 
@@ -102,6 +104,12 @@ let argv = yargs.command(
           type: 'boolean',
           default: false,
         },
+
+        cookie: {
+          desc: 'cookie文件',
+          type: 'string',
+          default: DEFAULT_COOKIE_FILE,
+        },
       })
       .config(config)
       .example('$0 -c 10 <url>', '10首同时下载')
@@ -139,6 +147,7 @@ cover:          ${cover}
 // process argv
 quality *= 1000
 retryTimeout = ms(`${retryTimeout} minutes`) as number
+readCookie(argv.cookie)
 
 async function main() {
   const start = Date.now()

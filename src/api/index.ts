@@ -1,4 +1,5 @@
 import * as Api from 'NeteaseCloudMusicApi'
+import { COOKIE_CONTENT } from '../auth/cookie'
 import { SongData } from '../common'
 import { Album } from './quicktype/album'
 import { DjradioProgram } from './quicktype/djradio'
@@ -12,7 +13,7 @@ export type StringOrNumber = string | number
  */
 
 export async function playlistDetail(id: string) {
-  const res = await Api.playlist_detail({ id })
+  const res = await Api.playlist_detail({ id, cookie: COOKIE_CONTENT })
   const playlist = res.body.playlist as Playlist
   return playlist
 }

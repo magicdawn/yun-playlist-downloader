@@ -42,7 +42,7 @@
     "debug": "^4.2.0",
     "dl-vampire": "^0.5.0",
     "filenamify": "^4.2.0",
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^10.0.0",
     "humanize-duration": "^3.24.0",
     "lodash": "^4.17.20",
     "log-reject-error": "^0.0.2",

@@ -4,20 +4,19 @@
   "description": "NetEase CloudMusic downloader",
   "main": "lib/index.js",
   "files": [
-    "bin",
+    "bin/yun",
     "lib",
     "package.json",
     "README.md",
     "CHANGELOG.md"
   ],
   "bin": {
-    "yun": "src/bin.ts"
+    "yun": "bin/yun"
   },
   "scripts": {
     "prepare": "husky install",
     "tsc": "tsc -b --incremental",
-    "prepublishOnly": "rm -rf lib; tsc; ./scripts/patch-pkg.ts --patch",
-    "postpublish": "./scripts/patch-pkg.ts --recover",
+    "prepublishOnly": "rm -rf lib; tsc",
     "test": "mocha",
     "test-cover": "nyc --reporter=lcov --reporter=text mocha",
     "report-cover": "codecov"

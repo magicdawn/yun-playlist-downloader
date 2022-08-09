@@ -1,6 +1,6 @@
-import BaseAdapter from './base'
 import { playlistDetail, songDetail } from '../api'
-import { Playlist } from '../api/quicktype/playlist-detail'
+import { Playlist } from '../define'
+import BaseAdapter from './base'
 
 // import debugNew from 'debug'
 // const debug = debugNew('yun:adapter:playlist')

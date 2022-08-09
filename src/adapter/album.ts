@@ -1,6 +1,5 @@
 import { album } from '../api'
-import { Album } from '../api/quicktype/album'
-import { SongData, Song } from '../common'
+import { Album, Song, SongData } from '../define'
 import BaseAdapter from './base'
 
 // import debugFactory from 'debug'

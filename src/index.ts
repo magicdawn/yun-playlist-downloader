@@ -1,8 +1,8 @@
+import dl from 'dl-vampire'
+import filenamify from 'filenamify'
 import _ from 'lodash'
 import symbols from 'log-symbols'
-import filenamify from 'filenamify'
-import dl from 'dl-vampire'
-import { Song } from './common'
+import { Song } from './define'
 
 // import debugFactory from 'debug'
 // const debug = debugFactory('yun:index')
@@ -11,10 +11,10 @@ import { Song } from './common'
  * page type
  */
 
-import BaseAdapter from './adapter/base'
-import PlaylistAdapter from './adapter/playlist'
 import AlbumAdapter from './adapter/album'
+import BaseAdapter from './adapter/base'
 import DjradioAdapter, { ProgramSong } from './adapter/djradio'
+import PlaylistAdapter from './adapter/playlist'
 
 interface Type {
   type: string
@@ -178,13 +178,13 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
  * check page type
  */
 
-export function getType(url: string) {
+export function getType(url: string): Type {
   const item = _.find(types, (item) => url.indexOf(item.type) > -1)
   if (item) return item
 
   // #/radio & #/djradio 是一样的
   if (/#\/radio/.exec(url)) {
-    return _.find(types, (item) => item.type === 'djradio')
+    return _.find(types, (item) => item.type === 'djradio')!
   }
 
   const msg = 'unsupported type'

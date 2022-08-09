@@ -1,20 +1,20 @@
 #!ts-node
 
-import 'log-reject-error/register'
-import path, { resolve } from 'path'
-import fs, { readFileSync } from 'fs'
-import pmap from 'promise.map'
 import debugFactory from 'debug'
-import humanizeDuration from 'humanize-duration'
-import _ from 'lodash'
-import yargs, { onFinishCommand } from 'yargs'
-import ms from 'ms'
-import logSymbols from 'log-symbols'
-import filenamify from 'filenamify'
-import { get$ } from './util'
-import { getFileName, downloadSong, getAdapter } from './index'
 import dl from 'dl-vampire'
+import filenamify from 'filenamify'
+import humanizeDuration from 'humanize-duration'
+import 'log-reject-error/register'
+import logSymbols from 'log-symbols'
+import ms from 'ms'
+import path from 'path'
+import pmap from 'promise.map'
+import { Merge } from 'type-fest'
+import yargs from 'yargs'
 import { DEFAULT_COOKIE_FILE, readCookie } from './auth/cookie'
+import { SongValid } from './define'
+import { downloadSong, getAdapter, getFileName } from './index'
+import { get$ } from './util'
 
 const debug = debugFactory('yun:cli')
 
@@ -129,7 +129,13 @@ let {
   skip: skipExists,
   progress,
   cover,
-} = argv
+} = argv as Merge<
+  typeof argv,
+  {
+    // url is positional & required
+    url: string
+  }
+>
 
 // 打印
 console.log(`
@@ -176,7 +182,7 @@ async function main() {
   // debug('songs : %O', songs[0].raw.playUrlInfo)
 
   const removed = songs.filter((x) => !x.url)
-  const keeped = songs.filter((x) => x.url)
+  const keeped = songs.filter((x) => x.url) as SongValid[]
 
   if (removed.length) {
     console.log(`${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`)

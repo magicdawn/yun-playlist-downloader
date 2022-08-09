@@ -2,9 +2,9 @@ import { extname } from 'path'
 import { padStart, trimStart } from 'lodash'
 import _ from 'lodash'
 import { getId } from '../util'
-import { Song } from '../common'
 import { songUrl } from '../api'
-import { SongPlayUrlInfo } from '../api/quicktype/song-url-info'
+import { Song, SongPlayUrlInfo } from '../define'
+import { assert } from 'console'
 
 // import debugFactory from 'debug'
 // const debug = debugFactory('yun:adapter:base')
@@ -31,7 +31,9 @@ export default class BaseAdapter {
   }
 
   get id() {
-    return getId(this.url)
+    const val = getId(this.url)
+    assert(val, 'id is empty')
+    return val!
   }
 
   /**
@@ -95,29 +97,28 @@ export default class BaseAdapter {
     })
   }
 
-  async filterSongs<T extends { id: number }, O extends T & { playUrlInfo?: SongPlayUrlInfo }>(
-    songDatas: T[],
-    quality: number
-  ): Promise<{
-    songs: O[]
-    removed: O[]
-    all: O[]
-  }> {
+  async filterSongs<T extends { id: number }>(songDatas: T[], quality: number) {
+    type WithOptionalPlayUrlInfo = T & { playUrlInfo?: SongPlayUrlInfo }
+
     // 获取下载链接
     const ids = songDatas.map((s) => s.id).join(',')
     const playUrlInfos = await songUrl(ids, quality)
-    const ret = { songs: [], removed: [], all: [] }
+    const ret: {
+      songs: WithOptionalPlayUrlInfo[]
+      removed: WithOptionalPlayUrlInfo[]
+      all: WithOptionalPlayUrlInfo[]
+    } = { songs: [], removed: [], all: [] }
 
     for (let songData of songDatas) {
       const { id } = songData
       const info = playUrlInfos.find((x) => String(x.id) === String(id))
 
-      const songDataFull = songData as O
+      const songDataFull = songData as WithOptionalPlayUrlInfo
       songDataFull.playUrlInfo = info
       ret.all.push(songDataFull)
 
       // 版权受限
-      if (!info || !info.url) {
+      if (!info?.url) {
         ret.removed.push(songDataFull)
       } else {
         ret.songs.push(songDataFull)

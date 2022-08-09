@@ -14,9 +14,10 @@
     "yun": "bin/yun"
   },
   "scripts": {
+    "dev": "tsc -w --incremental --tsBuildInfoFile ./lib/build.tsbuildinfo",
+    "build": "rm -rf lib; tsc",
+    "prepublishOnly": "pnpm build",
     "prepare": "husky install",
-    "tsc": "tsc -b --incremental",
-    "prepublishOnly": "rm -rf lib; tsc",
     "test": "mocha",
     "test-cover": "nyc --reporter=lcov --reporter=text mocha",
     "report-cover": "codecov"

@@ -1,10 +1,6 @@
 import * as Api from 'NeteaseCloudMusicApi'
 import { COOKIE_CONTENT } from '../auth/cookie'
-import { SongData } from '../common'
-import { Album } from './quicktype/album'
-import { DjradioProgram } from './quicktype/djradio'
-import { Playlist } from './quicktype/playlist-detail'
-import { SongPlayUrlInfo } from './quicktype/song-url-info'
+import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '../define'
 
 export type StringOrNumber = string | number
 

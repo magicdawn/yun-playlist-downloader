@@ -1,9 +1,8 @@
 import BaseAdapter from './base'
-import { Song } from '../common'
 import { djradioPrograms } from '../api'
 import moment from 'moment'
 import debugFactory from 'debug'
-import { DjradioProgram } from '../api/quicktype/djradio'
+import { DjradioProgram, Song } from '../define'
 
 const debug = debugFactory('yun:adapter:djradio')
 

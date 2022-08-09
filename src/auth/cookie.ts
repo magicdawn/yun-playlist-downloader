@@ -3,7 +3,7 @@ import { resolve } from 'path'
 
 export const DEFAULT_COOKIE_FILE = 'yun.cookie.txt'
 
-export let COOKIE_CONTENT: string = undefined
+export let COOKIE_CONTENT: string | undefined = undefined
 
 export function readCookie(cookieFile: string) {
   if (!cookieFile) return

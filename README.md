@@ -11,6 +11,7 @@
 
 ## 特性
 
+- [x] 支持歌单 / 专辑 / 电台
 - [x] 音质选择
 - [x] 下载超时 / 重试
 - [x] 再次下载默认跳过已下载部分, 使用 `content-length` 匹配
@@ -20,6 +21,10 @@
 ## 安装
 
 ```sh
+# pnpm (recommend)
+$ pnpm add -g yun-playlist-downloader
+
+# npm
 $ npm i yun-playlist-downloader -g
 ```
 

@@ -1,5 +1,4 @@
-import {normalizeUrl, getId} from '../src/util'
-import 'should'
+import { getId, normalizeUrl } from '../src/util'
 
 describe('util', function () {
   it('normalizeUrl', () => {
@@ -10,6 +9,6 @@ describe('util', function () {
 
   it('.getId', () => {
     const id = getId('https://music.163.com/#/program?id=2064329279')
-    id.should.equal('2064329279')
+    id!.should.equal('2064329279')
   })
 })

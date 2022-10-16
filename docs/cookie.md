@@ -6,6 +6,10 @@
 
 EditThisCookie https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg
 
+## 设置插件导出格式为: "分号分隔键值对"
+
+![image](https://user-images.githubusercontent.com/4067115/196025515-9b0ced9f-1c59-4f9c-9462-033e8d1d08da.png)
+
 ## 登录
 
 goto https://music.163.com/#

@@ -1,6 +1,10 @@
 # 更新记录
 
-## 2022-04-25 v3.2.0
+## 2022-11-14 v3.2.1
+
+- fix broken publish
+
+## 2022-11-14 v3.2.0
 
 - 分片支持超大歌单, see https://github.com/magicdawn/yun-playlist-downloader/issues/51
 - `umi-request` -> `got`, 前者在 node v18 会触发 warning, 使用 node internal fetch

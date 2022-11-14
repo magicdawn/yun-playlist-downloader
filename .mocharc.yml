@@ -7,4 +7,7 @@ require:
 recursive: true
 
 # travis -> 163
-timeout: 20000
+# timeout: 20000
+
+# github actions -> 163
+timeout: 40000

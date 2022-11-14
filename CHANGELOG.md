@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2022-04-25 v3.2.0
+
+- 分片支持超大歌单, see https://github.com/magicdawn/yun-playlist-downloader/issues/51
+- move to github actions
+
 ## 2022-04-25 v3.1.0
 
 - 支持 `--cookie` 默认读取 `yun.cookie.txt` 文件

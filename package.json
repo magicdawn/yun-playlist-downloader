@@ -52,7 +52,7 @@
     "promise.retry": "^1.1.0",
     "rc": "^1.2.8",
     "umi-request": "^1.4.0",
-    "yargs": "^16.2.0"
+    "yargs": "^17.6.2"
   },
   "optionalDependencies": {
     "@magicdawn/ascii-progress": "^1.0.8"
@@ -67,13 +67,12 @@
     "@types/fs-extra": "^9.0.13",
     "@types/humanize-duration": "^3.27.1",
     "@types/lodash": "^4.14.188",
-    "@types/mocha": "^9.1.1",
+    "@types/mocha": "^10.0.0",
     "@types/ms": "^0.7.31",
     "@types/node": "^18.11.9",
     "@types/prettier": "2.7.1",
     "@types/rc": "^1.2.1",
-    "@types/yargs": "^15.0.14",
-    "codecov": "^3.8.3",
+    "@types/yargs": "^17.0.13",
     "eslint": "^8.27.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.3",

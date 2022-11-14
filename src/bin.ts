@@ -37,7 +37,7 @@ const config = require('rc')('yun', {
   'progress': true,
 })
 
-let argv = yargs.command(
+const parser = yargs.command(
   '$0 <url>',
   '网易云音乐 歌单/专辑 下载器',
   // builder
@@ -116,29 +116,32 @@ let argv = yargs.command(
       .example('$0 -f ":singer - :songName.:ext" <url>', '下载格式为 "歌手 - 歌名"')
       .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
   }
-).argv
+)
 
-// url
-let {
-  url,
-  concurrency,
-  format,
-  quality,
-  retryTimeout,
-  retryTimes,
-  skip: skipExists,
-  progress,
-  cover,
-} = argv as Merge<
-  typeof argv,
-  {
-    // url is positional & required
-    url: string
-  }
->
+async function main() {
+  const argv = await parser.argv
 
-// 打印
-console.log(`
+  // url
+  let {
+    url,
+    concurrency,
+    format,
+    quality,
+    retryTimeout,
+    retryTimes,
+    skip: skipExists,
+    progress,
+    cover,
+  } = argv as Merge<
+    typeof argv,
+    {
+      // url is positional & required
+      url: string
+    }
+  >
+
+  // 打印
+  console.log(`
 当前参数
 concurrency:    ${concurrency}
 format:         ${format}
@@ -150,12 +153,11 @@ progress:       ${progress}
 cover:          ${cover}
 `)
 
-// process argv
-quality *= 1000
-retryTimeout = ms(`${retryTimeout} minutes`) as number
-readCookie(argv.cookie)
+  // process argv
+  quality *= 1000
+  retryTimeout = ms(`${retryTimeout} minutes`) as number
+  readCookie(argv.cookie)
 
-async function main() {
   const start = Date.now()
   const $ = await get$(url)
   const adapter = getAdapter($, url)

@@ -9,10 +9,7 @@ import { request } from './singleton'
  */
 
 export function getHtml(url: string): Promise<string> {
-  return request.get(url, {
-    prefix: '',
-    responseType: 'text',
-  })
+  return request.get(url, { prefixUrl: '' }).text()
 }
 
 /**

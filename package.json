@@ -19,8 +19,7 @@
     "prepublishOnly": "pnpm build",
     "prepare": "husky install",
     "test": "mocha",
-    "test-cover": "nyc --reporter=lcov --reporter=text mocha",
-    "report-cover": "codecov"
+    "test-cover": "nyc --reporter=lcov --reporter=text mocha"
   },
   "repository": {
     "type": "git",

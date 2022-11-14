@@ -1,7 +1,0 @@
-language: node_js
-node_js:
-  - v12
-script: 'npm run test-cover'
-after_script: 'npm run report-cover'
-notifications:
-  email: false

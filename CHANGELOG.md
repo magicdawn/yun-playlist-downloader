@@ -4,6 +4,7 @@
 
 - 分片支持超大歌单, see https://github.com/magicdawn/yun-playlist-downloader/issues/51
 - move to github actions
+- update deps
 
 ## 2022-04-25 v3.1.0
 

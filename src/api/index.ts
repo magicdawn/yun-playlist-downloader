@@ -1,8 +1,19 @@
+import _ from 'lodash'
 import * as Api from 'NeteaseCloudMusicApi'
+import pmap from 'promise.map'
 import { COOKIE_CONTENT } from '../auth/cookie'
 import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '../define'
 
 export type StringOrNumber = string | number
+
+/**
+ * 分片处理
+ * songData / songUrl 需要分片, id 太多报错
+ * see https://github.com/magicdawn/yun-playlist-downloader/issues/51
+ */
+
+export const BATCH_ID_SIZE = 500
+export const BATCH_ID_CONCURRENCY = 4
 
 /**
  * 歌单详情
@@ -18,26 +29,44 @@ export async function playlistDetail(id: string) {
  * song 详情
  */
 
-export async function songDetail(ids: string) {
-  const res = await Api.song_detail({ ids })
-  const songDatas = res.body.songs as SongData[]
-  return songDatas
+export async function songDetail(ids: number[]) {
+  const singleRequest = async (idsStr: string) => {
+    const res = await Api.song_detail({ ids: idsStr })
+    const songDatas = res.body.songs as SongData[]
+    return songDatas
+  }
+
+  // 500 首做一次 request
+  const chunks = _.chunk(ids, BATCH_ID_SIZE)
+  const songDatasArray = await pmap(
+    chunks,
+    (chunk) => {
+      return singleRequest(chunk.join(','))
+    },
+    BATCH_ID_CONCURRENCY
+  )
+
+  return songDatasArray.flat()
 }
 
 /**
  * song 播放地址
  */
 
-export async function songUrl(
-  id: Array<StringOrNumber> | StringOrNumber,
-  quality?: StringOrNumber
-) {
-  if (Array.isArray(id)) {
-    id = id.join(',')
+export async function songUrl(ids: Array<StringOrNumber>, quality?: StringOrNumber) {
+  const singleRequest = async (id: string) => {
+    const res = await Api.song_url({ id, br: quality })
+    const infos = res.body.data as SongPlayUrlInfo[]
+    return infos
   }
-  const res = await Api.song_url({ id, br: quality })
-  const infos = res.body.data as SongPlayUrlInfo[]
-  return infos
+
+  const chunks = _.chunk(ids, BATCH_ID_SIZE)
+  const infosArr = await pmap(
+    chunks,
+    (chunk) => singleRequest(chunk.join(',')),
+    BATCH_ID_CONCURRENCY
+  )
+  return infosArr.flat()
 }
 
 /**
@@ -54,8 +83,6 @@ export async function album(id: StringOrNumber) {
 /**
  * 电台
  */
-
-export async function djradio(id: StringOrNumber) {}
 
 export async function djradioPrograms(id: StringOrNumber) {
   let hasMore = true

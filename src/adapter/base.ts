@@ -74,7 +74,10 @@ export default class BaseAdapter {
 
       return {
         // 歌手
-        singer: _.get(songData, 'ar.0.name') || _.get(songData, 'artists.0.name'),
+        singer:
+          (_.get(songData, 'ar.0.name') as string) ||
+          (_.get(songData, 'artists.0.name') as string) ||
+          '',
 
         // 歌曲名
         songName: songData.name,
@@ -101,7 +104,7 @@ export default class BaseAdapter {
     type WithOptionalPlayUrlInfo = T & { playUrlInfo?: SongPlayUrlInfo }
 
     // 获取下载链接
-    const ids = songDatas.map((s) => s.id).join(',')
+    const ids = songDatas.map((s) => s.id)
     const playUrlInfos = await songUrl(ids, quality)
     const ret: {
       songs: WithOptionalPlayUrlInfo[]

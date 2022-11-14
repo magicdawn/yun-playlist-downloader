@@ -28,7 +28,7 @@ export default class PlaylistAdapter extends BaseAdapter {
   async getSongDatas() {
     const playlist = await this.getPlaylist()
     const trackIds = playlist.trackIds.map((x) => x.id)
-    const songDatas = await songDetail(trackIds.join(','))
+    const songDatas = await songDetail(trackIds)
     return songDatas
   }
 

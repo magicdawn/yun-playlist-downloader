@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "target": "es2019",
+    "target": "ES2021",
     "module": "CommonJS",
     "strictNullChecks": true
   },

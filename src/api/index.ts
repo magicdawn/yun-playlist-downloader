@@ -4,7 +4,7 @@ import pmap from 'promise.map'
 import { COOKIE_CONTENT } from '../auth/cookie'
 import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '../define'
 
-export type StringOrNumber = string | number
+type Id = string | number
 
 /**
  * 分片处理
@@ -29,7 +29,7 @@ export async function playlistDetail(id: string) {
  * song 详情
  */
 
-export async function songDetail(ids: number[]) {
+export async function songDetail(ids: Id[]) {
   const singleRequest = async (idsStr: string) => {
     const res = await Api.song_detail({ ids: idsStr })
     const songDatas = res.body.songs as SongData[]
@@ -53,7 +53,7 @@ export async function songDetail(ids: number[]) {
  * song 播放地址
  */
 
-export async function songUrl(ids: Array<StringOrNumber>, quality?: StringOrNumber) {
+export async function songUrl(ids: Id[], quality?: string | number) {
   const singleRequest = async (id: string) => {
     const res = await Api.song_url({ id, br: quality })
     const infos = res.body.data as SongPlayUrlInfo[]
@@ -73,7 +73,7 @@ export async function songUrl(ids: Array<StringOrNumber>, quality?: StringOrNumb
  * 专辑
  */
 
-export async function album(id: StringOrNumber) {
+export async function album(id: Id) {
   const res = await Api.album({ id })
   const album = res.body.album as Album
   const songs = res.body.songs as SongData[]
@@ -84,7 +84,7 @@ export async function album(id: StringOrNumber) {
  * 电台
  */
 
-export async function djradioPrograms(id: StringOrNumber) {
+export async function djradioPrograms(id: Id) {
   let hasMore = true
   let pagesize = 100
   let pagenum = 1

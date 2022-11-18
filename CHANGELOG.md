@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2022-11-18 v3.2.2
+
+- feat: make chunk size 500 -> 200, closes https://github.com/magicdawn/yun-playlist-downloader/issues/52
+
 ## 2022-11-14 v3.2.1
 
 - fix broken publish

@@ -12,7 +12,7 @@ type Id = string | number
  * see https://github.com/magicdawn/yun-playlist-downloader/issues/51
  */
 
-export const BATCH_ID_SIZE = 500
+export const BATCH_ID_SIZE = 200
 export const BATCH_ID_CONCURRENCY = 4
 
 /**

@@ -4,7 +4,7 @@
 
 <!-- [![Build Status](https://img.shields.io/travis/magicdawn/yun-playlist-downloader.svg?style=flat-square)](https://travis-ci.org/magicdawn/yun-playlist-downloader) -->
 
-[![Build Status](https://img.shields.io/github/checks-status/magicdawn/yun-playlist-downloader/master?style=flat-square)](https://github.com/magicdawn/yun-playlist-downloader/actions/workflows/ci.yml)
+[![Build Status](https://img.shields.io/github/checks-status/magicdawn/yun-playlist-downloader/main?style=flat-square)](https://github.com/magicdawn/yun-playlist-downloader/actions/workflows/ci.yml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/magicdawn/yun-playlist-downloader.svg?style=flat-square)](https://codecov.io/gh/magicdawn/yun-playlist-downloader)
 [![npm version](https://img.shields.io/npm/v/yun-playlist-downloader.svg?style=flat-square)](https://www.npmjs.com/package/yun-playlist-downloader)
 [![npm downloads](https://img.shields.io/npm/dm/yun-playlist-downloader.svg?style=flat-square)](https://www.npmjs.com/package/yun-playlist-downloader)
@@ -122,7 +122,7 @@ Usage: yun <url> [options]
 
 ## 截图
 
-![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/master/yun.png)
+![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/main/yun.png)
 
 ## 已知问题
 

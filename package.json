@@ -55,7 +55,7 @@
     "yargs": "^17.7.1"
   },
   "optionalDependencies": {
-    "@magicdawn/ascii-progress": "^1.0.8"
+    "ascii-progress": "^2.0.0"
   },
   "devDependencies": {
     "@magicdawn/eslint-config": "^0.1.0",

@@ -1,3 +1,4 @@
+import { type ProgressBar as TProgressBar } from 'ascii-progress'
 import dl from 'dl-vampire'
 import filenamify from 'filenamify'
 import _ from 'lodash'
@@ -59,7 +60,7 @@ export async function downloadSong(options: DownloadSongOptions & { progress?: b
 
   let hasProgressBar = false
   try {
-    require('@magicdawn/ascii-progress')
+    require('ascii-progress')
     hasProgressBar = true
   } catch (e) {
     // noop
@@ -73,10 +74,10 @@ export async function downloadSong(options: DownloadSongOptions & { progress?: b
 }
 
 export async function downloadSongWithProgress(options: DownloadSongOptions) {
-  const ProgressBar = require('@magicdawn/ascii-progress')
   const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
 
-  let bar: any
+  const ProgressBar: typeof TProgressBar = require('ascii-progress').ProgressBar
+  let bar: TProgressBar
   const initBar = () => {
     bar = new ProgressBar({
       schema: `:symbol ${song.index}/${totalLength} [:bar] :postText`,
@@ -99,7 +100,6 @@ export async function downloadSongWithProgress(options: DownloadSongOptions) {
   // 失败
   const fail = () => {
     bar.update(0, { symbol: symbols.error, postText: `下载失败 ${file}` })
-    bar.terminate()
   }
 
   // 下载中

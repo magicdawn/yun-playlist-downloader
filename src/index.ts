@@ -1,7 +1,6 @@
 import { type ProgressBar as TProgressBar } from 'ascii-progress'
 import dl from 'dl-vampire'
 import filenamify from 'filenamify'
-import _ from 'lodash'
 import LogSymbols from 'log-symbols'
 import pc from 'picocolors'
 import { Song } from './define'
@@ -18,13 +17,16 @@ import BaseAdapter from './adapter/base'
 import DjradioAdapter, { ProgramSong } from './adapter/djradio'
 import PlaylistAdapter from './adapter/playlist'
 
-interface Type {
-  type: string
+const allowedPageTypes = ['playlist', 'album', 'djradio'] as const
+type PageType = typeof allowedPageTypes extends ReadonlyArray<infer T> ? T : never
+
+interface TypeItem {
+  type: PageType
   typeText: string
   adapter: typeof BaseAdapter
 }
 
-export const types: Type[] = [
+export const typeItems: TypeItem[] = [
   {
     type: 'playlist',
     typeText: '列表',
@@ -81,6 +83,7 @@ export async function downloadSongWithProgress(options: DownloadSongOptions) {
   let bar: TProgressBar
   const initBar = () => {
     bar = new ProgressBar({
+      // .green not working
       schema: `:symbol ${song.index}/${totalLength} [${pc.green(':bar')}] :postText`,
       current: 0,
       total: 100,
@@ -179,13 +182,13 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
  * check page type
  */
 
-export function getType(url: string): Type {
-  const item = _.find(types, (item) => url.indexOf(item.type) > -1)
+export function getType(url: string): TypeItem {
+  const item = typeItems.find((item) => url.includes(item.type))
   if (item) return item
 
   // #/radio & #/djradio 是一样的
   if (/#\/radio/.exec(url)) {
-    return _.find(types, (item) => item.type === 'djradio')!
+    return typeItems.find((item) => item.type === 'djradio')!
   }
 
   const msg = 'unsupported type'
@@ -231,7 +234,6 @@ export function getFileName({
 
   // 从 `song` 中取值
   ;['songName', 'singer', 'rawIndex', 'index', 'ext'].forEach((token) => {
-    // rawIndex 为 number, sanitize(number) error
     const val = filenamify(String(song[token]))
     format = format.replace(new RegExp(':' + token, 'ig'), val)
   })

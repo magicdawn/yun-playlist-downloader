@@ -2,7 +2,8 @@ import { type ProgressBar as TProgressBar } from 'ascii-progress'
 import dl from 'dl-vampire'
 import filenamify from 'filenamify'
 import _ from 'lodash'
-import symbols from 'log-symbols'
+import LogSymbols from 'log-symbols'
+import pc from 'picocolors'
 import { Song } from './define'
 
 // import debugFactory from 'debug'
@@ -80,9 +81,9 @@ export async function downloadSongWithProgress(options: DownloadSongOptions) {
   let bar: TProgressBar
   const initBar = () => {
     bar = new ProgressBar({
-      schema: `:symbol ${song.index}/${totalLength} [:bar] :postText`,
-      total: 100,
+      schema: `:symbol ${song.index}/${totalLength} [${pc.green(':bar')}] :postText`,
       current: 0,
+      total: 100,
       width: 10,
       filled: '=',
       blank: ' ',
@@ -92,23 +93,23 @@ export async function downloadSongWithProgress(options: DownloadSongOptions) {
   // 成功
   const success = () => {
     bar.update(1, {
-      symbol: symbols.success,
+      symbol: LogSymbols.success,
       postText: `${skip ? '下载跳过' : '下载成功'} ${file}`,
     })
   }
 
   // 失败
   const fail = () => {
-    bar.update(0, { symbol: symbols.error, postText: `下载失败 ${file}` })
+    bar.update(0, { symbol: LogSymbols.error, postText: `下载失败 ${file}` })
   }
 
   // 下载中
   const downloading = (percent: number) =>
-    bar.update(percent, { symbol: symbols.info, postText: `  下载中 ${file}` })
+    bar.update(percent, { symbol: LogSymbols.info, postText: `  下载中 ${file}` })
 
   // 重试
   const retry = (i: number) => {
-    bar.tick(0, { symbol: symbols.warning, postText: ` ${i + 1}次失败 ${file}` })
+    bar.tick(0, { symbol: LogSymbols.warning, postText: ` ${i + 1}次失败 ${file}` })
   }
 
   // init state
@@ -159,18 +160,18 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
         timeout: retryTimeout,
         times: retryTimes,
         onerror: function (e, i) {
-          console.log(`${symbols.warning} ${song.index}/${totalLength}  ${i + 1}次失败 ${file}`)
+          console.log(`${LogSymbols.warning} ${song.index}/${totalLength}  ${i + 1}次失败 ${file}`)
         },
       },
     }))
   } catch (e) {
-    console.log(`${symbols.error} ${song.index}/${totalLength} 下载失败 ${file}`)
+    console.log(`${LogSymbols.error} ${song.index}/${totalLength} 下载失败 ${file}`)
     console.error(e.stack || e)
     return
   }
 
   console.log(
-    `${symbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`
+    `${LogSymbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`
   )
 }
 

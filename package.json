@@ -91,5 +91,8 @@
       "prettier --write"
     ]
   },
-  "prettier": "@magicdawn/prettier-config"
+  "prettier": "@magicdawn/prettier-config",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
 }

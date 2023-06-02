@@ -1,8 +1,12 @@
-import _ from 'lodash'
 import * as Api from 'NeteaseCloudMusicApi'
+import delay from 'delay'
+import _ from 'lodash'
 import pmap from 'promise.map'
 import { COOKIE_CONTENT } from '../auth/cookie'
+import { baseDebug } from '../common'
 import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '../define'
+
+const debug = baseDebug.extend('api:index')
 
 type Id = string | number
 
@@ -14,6 +18,54 @@ type Id = string | number
 
 export const BATCH_ID_SIZE = 200
 export const BATCH_ID_CONCURRENCY = 4
+
+/**
+ * {
+		"body": {
+			"code": 406
+			"message": "操作频繁，请稍候再试"
+			"msg": "操作频繁，请稍候再试"
+		}
+		"cookie": []
+		"status": 406
+	}
+ */
+export function handleRequestLimit<T extends (...args: any[]) => any>(fn: T, label: string) {
+  return async function (...args: Parameters<T>) {
+    let ret: ReturnType<T>
+
+    const limitReached = (err: any) =>
+      err &&
+      typeof err === 'object' &&
+      err.status === 406 &&
+      err.body?.code === 406 &&
+      /操作频繁/.test(err.body?.message || '')
+
+    let wait = 1
+    while (true) {
+      let err: any
+
+      try {
+        ret = await fn(...args)
+      } catch (e) {
+        err = e
+      }
+
+      if (limitReached(err)) {
+        debug('handleRequestLimit: 406-操作频繁 for %s, staring wait  %s seconds', label, wait)
+        await delay(1000 * wait++)
+        continue
+      }
+
+      if (err) {
+        throw err
+      } else {
+        debug('handleRequestLimit: success for %s', label)
+        return ret!
+      }
+    }
+  }
+}
 
 /**
  * 歌单详情
@@ -91,7 +143,10 @@ export async function djradioPrograms(id: Id) {
   let allPrograms: DjradioProgram[] = []
 
   do {
-    const res = await Api.dj_program({
+    const res = await handleRequestLimit(
+      Api.dj_program,
+      `dj_program(${pagenum})`
+    )({
       rid: id,
       limit: pagesize,
       offset: (pagenum - 1) * pagesize,

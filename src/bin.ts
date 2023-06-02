@@ -1,6 +1,5 @@
 #!ts-node
 
-import debugFactory from 'debug'
 import dl from 'dl-vampire'
 import filenamify from 'filenamify'
 import humanizeDuration from 'humanize-duration'
@@ -12,11 +11,12 @@ import pmap from 'promise.map'
 import { Merge } from 'type-fest'
 import yargs from 'yargs'
 import { DEFAULT_COOKIE_FILE, readCookie } from './auth/cookie'
+import { baseDebug } from './common'
 import { SongValid } from './define'
 import { downloadSong, getAdapter, getFileName } from './index'
 import { get$ } from './util'
 
-const debug = debugFactory('yun:cli')
+const debug = baseDebug.extend('cli')
 
 let DEFAULT_FORMAT = ':name/:singer - :songName.:ext'
 if (process.argv.some((s) => s.match(/(dj)?radio/))) {

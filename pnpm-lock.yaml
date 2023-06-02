@@ -14,6 +14,9 @@ dependencies:
   debug:
     specifier: ^4.3.4
     version: 4.3.4(supports-color@8.1.1)
+  delay:
+    specifier: ^5.0.0
+    version: 5.0.0
   dl-vampire:
     specifier: ^1.4.1
     version: 1.4.1
@@ -109,8 +112,8 @@ devDependencies:
     specifier: ^1.2.1
     version: 1.2.1
   '@types/yargs':
-    specifier: ^17.0.24
-    version: 17.0.24
+    specifier: 17.0.13
+    version: 17.0.13
   eslint:
     specifier: ^8.41.0
     version: 8.41.0
@@ -793,8 +796,8 @@ packages:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
     dev: true
 
-  /@types/yargs@17.0.24:
-    resolution: {integrity: sha512-6i0aC7jV6QzQB8ne1joVZ0eSFIstHsCrobmOtghM11yGlH0j43FKL2UhWdELkyps0zuf7qVTUVCCR+tgSlyLLw==}
+  /@types/yargs@17.0.13:
+    resolution: {integrity: sha512-9sWaruZk2JGxIQU+IhI1fhPYRcQ0UuTNuKuCW9bR5fp7qi2Llf7WDzNa17Cy7TKnh3cdxDOiyTu6gaLS0eDatg==}
     dependencies:
       '@types/yargs-parser': 21.0.0
     dev: true
@@ -1501,6 +1504,11 @@ packages:
       escodegen: 1.14.3
       esprima: 4.0.1
       vm2: 3.9.10
+    dev: false
+
+  /delay@5.0.0:
+    resolution: {integrity: sha512-ReEBKkIfe4ya47wlPYf/gu5ib6yUG0/Aez0JQZQz94kiWtRQvZIQbTiehsnwHvLSWJnQdhVeqYue7Id1dKr0qw==}
+    engines: {node: '>=10'}
     dev: false
 
   /delayed-stream@1.0.0:

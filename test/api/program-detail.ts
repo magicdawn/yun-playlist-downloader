@@ -1,3 +1,4 @@
+import 'should'
 import { djradioPrograms } from '../../src/api'
 
 describe('djradioPrograms', function () {

@@ -5,9 +5,6 @@ import LogSymbols from 'log-symbols'
 import pc from 'picocolors'
 import { Song } from './define'
 
-// import debugFactory from 'debug'
-// const debug = debugFactory('yun:index')
-
 /**
  * page type
  */

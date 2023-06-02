@@ -10,4 +10,4 @@ recursive: true
 # timeout: 20000
 
 # github actions -> 163
-timeout: 40000
+timeout: 60000

@@ -124,11 +124,6 @@ Usage: yun <url> [options]
 
 ![](https://raw.githubusercontent.com/magicdawn/yun-playlist-downloader/main/yun.png)
 
-## 已知问题
-
-- [x] 并发过大会导致某些一开始任务即便机器处于空闲状态也会 block 住, 请根据自己网速酌情设置 `concurrency` 参数
-- [x] 使用了类似 Phantom.js 的 Nightmare 来计算下载参数, 安装的时候要装一遍 Electron, 程序体积比较大. 见谅.
-
 ## 更新记录
 
 [CHANGELOG.md](CHANGELOG.md)

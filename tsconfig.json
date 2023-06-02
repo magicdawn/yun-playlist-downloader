@@ -10,7 +10,8 @@
     "resolveJsonModule": true,
     "target": "ES2020",
     "module": "CommonJS",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "skipLibCheck": true
   },
   "ts-node": {
     "swc": true

@@ -1,5 +1,36 @@
 # 更新记录
 
+## 2023-06-02 v3.3.0
+
+- feat: 升级 ascii-progress
+- feat: 试听歌曲加上试听标识
+- fix: 处理 dj_program 406 操作频繁的问题
+- 升级依赖, node 需要 LTS v18
+
+详细
+
+- b31c3f5 chore: tweak tsconfig
+- 285f611 feat: explict mark freeTrialInfo
+- 4c3ff60 chore: add ncu config file
+- e1fe3de chore: clean up unused debug
+- 879deaa test: make test pass 406-request-too-often
+- 1b7d50a ci: using pnpm@8
+- a192b53 chore: update deps
+- 4f926a1 chore: readme afdian
+- 8bff1a9 chore: type tweaks
+- 1e76aba feat: green progress-bar
+- afcd2d6 chore: rm @magicdawn/ascii-progress, add ascii-progress
+- 8331993 chore: d.ts -> .ts
+- 1481855 chore: revert @types/yargs version
+- 3035e24 fix: node-version
+- 78fd1b1 chore: ci use lts node-version
+- 7712eb5 chore: node support from latest lts
+- 1b3e318 chore: use main default branch
+- e016162 chore: update deps
+- 7ba074e chore: update lock
+- 8136a8a feat: ncu-safe
+- 00b303b dep: update deps
+
 ## 2022-11-18 v3.2.2
 
 - feat: make chunk size 500 -> 200, closes https://github.com/magicdawn/yun-playlist-downloader/issues/52

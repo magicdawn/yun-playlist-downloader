@@ -91,15 +91,16 @@ Usage: yun <url> [options]
 | `:typeText`     | = `专辑` or `列表`         |            |
 | `:name`         | 专辑名称 or 播放列表名称   |            |
 | `:singer`       | 歌手名                     |            |
-| `:songName`     | 歌曲名(不含扩展名)         |            |
+| `:songName`     | 歌名(aka 标题)             |            |
+| `:albumName`    | 所属专辑                   |            |
 | `:ext`          | 文件后缀,如 `mp3` 不带 `.` |            |
 | `:index`        | `01` , `02` ... `12`       |            |
 | `:rawIndex`     | `0` `1` ... `11`           |            |
 | `:programDate`  | 电台节目发布日期           | 仅电台可用 |
 | `:programOrder` | 数字, 电台第几期           | 仅电台可用 |
 
-默认值 = `:name/:singer - :songName.:ext`
-电台默认 = `:name/:programDate 第:programOrder 期 - :songName.:ext`
+- 默认值 = `:name/:singer - :songName.:ext`
+- 电台默认 = `:name/:programDate 第:programOrder 期 - :songName.:ext`
 
 ### `-q, --quality` 自定义下载音质
 

@@ -13,6 +13,9 @@ export type Song = {
   // 歌曲名
   songName: string
 
+  // 所属专辑
+  albumName: string
+
   // url for download
   url?: string
 

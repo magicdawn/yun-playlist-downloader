@@ -231,7 +231,9 @@ export function getFileName({
   })
 
   // 从 `song` 中取值
-  ;['songName', 'singer', 'rawIndex', 'index', 'ext'].forEach((token) => {
+  type SongKey = keyof Song
+  const keys = ['songName', 'singer', 'albumName', 'rawIndex', 'index', 'ext'] satisfies SongKey[]
+  keys.forEach((token) => {
     const val = filenamify(String(song[token]))
     format = format.replace(new RegExp(':' + token, 'ig'), val)
   })

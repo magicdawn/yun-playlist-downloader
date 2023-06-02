@@ -78,6 +78,9 @@ export default class BaseAdapter {
         // 歌曲名
         songName: songData.name,
 
+        // 专辑名
+        albumName: (_.get(songData, 'al.name') as string) || '',
+
         // url for download
         url,
 

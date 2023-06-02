@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2023-06-02 v3.3.1
+
+- feat: support `:albumName` in format
+
 ## 2023-06-02 v3.3.0
 
 - feat: 升级 ascii-progress

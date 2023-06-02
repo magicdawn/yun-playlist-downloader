@@ -81,6 +81,9 @@ export default class BaseAdapter {
         // url for download
         url,
 
+        // free trial
+        isFreeTrial: songData.playUrlInfo ? Boolean(songData.playUrlInfo.freeTrialInfo) : undefined,
+
         // extension
         ext: url && trimStart(extname(url), '.'),
 

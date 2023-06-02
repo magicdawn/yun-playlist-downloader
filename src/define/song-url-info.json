@@ -1,0 +1,81 @@
+{
+  "data": [
+    {
+      "id": 33894312,
+      "url": "http://m8.music.126.net/20230602165719/2a3f6607c13bda6e4d3eb175f533fb31/ymusic/0fd6/4f65/43ed/a8772889f38dfcb91c04da915b301617.mp3",
+      "br": 320000,
+      "size": 10691439,
+      "md5": "a8772889f38dfcb91c04da915b301617",
+      "code": 200,
+      "expi": 1200,
+      "type": "mp3",
+      "gain": -6.3072,
+      "peak": 1,
+      "fee": 0,
+      "uf": null,
+      "payed": 0,
+      "flag": 129,
+      "canExtend": false,
+      "freeTrialInfo": null,
+      "level": "exhigh",
+      "encodeType": "mp3",
+      "freeTrialPrivilege": {
+        "resConsumable": false,
+        "userConsumable": false,
+        "listenType": null,
+        "cannotListenReason": null
+      },
+      "freeTimeTrialPrivilege": {
+        "resConsumable": false,
+        "userConsumable": false,
+        "type": 0,
+        "remainTime": 0
+      },
+      "urlSource": 0,
+      "rightSource": 0,
+      "podcastCtrp": null,
+      "effectTypes": null,
+      "time": 267232
+    },
+    {
+      "id": 405998841,
+      "url": "http://m802.music.126.net/20230602165719/87f32fdd7d215e57d7c2d7a039ca1d56/jd-musicrep-ts/4b29/49a4/74b2/16ac0b6b3f53134ff6ad16f4f41d21eb.mp3",
+      "br": 128012,
+      "size": 481115,
+      "md5": "16ac0b6b3f53134ff6ad16f4f41d21eb",
+      "code": 200,
+      "expi": 1200,
+      "type": "mp3",
+      "gain": -0.0002,
+      "peak": 0,
+      "fee": 1,
+      "uf": null,
+      "payed": 0,
+      "flag": 1284,
+      "canExtend": false,
+      "freeTrialInfo": {
+        "start": 0,
+        "end": 30
+      },
+      "level": "standard",
+      "encodeType": "mp3",
+      "freeTrialPrivilege": {
+        "resConsumable": true,
+        "userConsumable": false,
+        "listenType": null,
+        "cannotListenReason": null
+      },
+      "freeTimeTrialPrivilege": {
+        "resConsumable": false,
+        "userConsumable": false,
+        "type": 0,
+        "remainTime": 0
+      },
+      "urlSource": 0,
+      "rightSource": 0,
+      "podcastCtrp": null,
+      "effectTypes": null,
+      "time": 30040
+    }
+  ]
+}

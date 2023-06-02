@@ -16,6 +16,9 @@ export type Song = {
   // url for download
   url?: string
 
+  // 试听?
+  isFreeTrial?: boolean
+
   // extension
   ext?: string
 

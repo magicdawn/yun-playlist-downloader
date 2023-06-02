@@ -20,6 +20,11 @@
 - [x] 自定义文件名
 - [x] 下载进度显示
 
+## 注意
+
+本项目不支持越权使用, VIP 歌曲请开通 VIP 后结合 `--cookie` 使用.
+see https://github.com/magicdawn/yun-playlist-downloader/issues/54
+
 ## 安装
 
 ```sh

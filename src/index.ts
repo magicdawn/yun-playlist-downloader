@@ -9,6 +9,7 @@ import { Song } from './define'
  * page type
  */
 
+import path from 'path'
 import AlbumAdapter from './adapter/album'
 import BaseAdapter from './adapter/base'
 import DjradioAdapter, { ProgramSong } from './adapter/djradio'
@@ -247,6 +248,13 @@ export function getFileName({
     if (programOrder) {
       format = format.replace(new RegExp(':programOrder'), filenamify(programOrder.toString()))
     }
+  }
+
+  if (song.isFreeTrial) {
+    const dir = path.dirname(format)
+    const ext = path.extname(format)
+    const base = path.basename(format, ext)
+    format = path.join(dir, `${base} [试听]${ext}`)
   }
 
   return format

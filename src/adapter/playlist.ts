@@ -2,9 +2,6 @@ import { playlistDetail, songDetail } from '../api'
 import { Playlist } from '../define'
 import BaseAdapter from './base'
 
-// import debugNew from 'debug'
-// const debug = debugNew('yun:adapter:playlist')
-
 export default class PlaylistAdapter extends BaseAdapter {
   #playlist: Playlist
 

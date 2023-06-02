@@ -1,13 +1,9 @@
+import { assert } from 'console'
+import _, { padStart, trimStart } from 'lodash'
 import { extname } from 'path'
-import { padStart, trimStart } from 'lodash'
-import _ from 'lodash'
-import { getId } from '../util'
 import { songUrl } from '../api'
 import { Song, SongPlayUrlInfo } from '../define'
-import { assert } from 'console'
-
-// import debugFactory from 'debug'
-// const debug = debugFactory('yun:adapter:base')
+import { getId } from '../util'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
 

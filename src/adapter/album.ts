@@ -2,9 +2,6 @@ import { album } from '../api'
 import { Album, Song, SongData } from '../define'
 import BaseAdapter from './base'
 
-// import debugFactory from 'debug'
-// const debug = debugFactory('yun:adapter:album')
-
 export default class AlbumAdapter extends BaseAdapter {
   #detail: { album: Album; songs: SongData[] }
   private async getDetail() {

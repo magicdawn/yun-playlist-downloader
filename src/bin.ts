@@ -181,7 +181,6 @@ cover:          ${cover}
 
   const songs = await adapter.getSongs(quality)
   debug('songs : %j', songs)
-  // debug('songs : %O', songs[0].raw.playUrlInfo)
 
   const removed = songs.filter((x) => !x.url)
   const keeped = songs.filter((x) => x.url) as SongValid[]

@@ -1,9 +1,6 @@
 import cheerio from 'cheerio'
 import { request } from './singleton'
 
-// import debugFactory from 'debug'
-// const debug = debugFactory('yun:util')
-
 /**
  * 获取html
  */

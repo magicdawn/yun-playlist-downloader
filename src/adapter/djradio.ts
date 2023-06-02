@@ -1,10 +1,10 @@
-import BaseAdapter from './base'
-import { djradioPrograms } from '../api'
 import moment from 'moment'
-import debugFactory from 'debug'
+import { djradioPrograms } from '../api'
+import { baseDebug } from '../common'
 import { DjradioProgram, Song } from '../define'
+import BaseAdapter from './base'
 
-const debug = debugFactory('yun:adapter:djradio')
+const debug = baseDebug.extend('adapter:djradio')
 
 export interface ProgramSong extends Song {
   // 日期

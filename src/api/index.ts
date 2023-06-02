@@ -29,6 +29,9 @@ export const BATCH_ID_CONCURRENCY = 4
 		"cookie": []
 		"status": 406
 	}
+
+	貌似只有 dj_program 有影响...
+	先不包其他接口了
  */
 export function handleRequestLimit<T extends (...args: any[]) => any>(fn: T, label: string) {
   return async function (...args: Parameters<T>) {

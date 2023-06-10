@@ -1,6 +1,6 @@
-import { album } from '../api'
-import { Album, Song, SongData } from '../define'
-import BaseAdapter from './base'
+import { album } from '$api'
+import { Album, Song, SongData } from '$define'
+import BaseAdapter from './base.js'
 
 export default class AlbumAdapter extends BaseAdapter {
   #detail: { album: Album; songs: SongData[] }

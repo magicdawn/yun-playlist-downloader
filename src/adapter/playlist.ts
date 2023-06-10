@@ -1,6 +1,6 @@
-import { playlistDetail, songDetail } from '../api'
-import { Playlist } from '../define'
-import BaseAdapter from './base'
+import { playlistDetail, songDetail } from '$api'
+import { Playlist } from '$define'
+import BaseAdapter from './base.js'
 
 export default class PlaylistAdapter extends BaseAdapter {
   #playlist: Playlist

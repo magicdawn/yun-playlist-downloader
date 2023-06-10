@@ -1,5 +1,5 @@
+import { request } from '$singleton'
 import cheerio from 'cheerio'
-import { request } from './singleton'
 
 /**
  * 获取html

@@ -1,8 +1,8 @@
+import { djradioPrograms } from '$api'
+import { baseDebug } from '$common'
+import { DjradioProgram, Song } from '$define'
 import moment from 'moment'
-import { djradioPrograms } from '../api'
-import { baseDebug } from '../common'
-import { DjradioProgram, Song } from '../define'
-import BaseAdapter from './base'
+import BaseAdapter from './base.js'
 
 const debug = baseDebug.extend('adapter:djradio')
 

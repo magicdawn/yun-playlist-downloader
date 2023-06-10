@@ -1,10 +1,10 @@
-import * as Api from 'NeteaseCloudMusicApi'
+import { COOKIE_CONTENT } from '$auth/cookie'
+import { baseDebug } from '$common'
+import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '$define'
+import Api from 'NeteaseCloudMusicApi'
 import delay from 'delay'
-import _ from 'lodash'
+import * as _ from 'lodash-es'
 import pmap from 'promise.map'
-import { COOKIE_CONTENT } from '../auth/cookie'
-import { baseDebug } from '../common'
-import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '../define'
 
 const debug = baseDebug.extend('api:index')
 

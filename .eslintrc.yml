@@ -1,5 +1,8 @@
 # root
 root: true
 
+parserOptions:
+  sourceType: module
+
 extends:
   - '@magicdawn'

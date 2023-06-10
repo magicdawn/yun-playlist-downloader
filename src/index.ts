@@ -1,19 +1,22 @@
+import { Song } from '$define'
 import { type ProgressBar as TProgressBar } from 'ascii-progress'
-import dl from 'dl-vampire'
+import { dl } from 'dl-vampire'
+import esm from 'esm-utils'
 import filenamify from 'filenamify'
 import LogSymbols from 'log-symbols'
 import pc from 'picocolors'
-import { Song } from './define'
+
+const { require } = esm(import.meta.url)
 
 /**
  * page type
  */
 
 import path from 'path'
-import AlbumAdapter from './adapter/album'
-import BaseAdapter from './adapter/base'
-import DjradioAdapter, { ProgramSong } from './adapter/djradio'
-import PlaylistAdapter from './adapter/playlist'
+import AlbumAdapter from './adapter/album.js'
+import BaseAdapter from './adapter/base.js'
+import DjradioAdapter, { ProgramSong } from './adapter/djradio.js'
+import PlaylistAdapter from './adapter/playlist.js'
 
 const allowedPageTypes = ['playlist', 'album', 'djradio'] as const
 type PageType = typeof allowedPageTypes extends ReadonlyArray<infer T> ? T : never

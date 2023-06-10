@@ -1,6 +1,11 @@
-#!ts-node
+#!/usr/bin/env tsx
 
-import dl from 'dl-vampire'
+import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
+import { baseDebug } from '$common'
+import { SongValid } from '$define'
+import { downloadSong, getAdapter, getFileName } from '$index'
+import { get$ } from '$util'
+import { dl } from 'dl-vampire'
 import filenamify from 'filenamify'
 import humanizeDuration from 'humanize-duration'
 import 'log-reject-error/register'
@@ -8,13 +13,9 @@ import logSymbols from 'log-symbols'
 import ms from 'ms'
 import path from 'path'
 import pmap from 'promise.map'
-import { Merge } from 'type-fest'
-import yargs from 'yargs'
-import { DEFAULT_COOKIE_FILE, readCookie } from './auth/cookie'
-import { baseDebug } from './common'
-import { SongValid } from './define'
-import { downloadSong, getAdapter, getFileName } from './index'
-import { get$ } from './util'
+import rcFactory from 'rc'
+import { hideBin } from 'yargs/helpers'
+import yargs from 'yargs/yargs'
 
 const debug = baseDebug.extend('cli')
 
@@ -27,7 +28,7 @@ if (process.argv.some((s) => s.match(/(dj)?radio/))) {
 }
 
 // get config
-const config = require('rc')('yun', {
+const config = rcFactory('yun', {
   'concurrency': 5,
   'format': DEFAULT_FORMAT,
   'quality': 320,
@@ -37,91 +38,104 @@ const config = require('rc')('yun', {
   'progress': true,
 })
 
-const parser = yargs.command(
-  '$0 <url>',
-  '网易云音乐 歌单/专辑 下载器',
-  // builder
-  (yargs) => {
-    return yargs
-      .scriptName('yun')
-      .usage('Usage: $0 <url> [options]')
-      .positional('url', { describe: '歌单/专辑的链接', type: 'string' })
-      .alias({
-        h: 'help',
-        v: 'version',
-        c: 'concurrency',
-        f: 'format',
-        q: 'quality',
-        s: 'skip',
-        p: 'progress',
-      })
-      .options({
-        concurrency: {
-          desc: '同时下载数量',
-          type: 'number',
-          default: 5,
-        },
+const parser = yargs(hideBin(process.argv))
+  .command(
+    '$0 <url>',
+    '网易云音乐 歌单/专辑 下载器',
+    // builder
+    (yargs) => {
+      return yargs
+        .scriptName('yun')
+        .usage('Usage: $0 <url> [options]')
+        .positional('url', { describe: '歌单/专辑的链接', type: 'string' })
+        .alias({
+          h: 'help',
+          v: 'version',
+          c: 'concurrency',
+          f: 'format',
+          q: 'quality',
+          s: 'skip',
+          p: 'progress',
+        })
+        .options({
+          concurrency: {
+            desc: '同时下载数量',
+            type: 'number',
+            default: 5,
+          },
 
-        format: {
-          desc: '文件格式',
-          type: 'string',
-          default: DEFAULT_FORMAT,
-        },
+          format: {
+            desc: '文件格式',
+            type: 'string',
+            default: DEFAULT_FORMAT,
+          },
 
-        quality: {
-          desc: '音质',
-          type: 'number',
-          default: 320,
-          choices: [128, 192, 320],
-        },
+          quality: {
+            desc: '音质',
+            type: 'number',
+            default: 320,
+            choices: [128, 192, 320],
+          },
 
-        retryTimeout: {
-          desc: '下载超时(分)',
-          type: 'number',
-          default: 3,
-        },
+          retryTimeout: {
+            desc: '下载超时(分)',
+            type: 'number',
+            default: 3,
+          },
 
-        retryTimes: {
-          desc: '下载重试次数',
-          type: 'number',
-          default: 3,
-        },
+          retryTimes: {
+            desc: '下载重试次数',
+            type: 'number',
+            default: 3,
+          },
 
-        skip: {
-          desc: '对于已存在文件且大小合适则跳过',
-          type: 'boolean',
-          default: true,
-        },
+          skip: {
+            desc: '对于已存在文件且大小合适则跳过',
+            type: 'boolean',
+            default: true,
+          },
 
-        progress: {
-          desc: '是否显示进度条',
-          type: 'boolean',
-          default: true,
-        },
+          progress: {
+            desc: '是否显示进度条',
+            type: 'boolean',
+            default: true,
+          },
 
-        cover: {
-          desc: '下载封面',
-          type: 'boolean',
-          default: false,
-        },
+          cover: {
+            desc: '下载封面',
+            type: 'boolean',
+            default: false,
+          },
 
-        cookie: {
-          desc: 'cookie文件',
-          type: 'string',
-          default: DEFAULT_COOKIE_FILE,
-        },
-      })
-      .config(config)
-      .example('$0 -c 10 <url>', '10首同时下载')
-      .example('$0 -f ":singer - :songName.:ext" <url>', '下载格式为 "歌手 - 歌名"')
-      .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
-  }
-)
+          cookie: {
+            desc: 'cookie文件',
+            type: 'string',
+            default: DEFAULT_COOKIE_FILE,
+          },
+        })
+        .config(config)
+        .example('$0 -c 10 <url>', '10首同时下载')
+        .example('$0 -f ":singer - :songName.:ext" <url>', '下载格式为 "歌手 - 歌名"')
+        .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
+    }
+  )
+  .help()
+
+type ExpectedArgv = {
+  url: string
+  concurrency: number
+  format: string
+  quality: number
+  retryTimeout: number
+  retryTimes: number
+  skip: boolean
+  progress: boolean
+  cover: boolean
+  cookie: string
+}
 
 async function main() {
-  const argv = await parser.argv
-
-  // url
+  const argv = (await parser.argv) as unknown as ExpectedArgv
   let {
     url,
     concurrency,
@@ -132,13 +146,7 @@ async function main() {
     skip: skipExists,
     progress,
     cover,
-  } = argv as Merge<
-    typeof argv,
-    {
-      // url is positional & required
-      url: string
-    }
-  >
+  } = argv
 
   // 打印
   console.log(`
@@ -193,7 +201,7 @@ cover:          ${cover}
   }
 
   // FIXME
-  // process.exit()
+  process.exit()
 
   // 开始下载
   console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)

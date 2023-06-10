@@ -1,9 +1,10 @@
+import { songUrl } from '$api'
+import { Song, SongPlayUrlInfo } from '$define'
+import { getId } from '$util'
 import { assert } from 'console'
-import _, { padStart, trimStart } from 'lodash'
+import * as _ from 'lodash-es'
+import { padStart, trimStart } from 'lodash-es'
 import { extname } from 'path'
-import { songUrl } from '../api'
-import { Song, SongPlayUrlInfo } from '../define'
-import { getId } from '../util'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
 

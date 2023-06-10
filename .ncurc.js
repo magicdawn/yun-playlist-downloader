@@ -1,4 +1,5 @@
 module.exports = {
   // buggy types
-  reject: ['@types/yargs'],
+  // "@types/yargs": "17.0.13", works in cjs, esm 有问题
+  // reject: ['@types/yargs'],
 }

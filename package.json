@@ -2,6 +2,7 @@
   "name": "yun-playlist-downloader",
   "version": "3.3.1",
   "description": "NetEase CloudMusic downloader",
+  "type": "module",
   "main": "lib/index.js",
   "files": [
     "bin/yun",
@@ -45,6 +46,7 @@
     "fs-extra": "^11.1.1",
     "got": "11",
     "humanize-duration": "^3.28.0",
+    "ink": "^4.2.0",
     "lodash": "^4.17.21",
     "log-reject-error": "^0.0.2",
     "log-symbols": "^4.1.0",
@@ -54,6 +56,8 @@
     "promise.map": "^0.5.0",
     "promise.retry": "^1.1.1",
     "rc": "^1.2.8",
+    "react": "^18.2.0",
+    "valtio": "^1.10.5",
     "yargs": "^17.7.2"
   },
   "optionalDependencies": {
@@ -74,6 +78,7 @@
     "@types/node": "^20.2.5",
     "@types/prettier": "2.7.3",
     "@types/rc": "^1.2.1",
+    "@types/react": "^18.2.9",
     "@types/yargs": "17.0.13",
     "eslint": "^8.42.0",
     "husky": "^8.0.3",

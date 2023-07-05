@@ -1,2 +1,3 @@
 _analysis
-lib
+/lib
+/dist

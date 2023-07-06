@@ -3,17 +3,16 @@
   "version": "3.3.1",
   "description": "NetEase CloudMusic downloader",
   "type": "module",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "bin": {
+    "yun": "dist/bin.js"
+  },
   "files": [
-    "bin/yun.mjs",
-    "lib",
+    "dist/",
     "package.json",
     "README.md",
     "CHANGELOG.md"
   ],
-  "bin": {
-    "yun": "dist/bin.js"
-  },
   "scripts": {
     "_dev": "tsc -w --incremental --tsBuildInfoFile ./lib/build.tsbuildinfo",
     "_build": "rm -rf lib; tsc",
@@ -79,7 +78,7 @@
     "@types/lodash-es": "^4.17.7",
     "@types/mocha": "^10.0.1",
     "@types/ms": "^0.7.31",
-    "@types/node": "^20.3.3",
+    "@types/node": "^20.4.0",
     "@types/prettier": "2.7.3",
     "@types/rc": "^1.2.1",
     "@types/react": "^18.2.14",

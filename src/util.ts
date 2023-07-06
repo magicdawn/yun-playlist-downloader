@@ -16,9 +16,7 @@ export function getHtml(url: string): Promise<string> {
 export async function get$(url: string) {
   url = normalizeUrl(url)
   const html = await getHtml(url)
-  const $ = cheerio.load(html, {
-    decodeEntities: false,
-  })
+  const $ = cheerio.load(html, { decodeEntities: false })
   return $
 }
 

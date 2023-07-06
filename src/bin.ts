@@ -208,14 +208,8 @@ console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
 await pmap(
   keeped,
   (song) => {
-    // 根据格式获取所需文件名
-    const file = getFileName({
-      format: format,
-      song: song,
-      url: url,
-      name: name,
-    })
-
+    // 文件名
+    const file = getFileName({ format: format, song: song, url: url, name: name })
     // 下载
     return downloadSong({
       url: song.url,

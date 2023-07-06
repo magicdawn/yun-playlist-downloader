@@ -1,22 +1,17 @@
 import { Song } from '$define'
-import { type ProgressBar as TProgressBar } from 'ascii-progress'
+import { downloadSongWithInk } from '$download/progress/ink'
 import { dl } from 'dl-vampire'
-import esm from 'esm-utils'
 import filenamify from 'filenamify'
 import LogSymbols from 'log-symbols'
-import pc from 'picocolors'
-
-const { require } = esm(import.meta.url)
-
-/**
- * page type
- */
-
 import path from 'path'
 import AlbumAdapter from './adapter/album.js'
 import BaseAdapter from './adapter/base.js'
 import DjradioAdapter, { ProgramSong } from './adapter/djradio.js'
 import PlaylistAdapter from './adapter/playlist.js'
+
+/**
+ * page type
+ */
 
 const allowedPageTypes = ['playlist', 'album', 'djradio'] as const
 type PageType = typeof allowedPageTypes extends ReadonlyArray<infer T> ? T : never
@@ -49,7 +44,7 @@ export const typeItems: TypeItem[] = [
  * 下载一首歌曲
  */
 
-interface DownloadSongOptions {
+export interface DownloadSongOptions {
   url: string
   file: string
   song: Song
@@ -61,93 +56,11 @@ interface DownloadSongOptions {
 
 export async function downloadSong(options: DownloadSongOptions & { progress?: boolean }) {
   const { progress } = options
-
-  let hasProgressBar = false
-  try {
-    require('ascii-progress')
-    hasProgressBar = true
-  } catch (e) {
-    // noop
-  }
-
-  if (progress && hasProgressBar) {
-    return downloadSongWithProgress(options)
+  if (progress) {
+    return downloadSongWithInk(options)
   } else {
     return downloadSongPlain(options)
   }
-}
-
-export async function downloadSongWithProgress(options: DownloadSongOptions) {
-  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
-
-  const ProgressBar: typeof TProgressBar = require('ascii-progress').ProgressBar
-  let bar: TProgressBar
-  const initBar = () => {
-    bar = new ProgressBar({
-      // .green not working
-      schema: `:symbol ${song.index}/${totalLength} [${pc.green(':bar')}] :postText`,
-      current: 0,
-      total: 100,
-      width: 10,
-      filled: '=',
-      blank: ' ',
-    })
-  }
-
-  // 成功
-  const success = () => {
-    bar.update(1, {
-      symbol: LogSymbols.success,
-      postText: `${skip ? '下载跳过' : '下载成功'} ${file}`,
-    })
-  }
-
-  // 失败
-  const fail = () => {
-    bar.update(0, { symbol: LogSymbols.error, postText: `下载失败 ${file}` })
-  }
-
-  // 下载中
-  const downloading = (percent: number) =>
-    bar.update(percent, { symbol: LogSymbols.info, postText: `  下载中 ${file}` })
-
-  // 重试
-  const retry = (i: number) => {
-    bar.tick(0, { symbol: LogSymbols.warning, postText: ` ${i + 1}次失败 ${file}` })
-  }
-
-  // init state
-  initBar()
-  downloading(0)
-
-  let skip = false
-  try {
-    ;({ skip } = await dl({
-      url,
-      file,
-      skipExists,
-      onprogress(p) {
-        const { percent } = p
-        if (percent === 1) {
-          success()
-        } else {
-          downloading(percent)
-        }
-      },
-      retry: {
-        timeout: retryTimeout,
-        times: retryTimes,
-        onerror: function (e, i) {
-          retry(i)
-        },
-      },
-    }))
-  } catch (e) {
-    fail()
-    return
-  }
-
-  success()
 }
 
 export async function downloadSongPlain(options: DownloadSongOptions) {

@@ -1,0 +1,78 @@
+import { type DownloadSongOptions } from '$index'
+import { type ProgressBar as TProgressBar } from 'ascii-progress'
+import { dl } from 'dl-vampire'
+import logSymbols from 'log-symbols'
+import pc from 'picocolors'
+
+export async function downloadSongWithProgress(options: DownloadSongOptions) {
+  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
+
+  const ProgressBar: typeof TProgressBar = require('ascii-progress').ProgressBar
+  let bar: TProgressBar
+  const initBar = () => {
+    bar = new ProgressBar({
+      // .green not working
+      schema: `:symbol ${song.index}/${totalLength} [${pc.green(':bar')}] :postText`,
+      current: 0,
+      total: 100,
+      width: 10,
+      filled: '=',
+      blank: ' ',
+    })
+  }
+
+  // 成功
+  const success = () => {
+    bar.update(1, {
+      symbol: logSymbols.success,
+      postText: `${skip ? '下载跳过' : '下载成功'} ${file}`,
+    })
+  }
+
+  // 失败
+  const fail = () => {
+    bar.update(0, { symbol: logSymbols.error, postText: `下载失败 ${file}` })
+  }
+
+  // 下载中
+  const downloading = (percent: number) =>
+    bar.update(percent, { symbol: logSymbols.info, postText: `  下载中 ${file}` })
+
+  // 重试
+  const retry = (i: number) => {
+    bar.tick(0, { symbol: logSymbols.warning, postText: ` ${i + 1}次失败 ${file}` })
+  }
+
+  // init state
+  initBar()
+  downloading(0)
+
+  let skip = false
+  try {
+    ;({ skip } = await dl({
+      url,
+      file,
+      skipExists,
+      onprogress(p) {
+        const { percent } = p
+        if (percent === 1) {
+          success()
+        } else {
+          downloading(percent)
+        }
+      },
+      retry: {
+        timeout: retryTimeout,
+        times: retryTimes,
+        onerror: function (e, i) {
+          retry(i)
+        },
+      },
+    }))
+  } catch (e) {
+    fail()
+    return
+  }
+
+  success()
+}

@@ -63,9 +63,6 @@
     "valtio": "^1.10.6",
     "yargs": "^17.7.2"
   },
-  "optionalDependencies": {
-    "ascii-progress": "^2.0.0"
-  },
   "devDependencies": {
     "@magicdawn/eslint-config": "^0.1.0",
     "@magicdawn/prettier-config": "^0.0.2",

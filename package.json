@@ -19,7 +19,7 @@
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
     "build": "tsup",
-    "prepublishOnly": "pnpm build",
+    "prepublishOnly": "pnpm test && pnpm build",
     "prepare": "husky install",
     "test": "vitest run",
     "test:watch": "vitest",

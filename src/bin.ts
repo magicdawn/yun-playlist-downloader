@@ -6,6 +6,7 @@ import { SongValid } from '$define'
 import { downloadSong, getAdapter, getFileName } from '$index'
 import { get$ } from '$util'
 import { dl } from 'dl-vampire'
+import createEsmUtils from 'esm-utils'
 import filenamify from 'filenamify'
 import humanizeDuration from 'humanize-duration'
 import logSymbols from 'log-symbols'
@@ -16,6 +17,8 @@ import rcFactory from 'rc'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
 
+const { require } = createEsmUtils(import.meta)
+const { version } = require('../package.json')
 const debug = baseDebug.extend('cli')
 
 let DEFAULT_FORMAT = ':name/:singer - :songName.:ext'
@@ -118,6 +121,7 @@ const parser = yargs(hideBin(process.argv))
         .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
     }
   )
+  .version(version)
   .help()
 
 type ExpectedArgv = {

@@ -14,16 +14,14 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "_dev": "tsc -w --incremental --tsBuildInfoFile ./lib/build.tsbuildinfo",
-    "_build": "rm -rf lib; tsc",
-    "dev": "tsup --watch",
-    "typecheck": "tsc --noEmit",
-    "build": "tsup",
-    "prepublishOnly": "pnpm test && pnpm build",
     "prepare": "husky install",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsup --watch",
+    "build": "tsup",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:cover": "vitest run --coverage"
+    "test-cover": "vitest run --coverage",
+    "prepublishOnly": "pnpm typecheck && pnpm test && pnpm build"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,13 @@
 # 更新记录
 
+## 2023-07-06 v3.4.0
+
+- ESM
+- ink: 迁移到 ESM 以使用 ink, 去除 ascii-progress
+- tsup: 最终发布为 bundled esm, target 到 node16, 所以最低支持 node16
+- vitest: 替换 mocha / nyc
+- fix: 使用保留的数量作为 index 分母
+
 ## 2023-06-02 v3.3.1
 
 - feat: support `:albumName` in format

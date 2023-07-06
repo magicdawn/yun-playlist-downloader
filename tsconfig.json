@@ -16,7 +16,7 @@
     "strictNullChecks": true,
     "skipLibCheck": true,
     "jsx": "react-jsx",
-    "types": ["node"],
+    "types": ["node", "vitest/globals"],
     "plugins": [
       // Transform paths in output .js files
       // not working for esm

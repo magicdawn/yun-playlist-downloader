@@ -8,7 +8,6 @@ import { get$ } from '$util'
 import { dl } from 'dl-vampire'
 import filenamify from 'filenamify'
 import humanizeDuration from 'humanize-duration'
-import 'log-reject-error/register'
 import logSymbols from 'log-symbols'
 import ms from 'ms'
 import path from 'path'
@@ -134,22 +133,23 @@ type ExpectedArgv = {
   cookie: string
 }
 
-async function main() {
-  const argv = (await parser.argv) as unknown as ExpectedArgv
-  let {
-    url,
-    concurrency,
-    format,
-    quality,
-    retryTimeout,
-    retryTimes,
-    skip: skipExists,
-    progress,
-    cover,
-  } = argv
+const argv = (await parser.argv) as unknown as ExpectedArgv
+// if runing help, process will exit and not continued here
 
-  // 打印
-  console.log(`
+let {
+  url,
+  concurrency,
+  format,
+  quality,
+  retryTimeout,
+  retryTimes,
+  skip: skipExists,
+  progress,
+  cover,
+} = argv
+
+// 打印
+console.log(`
 当前参数
 concurrency:    ${concurrency}
 format:         ${format}
@@ -161,82 +161,75 @@ progress:       ${progress}
 cover:          ${cover}
 `)
 
-  // process argv
-  quality *= 1000
-  retryTimeout = ms(`${retryTimeout} minutes`) as number
-  readCookie(argv.cookie)
+// process argv
+quality *= 1000
+retryTimeout = ms(`${retryTimeout} minutes`) as number
+readCookie(argv.cookie)
 
-  const start = Date.now()
-  const $ = await get$(url)
-  const adapter = getAdapter($, url)
+const start = Date.now()
+const $ = await get$(url)
+const adapter = getAdapter($, url)
 
-  // 基本信息
-  const name = await adapter.getTitle()
-  console.log(`正在下载『${name}』,请稍候...`)
+// 基本信息
+const name = await adapter.getTitle()
+console.log(`正在下载『${name}』,请稍候...`)
 
-  // 封面
-  if (cover) {
-    const coverUrl = await adapter.getCover()
-    if (!coverUrl) {
-      console.log(`${logSymbols.warning} [cover]: 没有找到封面`)
-    } else {
-      const coverExt = path.extname(coverUrl) || '.jpg'
-      const coverFile = `${filenamify(name)}/cover${coverExt}`
-      await dl({ url: coverUrl, file: coverFile })
-      console.log(`${logSymbols.success} [cover]: 封面已下载 ${coverFile}`)
-    }
+// 封面
+if (cover) {
+  const coverUrl = await adapter.getCover()
+  if (!coverUrl) {
+    console.log(`${logSymbols.warning} [cover]: 没有找到封面`)
+  } else {
+    const coverExt = path.extname(coverUrl) || '.jpg'
+    const coverFile = `${filenamify(name)}/cover${coverExt}`
+    await dl({ url: coverUrl, file: coverFile })
+    console.log(`${logSymbols.success} [cover]: 封面已下载 ${coverFile}`)
   }
-
-  const songs = await adapter.getSongs(quality)
-  debug('songs : %j', songs)
-
-  const removed = songs.filter((x) => !x.url)
-  const keeped = songs.filter((x) => x.url) as SongValid[]
-
-  if (removed.length) {
-    console.log(`${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`)
-    for (let i of removed) {
-      console.log(`  ${i.singer} - ${i.songName}`)
-    }
-  }
-
-  // FIXME
-  process.exit()
-
-  // 开始下载
-  console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
-  await pmap(
-    keeped,
-    (song) => {
-      // 根据格式获取所需文件名
-      const file = getFileName({
-        format: format,
-        song: song,
-        url: url,
-        name: name,
-      })
-
-      // 下载
-      return downloadSong({
-        url: song.url,
-        file,
-        song,
-        totalLength: songs.length,
-        retryTimeout,
-        retryTimes,
-        skipExists,
-        progress,
-      })
-    },
-    concurrency
-  )
-
-  await new Promise((r) => {
-    process.nextTick(r)
-  })
-
-  const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
-  console.log('下载完成, 耗时%s', dur)
 }
 
-main()
+const songs = await adapter.getSongs(quality)
+debug('songs : %j', songs)
+
+const removed = songs.filter((x) => !x.url)
+const keeped = songs.filter((x) => x.url) as SongValid[]
+
+if (removed.length) {
+  console.log(`${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`)
+  for (let i of removed) {
+    console.log(`  ${i.singer} - ${i.songName}`)
+  }
+}
+
+// FIXME
+// process.exit()
+
+// 开始下载
+console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
+await pmap(
+  keeped,
+  (song) => {
+    // 根据格式获取所需文件名
+    const file = getFileName({
+      format: format,
+      song: song,
+      url: url,
+      name: name,
+    })
+
+    // 下载
+    return downloadSong({
+      url: song.url,
+      file,
+      song,
+      totalLength: keeped.length,
+      retryTimeout,
+      retryTimes,
+      skipExists,
+      progress,
+    })
+  },
+  concurrency
+)
+
+const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
+console.log('下载完成, 耗时%s', dur)

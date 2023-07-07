@@ -1,5 +1,10 @@
 # 更新记录
 
+## 2023-07-07 v3.4.2
+
+- fix index
+- improve ink rendering, add ink-spinner
+
 ## 2023-07-06 v3.4.1
 
 - fix `-v,--version` usage

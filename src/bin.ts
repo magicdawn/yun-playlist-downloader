@@ -4,7 +4,6 @@ import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
 import { baseDebug } from '$common'
 import { SongValid } from '$define'
 import { downloadSong, getAdapter, getFileName } from '$index'
-import { get$ } from '$util'
 import { dl } from 'dl-vampire'
 import createEsmUtils from 'esm-utils'
 import filenamify from 'filenamify'
@@ -172,8 +171,7 @@ retryTimeout = ms(`${retryTimeout} minutes`) as number
 readCookie(argv.cookie)
 
 const start = Date.now()
-const $ = await get$(url)
-const adapter = getAdapter($, url)
+const adapter = getAdapter(url)
 
 // 基本信息
 const name = await adapter.getTitle()

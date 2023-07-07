@@ -15,13 +15,10 @@ export interface ProgramSong extends Song {
 
 export default class DjradioAdapter extends BaseAdapter {
   #programs: DjradioProgram[]
-
-  async getAllPrograms() {
-    if (!this.#programs) {
-      const allPrograms = await djradioPrograms(this.id)
-      this.#programs = allPrograms
-    }
-    return this.#programs
+  async fetchAllPrograms() {
+    if (this.#programs) return
+    const allPrograms = await djradioPrograms(this.id)
+    this.#programs = allPrograms
   }
 
   get radio() {
@@ -29,17 +26,18 @@ export default class DjradioAdapter extends BaseAdapter {
   }
 
   async getTitle() {
-    await this.getAllPrograms()
+    await this.fetchAllPrograms()
     return this.radio?.name
   }
 
   async getCover() {
-    await this.getAllPrograms()
-    return this.radio.picUrl
+    await this.fetchAllPrograms()
+    return this.radio?.picUrl
   }
 
   async getSongs(quality: number): Promise<ProgramSong[]> {
-    const allPrograms = await this.getAllPrograms()
+    await this.fetchAllPrograms()
+    const allPrograms = this.#programs
     const mainSongs = allPrograms.map((x) => x.mainSong)
     const { all } = await this.filterSongs(mainSongs, quality)
     const songs = this.getSongsFromData(all)

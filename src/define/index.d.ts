@@ -1,10 +1,10 @@
-export { Album } from './album'
-export { DjradioProgram } from './djradio'
-export { Playlist } from './playlist-detail'
-export { SongPlayUrlInfo } from './song-url-info'
+import { Track } from './playlist-detail.js'
+import { SongPlayUrlInfo } from './song-url-info.js'
 
-import { Track } from './playlist-detail'
-import { SongPlayUrlInfo } from './song-url-info'
+export { Album } from './album.js'
+export { DjradioProgram } from './djradio.js'
+export { Playlist } from './playlist-detail.js'
+export { SongPlayUrlInfo } from './song-url-info.js'
 
 export type Song = {
   // 歌手

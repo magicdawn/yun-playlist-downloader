@@ -111,16 +111,10 @@ export function getType(url: string): TypeItem {
 
 /**
  * get a adapter via `url`
- *
- * an adapter should have {
- *   getTitle($) => string
- *   getDetail($, url, quality) => [song, ...]
- * }
  */
-
-export function getAdapter($: cheerio.Root, url: string) {
+export function getAdapter(url: string) {
   const { adapter } = getType(url)
-  return new adapter({ $, url })
+  return new adapter(url)
 }
 
 /**

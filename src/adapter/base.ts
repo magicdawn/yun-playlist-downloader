@@ -8,29 +8,14 @@ import { extname } from 'path'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
 
-interface AdapterOptions {
-  $: cheerio.Root
-  url: string
-}
-
 export default class BaseAdapter {
-  options: AdapterOptions
-  constructor(options: AdapterOptions) {
-    this.options = options
-  }
-
-  get url() {
-    return this.options.url
-  }
-
-  get $() {
-    return this.options.$
-  }
-
-  get id() {
-    const val = getId(this.url)
-    assert(val, 'id is empty')
-    return val!
+  url: string
+  id: string
+  constructor(url: string) {
+    this.url = url
+    const id = getId(url)
+    assert(id, 'id is empty')
+    this.id = id!
   }
 
   /**

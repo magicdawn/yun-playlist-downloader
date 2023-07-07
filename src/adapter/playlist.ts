@@ -4,27 +4,24 @@ import BaseAdapter from './base.js'
 
 export default class PlaylistAdapter extends BaseAdapter {
   #playlist: Playlist
-
-  private async getPlaylist() {
-    if (!this.#playlist) {
-      this.#playlist = await playlistDetail(this.id)
-    }
-    return this.#playlist
+  private async fetchPlaylist() {
+    if (this.#playlist) return
+    this.#playlist = await playlistDetail(this.id)
   }
 
   async getTitle() {
-    await this.getPlaylist()
+    await this.fetchPlaylist()
     return this.#playlist.name
   }
 
   async getCover() {
-    await this.getPlaylist()
+    await this.fetchPlaylist()
     return this.#playlist.coverImgUrl
   }
 
   async getSongDatas() {
-    const playlist = await this.getPlaylist()
-    const trackIds = playlist.trackIds.map((x) => x.id)
+    await this.fetchPlaylist()
+    const trackIds = this.#playlist.trackIds.map((x) => x.id)
     const songDatas = await songDetail(trackIds)
     return songDatas
   }

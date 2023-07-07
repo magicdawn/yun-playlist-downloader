@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2023-07-07 v3.4.3
+
+- fix ink-spinner mistaked add as devDependency, cause tsup bundled it
+
 ## 2023-07-07 v3.4.2
 
 - fix index

@@ -9,6 +9,7 @@ import { dl } from 'dl-vampire'
 import createEsmUtils from 'esm-utils'
 import filenamify from 'filenamify'
 import humanizeDuration from 'humanize-duration'
+import { padStart } from 'lodash-es'
 import logSymbols from 'log-symbols'
 import ms from 'ms'
 import path from 'path'
@@ -209,6 +210,14 @@ if (removed.length) {
 
 // 开始下载
 console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
+
+// fix index
+const len = keeped.length.toString().length
+keeped.forEach((item, index) => {
+  item.rawIndex = index // rawIndex: 0,1 ...
+  item.index = padStart(String(index + 1), len, '0') // index, first as 01
+})
+
 await pmap(
   keeped,
   (song) => {
@@ -231,3 +240,4 @@ await pmap(
 
 const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
 console.log('下载完成, 耗时%s', dur)
+process.exit(0)

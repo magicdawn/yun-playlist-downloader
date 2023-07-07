@@ -80,6 +80,7 @@
     "@vitest/coverage-v8": "^0.32.4",
     "eslint": "^8.44.0",
     "husky": "^8.0.3",
+    "ink-spinner": "^5.0.0",
     "lint-staged": "^13.2.3",
     "prettier": "^3.0.0",
     "should": "^13.2.3",

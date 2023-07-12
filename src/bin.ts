@@ -49,7 +49,7 @@ const parser = yargs(hideBin(process.argv))
       return yargs
         .scriptName('yun')
         .usage('Usage: $0 <url> [options]')
-        .positional('url', { describe: '歌单/专辑的链接', type: 'string' })
+        .positional('url', { describe: '歌单/专辑/电台的链接 or 歌单 ID', type: 'string' })
         .alias({
           h: 'help',
           v: 'version',

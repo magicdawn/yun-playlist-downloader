@@ -46,7 +46,7 @@
     "filenamify": "^6.0.0",
     "fs-extra": "^11.1.1",
     "got": "13",
-    "humanize-duration": "^3.28.0",
+    "humanize-duration": "^3.29.0",
     "ink": "^4.2.0",
     "ink-spinner": "^5.0.0",
     "lodash-es": "^4.17.21",
@@ -58,7 +58,7 @@
     "promise.retry": "^1.1.1",
     "rc": "^1.2.8",
     "react": "^18.2.0",
-    "valtio": "^1.10.6",
+    "valtio": "^1.10.7",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
@@ -71,7 +71,7 @@
     "@types/humanize-duration": "^3.27.1",
     "@types/lodash-es": "^4.17.7",
     "@types/ms": "^0.7.31",
-    "@types/node": "^20.4.0",
+    "@types/node": "^20.4.1",
     "@types/prettier": "2.7.3",
     "@types/rc": "^1.2.1",
     "@types/react": "^18.2.14",
@@ -84,7 +84,7 @@
     "should": "^13.2.3",
     "ts-node": "^10.9.1",
     "tsup": "^7.1.0",
-    "type-fest": "^3.12.0",
+    "type-fest": "^3.13.0",
     "typescript": "^5.1.6",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.33.0"

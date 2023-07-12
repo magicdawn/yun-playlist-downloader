@@ -170,6 +170,11 @@ quality *= 1000
 retryTimeout = ms(`${retryTimeout} minutes`) as number
 readCookie(argv.cookie)
 
+// only id as url provided
+if (url && /^\d+$/.test(url)) {
+  url = `https://music.163.com/#/playlist?id=${url}`
+}
+
 const start = Date.now()
 const adapter = getAdapter(url)
 

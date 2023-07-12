@@ -3,7 +3,7 @@ import { baseDebug } from '$common'
 import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '$define'
 import Api from 'NeteaseCloudMusicApi'
 import delay from 'delay'
-import * as _ from 'lodash-es'
+import { chunk } from 'lodash-es'
 import pmap from 'promise.map'
 
 const debug = baseDebug.extend('api:index')
@@ -92,7 +92,7 @@ export async function songDetail(ids: Id[]) {
   }
 
   // 500 首做一次 request
-  const chunks = _.chunk(ids, BATCH_ID_SIZE)
+  const chunks = chunk(ids, BATCH_ID_SIZE)
   const songDatasArray = await pmap(
     chunks,
     (chunk) => {
@@ -115,7 +115,7 @@ export async function songUrl(ids: Id[], quality?: string | number) {
     return infos
   }
 
-  const chunks = _.chunk(ids, BATCH_ID_SIZE)
+  const chunks = chunk(ids, BATCH_ID_SIZE)
   const infosArr = await pmap(
     chunks,
     (chunk) => singleRequest(chunk.join(',')),

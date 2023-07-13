@@ -1,5 +1,15 @@
 # 更新记录
 
+## 2023-07-14 v3.4.4
+
+- 02b460b feat: support playlist id as provided url
+
+others
+
+- c26f7de doc: add playlist id postional argument usage guide
+- 9fa7a42 chore: remove import \*
+- 38bf3b2 refactor: remove cheerio
+
 ## 2023-07-07 v3.4.3
 
 - fix ink-spinner mistaked add as devDependency, cause tsup bundled it

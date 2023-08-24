@@ -33,7 +33,7 @@ if (process.argv.some((s) => s.match(/(dj)?radio/))) {
 const config = rcFactory('yun', {
   'concurrency': 5,
   'format': DEFAULT_FORMAT,
-  'quality': 320,
+  'quality': 999,
   'retry-timeout': 3, // 3 mins
   'retry-times': 3, // 3 times
   'skip': true,
@@ -73,10 +73,10 @@ const parser = yargs(hideBin(process.argv))
           },
 
           quality: {
-            desc: '音质',
+            desc: '音质, 默认 999k 即最大码率',
             type: 'number',
-            default: 320,
-            choices: [128, 192, 320],
+            default: 999,
+            choices: [128, 192, 320, 999],
           },
 
           retryTimeout: {
@@ -116,8 +116,10 @@ const parser = yargs(hideBin(process.argv))
           },
         })
         .config(config)
+        .example(`$0 'https://music.163.com/#/playlist?id=7392714527'`, '下载歌单')
+        .example('$0 7392714527', '使用 id 下载歌单')
         .example('$0 -c 10 <url>', '10首同时下载')
-        .example('$0 -f ":singer - :songName.:ext" <url>', '下载格式为 "歌手 - 歌名"')
+        .example('$0 -f ":singer - :songName.:ext" <url>', '下载文件名为 "歌手 - 歌名"')
         .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
     }
   )
@@ -159,7 +161,7 @@ concurrency:    ${concurrency}
 format:         ${format}
 retry-timeout:  ${retryTimeout} (分钟)
 retry-times:    ${retryTimes} (次)
-quality:        ${quality}
+quality:        ${quality}k
 skip:           ${skipExists}
 progress:       ${progress}
 cover:          ${cover}

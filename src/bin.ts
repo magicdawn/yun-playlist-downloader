@@ -14,12 +14,23 @@ import ms from 'ms'
 import path from 'path'
 import pmap from 'promise.map'
 import rcFactory from 'rc'
+import { PackageJson } from 'type-fest'
+import updateNotifier from 'update-notifier'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
 
-const { require } = createEsmUtils(import.meta)
-const { version } = require('../package.json')
 const debug = baseDebug.extend('cli')
+
+const { require } = createEsmUtils(import.meta)
+const packageJson = require('../package.json')
+const { version } = packageJson as PackageJson
+
+// update notify
+updateNotifier({ pkg: packageJson }).notify()
+// updateNotifier({
+//   pkg: { name: 'yun-playlist-downloader', version: '1.0.0' },
+//   updateCheckInterval: 0,
+// }).notify()
 
 let DEFAULT_FORMAT = ':name/:singer - :songName.:ext'
 if (process.argv.some((s) => s.match(/(dj)?radio/))) {
@@ -123,7 +134,7 @@ const parser = yargs(hideBin(process.argv))
         .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
     }
   )
-  .version(version)
+  .version(version!)
   .help()
 
 type ExpectedArgv = {

@@ -19,6 +19,10 @@ type Id = string | number
 export const BATCH_ID_SIZE = 200
 export const BATCH_ID_CONCURRENCY = 4
 
+const getApiBaseConfig = (): Api.RequestBaseConfig => {
+  return { cookie: COOKIE_CONTENT }
+}
+
 /**
  * {
 		"body": {
@@ -75,7 +79,7 @@ export function handleRequestLimit<T extends (...args: any[]) => any>(fn: T, lab
  */
 
 export async function playlistDetail(id: string) {
-  const res = await Api.playlist_detail({ id, cookie: COOKIE_CONTENT })
+  const res = await Api.playlist_detail({ ...getApiBaseConfig(), id })
   const playlist = res.body.playlist as Playlist
   return playlist
 }
@@ -86,7 +90,7 @@ export async function playlistDetail(id: string) {
 
 export async function songDetail(ids: Id[]) {
   const singleRequest = async (idsStr: string) => {
-    const res = await Api.song_detail({ ids: idsStr })
+    const res = await Api.song_detail({ ...getApiBaseConfig(), ids: idsStr })
     const songDatas = res.body.songs as SongData[]
     return songDatas
   }
@@ -110,7 +114,7 @@ export async function songDetail(ids: Id[]) {
 
 export async function songUrl(ids: Id[], quality?: string | number) {
   const singleRequest = async (id: string) => {
-    const res = await Api.song_url({ id, br: quality })
+    const res = await Api.song_url({ ...getApiBaseConfig(), id, br: quality })
     const infos = res.body.data as SongPlayUrlInfo[]
     return infos
   }
@@ -129,7 +133,7 @@ export async function songUrl(ids: Id[], quality?: string | number) {
  */
 
 export async function album(id: Id) {
-  const res = await Api.album({ id })
+  const res = await Api.album({ ...getApiBaseConfig(), id })
   const album = res.body.album as Album
   const songs = res.body.songs as SongData[]
   return { album, songs }
@@ -150,6 +154,7 @@ export async function djradioPrograms(id: Id) {
       Api.dj_program,
       `dj_program(${pagenum})`
     )({
+      ...getApiBaseConfig(),
       rid: id,
       limit: pagesize,
       offset: (pagenum - 1) * pagesize,

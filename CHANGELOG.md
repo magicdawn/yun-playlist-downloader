@@ -1,5 +1,11 @@
 # 更新记录
 
+## 2023-08-25 v3.5.0
+
+- ff89a4e feat: add update-notifier
+- 7adeaed feat: change default quality to 999(k), add more example
+- 17ee78a fix: use cookie in all NeteaseCloudMusicApi calls when provided, see [#57](https://github.com/magicdawn/yun-playlist-downloader/issues/57)
+
 ## 2023-07-14 v3.4.4
 
 - 02b460b feat: support playlist id as provided url

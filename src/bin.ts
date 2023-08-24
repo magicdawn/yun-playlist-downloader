@@ -25,7 +25,7 @@ const { require } = createEsmUtils(import.meta)
 const packageJson = require('../package.json')
 const { version } = packageJson as PackageJson
 
-// update notify
+// check update
 updateNotifier({ pkg: packageJson }).notify()
 // updateNotifier({
 //   pkg: { name: 'yun-playlist-downloader', version: '1.0.0' },

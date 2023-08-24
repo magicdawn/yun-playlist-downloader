@@ -76,6 +76,7 @@
     "@types/prettier": "2.7.3",
     "@types/rc": "^1.2.1",
     "@types/react": "^18.2.21",
+    "@types/update-notifier": "^6.0.4",
     "@types/yargs": "17.0.24",
     "@vitest/coverage-v8": "^0.34.2",
     "eslint": "^8.47.0",

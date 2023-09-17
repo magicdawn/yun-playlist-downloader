@@ -1,0 +1,5 @@
+logLevel = "debug" # "debug" | "warn" | "error"
+
+[install]
+# set default registry as a string
+registry = "https://registry.npmmirror.com/"

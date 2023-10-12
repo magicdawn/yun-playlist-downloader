@@ -2,8 +2,7 @@ import { songUrl } from '$api'
 import { Song, SongPlayUrlInfo } from '$define'
 import { getId } from '$util'
 import { assert } from 'console'
-import * as _ from 'lodash-es'
-import { padStart, trimStart } from 'lodash-es'
+import { get, padStart, trimStart } from 'lodash-es'
 import { extname } from 'path'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
@@ -57,15 +56,15 @@ export class BaseAdapter {
       return {
         // 歌手
         singer:
-          (_.get(songData, 'ar.0.name') as string) ||
-          (_.get(songData, 'artists.0.name') as string) ||
+          (get(songData, 'ar.0.name') as string) ||
+          (get(songData, 'artists.0.name') as string) ||
           '',
 
         // 歌曲名
         songName: songData.name,
 
         // 专辑名
-        albumName: (_.get(songData, 'al.name') as string) || '',
+        albumName: (get(songData, 'al.name') as string) || '',
 
         // url for download
         url,

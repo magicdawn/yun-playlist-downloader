@@ -8,7 +8,7 @@ import { extname } from 'path'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
 
-export default class BaseAdapter {
+export class BaseAdapter {
   url: string
   id: string
   constructor(url: string) {

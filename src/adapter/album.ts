@@ -1,8 +1,8 @@
 import { album } from '$api'
 import { Album, Song, SongData } from '$define'
-import BaseAdapter from './base.js'
+import { BaseAdapter } from './base'
 
-export default class AlbumAdapter extends BaseAdapter {
+export class AlbumAdapter extends BaseAdapter {
   #detail: { album: Album; songs: SongData[] }
   private async fetchDetail() {
     if (this.#detail) return

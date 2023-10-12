@@ -1,13 +1,13 @@
 import { Song } from '$define'
-import { downloadSongWithInk } from '$download/progress/ink'
 import { dl } from 'dl-vampire'
 import filenamify from 'filenamify'
 import LogSymbols from 'log-symbols'
 import path from 'path'
-import AlbumAdapter from './adapter/album.js'
-import BaseAdapter from './adapter/base.js'
-import DjradioAdapter, { ProgramSong } from './adapter/djradio.js'
-import PlaylistAdapter from './adapter/playlist.js'
+import { AlbumAdapter } from './adapter/album'
+import { BaseAdapter } from './adapter/base'
+import { DjradioAdapter, ProgramSong } from './adapter/djradio'
+import { PlaylistAdapter } from './adapter/playlist'
+import { downloadSongWithInk } from './download/progress/ink'
 
 /**
  * page type

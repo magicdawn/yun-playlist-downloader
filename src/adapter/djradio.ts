@@ -2,7 +2,7 @@ import { djradioPrograms } from '$api'
 import { baseDebug } from '$common'
 import { DjradioProgram, Song } from '$define'
 import moment from 'moment'
-import BaseAdapter from './base.js'
+import { BaseAdapter } from './base'
 
 const debug = baseDebug.extend('adapter:djradio')
 
@@ -13,7 +13,7 @@ export interface ProgramSong extends Song {
   programOrder: number
 }
 
-export default class DjradioAdapter extends BaseAdapter {
+export class DjradioAdapter extends BaseAdapter {
   #programs: DjradioProgram[]
   async fetchAllPrograms() {
     if (this.#programs) return

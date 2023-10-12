@@ -1,8 +1,8 @@
 import { playlistDetail, songDetail } from '$api'
 import { Playlist } from '$define'
-import BaseAdapter from './base.js'
+import { BaseAdapter } from './base'
 
-export default class PlaylistAdapter extends BaseAdapter {
+export class PlaylistAdapter extends BaseAdapter {
   #playlist: Playlist
   private async fetchPlaylist() {
     if (this.#playlist) return

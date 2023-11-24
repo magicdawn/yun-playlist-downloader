@@ -84,7 +84,7 @@ const parser = yargs(hideBin(process.argv))
           },
 
           quality: {
-            desc: '音质, 默认 999k 即最大码率',
+            desc: '音质, 默认 999k 即最大码率, 可选 128/192/320',
             type: 'number',
             default: 999,
             choices: [128, 192, 320, 999],

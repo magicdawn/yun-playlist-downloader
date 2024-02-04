@@ -38,6 +38,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@types/qrcode-terminal": "^0.12.2",
     "NeteaseCloudMusicApi": "^4.13.6",
     "debug": "^4.3.4",
     "delay": "^6.0.0",
@@ -56,6 +57,7 @@
     "picocolors": "^1.0.0",
     "promise.map": "^0.5.0",
     "promise.retry": "^1.1.1",
+    "qrcode-terminal": "^0.12.0",
     "rc": "^1.2.8",
     "react": "^18.2.0",
     "update-notifier": "^7.0.0",

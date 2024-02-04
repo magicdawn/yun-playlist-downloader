@@ -27,3 +27,10 @@ export const getId = function (url: string) {
   const id = u.searchParams.get('id')
   return id
 }
+
+/**
+ * 线程堵塞
+ */
+export function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}

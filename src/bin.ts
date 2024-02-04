@@ -1,25 +1,14 @@
 #!/usr/bin/env node
 
 import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
-import { baseDebug } from '$common'
-import { SongValid } from '$define'
-import { downloadSong, getAdapter, getFileName } from '$index'
-import { dl } from 'dl-vampire'
 import createEsmUtils from 'esm-utils'
-import filenamify from 'filenamify'
-import humanizeDuration from 'humanize-duration'
-import { padStart } from 'lodash-es'
-import logSymbols from 'log-symbols'
-import ms from 'ms'
-import path from 'path'
-import pmap from 'promise.map'
 import rcFactory from 'rc'
 import { PackageJson } from 'type-fest'
 import updateNotifier from 'update-notifier'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
-
-const debug = baseDebug.extend('cli')
+import { ExpectedArgv, main } from '$cmd/yun'
+import { loginCommand } from '$cmd/login'
 
 const { require } = createEsmUtils(import.meta)
 const packageJson = require('../package.json')
@@ -131,129 +120,41 @@ const parser = yargs(hideBin(process.argv))
         .example('$0 7392714527', '使用 id 下载歌单')
         .example('$0 -c 10 <url>', '10首同时下载')
         .example('$0 -f ":singer - :songName.:ext" <url>', '下载文件名为 "歌手 - 歌名"')
+        .example('$0 login --help', '查看登录操作相关帮助')
         .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
+    }
+  )
+  /**
+   * yun login
+   */
+  .command(
+    'login',
+    '登录账号缓存 cookie 文件',
+    (yargs) => {
+      // 放弃在这折腾，所有子命令的执行在 $login.ts
+      // 在这里写存在线程竞争的问题
+      return (
+        yargs
+          // .scriptName('yun')
+          .command('check', '检查是否已经缓存了 cookie 文件', (yargs) => {})
+          .command('delete', '删除已有的 cookie 文件', (yargs) => {})
+          .help()
+      )
+    },
+    (args) => {
+      /* 无子命令，yun login 的情况下。 */
     }
   )
   .version(version!)
   .help()
 
-type ExpectedArgv = {
-  url: string
-  concurrency: number
-  format: string
-  quality: number
-  retryTimeout: number
-  retryTimes: number
-  skip: boolean
-  progress: boolean
-  cover: boolean
-  cookie: string
-}
-
 const argv = (await parser.argv) as unknown as ExpectedArgv
 // if runing help, process will exit and not continued here
 
-let {
-  url,
-  concurrency,
-  format,
-  quality,
-  retryTimeout,
-  retryTimes,
-  skip: skipExists,
-  progress,
-  cover,
-} = argv
+const cmd: string[] = argv['_']
 
-// 打印
-console.log(`
-当前参数
-concurrency:    ${concurrency}
-format:         ${format}
-retry-timeout:  ${retryTimeout} (分钟)
-retry-times:    ${retryTimes} (次)
-quality:        ${quality}k
-skip:           ${skipExists}
-progress:       ${progress}
-cover:          ${cover}
-`)
-
-// process argv
-quality *= 1000
-retryTimeout = ms(`${retryTimeout} minutes`) as number
-readCookie(argv.cookie)
-
-// only id as url provided
-if (url && /^\d+$/.test(url)) {
-  url = `https://music.163.com/#/playlist?id=${url}`
+if (cmd[0] == 'login') {
+  loginCommand(cmd)
+} else {
+  main(argv)
 }
-
-const start = Date.now()
-const adapter = getAdapter(url)
-
-// 基本信息
-const name = await adapter.getTitle()
-console.log(`正在下载『${name}』,请稍候...`)
-
-// 封面
-if (cover) {
-  const coverUrl = await adapter.getCover()
-  if (!coverUrl) {
-    console.log(`${logSymbols.warning} [cover]: 没有找到封面`)
-  } else {
-    const coverExt = path.extname(coverUrl) || '.jpg'
-    const coverFile = `${filenamify(name)}/cover${coverExt}`
-    await dl({ url: coverUrl, file: coverFile })
-    console.log(`${logSymbols.success} [cover]: 封面已下载 ${coverFile}`)
-  }
-}
-
-const songs = await adapter.getSongs(quality)
-debug('songs : %j', songs)
-
-const removed = songs.filter((x) => !x.url)
-const keeped = songs.filter((x) => x.url) as SongValid[]
-
-if (removed.length) {
-  console.log(`${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`)
-  for (let i of removed) {
-    console.log(`  ${i.singer} - ${i.songName}`)
-  }
-}
-
-// FIXME
-// process.exit()
-
-// 开始下载
-console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
-
-// fix index
-const len = keeped.length.toString().length
-keeped.forEach((item, index) => {
-  item.rawIndex = index // rawIndex: 0,1 ...
-  item.index = padStart(String(index + 1), len, '0') // index, first as 01
-})
-
-await pmap(
-  keeped,
-  (song) => {
-    // 文件名
-    const file = getFileName({ format: format, song: song, url: url, name: name })
-    // 下载
-    return downloadSong({
-      url: song.url,
-      file,
-      song,
-      totalLength: keeped.length,
-      retryTimeout,
-      retryTimes,
-      skipExists,
-      progress,
-    })
-  },
-  concurrency
-)
-
-const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
-console.log('下载完成, 耗时%s', dur)
-process.exit(0)

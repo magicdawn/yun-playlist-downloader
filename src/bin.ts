@@ -131,7 +131,7 @@ const parser = yargs(hideBin(process.argv))
     'login',
     '登录账号缓存 cookie 文件',
     (yargs) => {
-      // 放弃在这折腾，所有子命令的执行在 $login.ts
+      // 放弃在这折腾，所有子命令的执行在 $cmd/login.ts
       // 在这里写存在线程竞争的问题
       return (
         yargs

@@ -1,10 +1,12 @@
 import { COOKIE_CONTENT } from '$auth/cookie'
 import { baseDebug } from '$common'
 import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '$define'
-import Api from 'NeteaseCloudMusicApi'
+import Api, { login_qr_check } from 'NeteaseCloudMusicApi'
+import qrcode from 'qrcode-terminal' // 不能 import { xxx } from 'qrcode-terminal'，运行会出错，一个bug
 import delay from 'delay'
 import { chunk } from 'lodash-es'
 import pmap from 'promise.map'
+import { sleep } from '$util'
 
 const debug = baseDebug.extend('api:index')
 
@@ -169,4 +171,48 @@ export async function djradioPrograms(id: Id) {
   } while (hasMore)
 
   return allPrograms
+}
+
+/**
+ * 登录
+ */
+
+export async function QRCodeLogin() {
+  // 1. 生成 key
+  let r = await Api.login_qr_key({})
+  if (r.body.code != 200) {
+    console.log('生成二维码失败')
+    process.exit(1)
+  }
+
+  const key = (r.body.data as any).unikey
+
+  // 2. 生成二维码
+  r = await Api.login_qr_create({ key: key })
+  if (r.body.code != 200) {
+    console.log('生成二维码失败')
+    process.exit(1)
+  }
+
+  const qrurl = (r.body.data as any).qrurl
+  qrcode.generate(qrurl, { small: true })
+  console.log('请扫描二维码登录')
+
+  // 3. 等待扫码
+  while (true) {
+    r = await Api.login_qr_check({ key: key })
+
+    const code = r.body.code // 800 为二维码过期,801 为等待扫码,802 为待确认,803 为授权登录成功(803 状态码下会返回 cookies),如扫码后返回502,则需加上noCookie参数,如&noCookie=true
+
+    if (code == 803) {
+      return r.body.cookie
+    } else if (code == 802 || code == 801) {
+      await sleep(5000)
+      // continue
+    } else if (code == 800) {
+      console.log('二维码超时')
+      // break
+      process.exit(1)
+    }
+  }
 }

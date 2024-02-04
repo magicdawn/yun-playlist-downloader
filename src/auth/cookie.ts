@@ -1,7 +1,11 @@
 import { existsSync, readFileSync } from 'fs'
-import { resolve } from 'path'
+import { resolve, join, dirname } from 'path'
+import { fileURLToPath } from 'url'
 
-export const DEFAULT_COOKIE_FILE = 'yun.cookie.txt'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+export const DEFAULT_COOKIE_FILE = join(__dirname, 'yun.cookie.txt')
 
 export let COOKIE_CONTENT: string | undefined = undefined
 

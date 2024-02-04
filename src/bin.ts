@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
+import { DEFAULT_COOKIE_FILE } from '$auth/cookie'
 import createEsmUtils from 'esm-utils'
 import rcFactory from 'rc'
 import { PackageJson } from 'type-fest'

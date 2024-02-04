@@ -1,7 +1,7 @@
 import { COOKIE_CONTENT } from '$auth/cookie'
 import { baseDebug } from '$common'
 import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '$define'
-import Api, { login_qr_check } from 'NeteaseCloudMusicApi'
+import Api from 'NeteaseCloudMusicApi'
 import qrcode from 'qrcode-terminal' // 不能 import { xxx } from 'qrcode-terminal'，运行会出错，一个bug
 import delay from 'delay'
 import { chunk } from 'lodash-es'

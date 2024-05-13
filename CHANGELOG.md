@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2024-05-13 v3.5.1
+
+- update deps
+
 ## 2023-08-25 v3.5.0
 
 - ff89a4e feat: add update-notifier

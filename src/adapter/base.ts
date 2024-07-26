@@ -2,7 +2,7 @@ import { songUrl } from '$api'
 import { Song, SongPlayUrlInfo } from '$define'
 import { getId } from '$util'
 import { assert } from 'console'
-import { get, padStart, trimStart } from 'lodash-es'
+import { get, trimStart } from 'lodash-es'
 import { extname } from 'path'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
@@ -45,7 +45,7 @@ export class BaseAdapter {
    */
 
   getSongsFromData<T extends { name: string; playUrlInfo?: SongPlayUrlInfo }>(
-    songDatas: T[]
+    songDatas: T[],
   ): Song[] {
     // e.g 100 songDatas -> len = 3
     const len = String(songDatas.length).length
@@ -76,7 +76,7 @@ export class BaseAdapter {
         ext: url && trimStart(extname(url), '.'),
 
         // index, first as 01
-        index: padStart(String(index + 1), len, '0'),
+        index: String(index + 1).padStart(len, '0'),
 
         // rawIndex: 0,1 ...
         rawIndex: index,

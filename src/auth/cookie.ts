@@ -1,4 +1,5 @@
 import { existsSync, readFileSync } from 'fs'
+import logSymbols from 'log-symbols'
 import { resolve } from 'path'
 
 export const DEFAULT_COOKIE_FILE = 'yun.cookie.txt'
@@ -10,10 +11,10 @@ export function readCookie(cookieFile: string) {
 
   const file = resolve(cookieFile)
   if (!existsSync(file)) {
-    console.log(`[cookie] cookie 文件不存在: %s`, file)
+    console.log(`${logSymbols.warning} [cookie] cookie 文件不存在: %s`, file)
     return
   } else {
-    console.log(`[cookie] 使用 cookie 文件: %s`, file)
+    console.log(`${logSymbols.info} [cookie] 使用 cookie 文件: %s`, file)
   }
 
   let str = readFileSync(file, 'utf-8')

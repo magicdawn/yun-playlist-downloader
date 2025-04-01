@@ -1,0 +1,32 @@
+name: sync-tag-to-release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync-tag-to-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'pnpm'
+
+      # 1. publish local
+      # 2. push tag to github
+      # 3. sync tag -> release, add changelog
+      - run: pnpx changeloggithub@0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

@@ -3,7 +3,7 @@ import { baseDebug } from '$common'
 import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '$define'
 import Api from 'NeteaseCloudMusicApi'
 import delay from 'delay'
-import { chunk } from 'lodash-es'
+import { chunk } from 'es-toolkit'
 import pmap from 'promise.map'
 
 const debug = baseDebug.extend('api:index')
@@ -102,7 +102,7 @@ export async function songDetail(ids: Id[]) {
     (chunk) => {
       return singleRequest(chunk.join(','))
     },
-    BATCH_ID_CONCURRENCY
+    BATCH_ID_CONCURRENCY,
   )
 
   return songDatasArray.flat()
@@ -123,7 +123,7 @@ export async function songUrl(ids: Id[], quality?: string | number) {
   const infosArr = await pmap(
     chunks,
     (chunk) => singleRequest(chunk.join(',')),
-    BATCH_ID_CONCURRENCY
+    BATCH_ID_CONCURRENCY,
   )
   return infosArr.flat()
 }
@@ -152,7 +152,7 @@ export async function djradioPrograms(id: Id) {
   do {
     const res = await handleRequestLimit(
       Api.dj_program,
-      `dj_program(${pagenum})`
+      `dj_program(${pagenum})`,
     )({
       ...getApiBaseConfig(),
       rid: id,

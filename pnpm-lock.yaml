@@ -26,6 +26,9 @@ importers:
       dl-vampire:
         specifier: ^2.1.3
         version: 2.1.3
+      es-toolkit:
+        specifier: ^1.34.1
+        version: 1.34.1
       filenamify:
         specifier: ^6.0.0
         version: 6.0.0
@@ -40,13 +43,10 @@ importers:
         version: 3.32.1
       ink:
         specifier: ^5.2.0
-        version: 5.2.0(@types/react@19.0.12)(react@19.1.0)
+        version: 5.2.0(@types/react@18.3.20)(react@18.3.1)
       ink-spinner:
         specifier: ^5.0.0
-        version: 5.0.0(ink@5.2.0(@types/react@19.0.12)(react@19.1.0))(react@19.1.0)
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
+        version: 5.0.0(ink@5.2.0(@types/react@18.3.20)(react@18.3.1))(react@18.3.1)
       log-symbols:
         specifier: ^7.0.0
         version: 7.0.0
@@ -69,14 +69,14 @@ importers:
         specifier: ^1.2.8
         version: 1.2.8
       react:
-        specifier: ^19.1.0
-        version: 19.1.0
+        specifier: ^18.3.1
+        version: 18.3.1
       update-notifier:
         specifier: ^7.3.1
         version: 7.3.1
       valtio:
         specifier: ^2.1.4
-        version: 2.1.4(@types/react@19.0.12)(react@19.1.0)
+        version: 2.1.4(@types/react@18.3.20)(react@18.3.1)
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -102,9 +102,6 @@ importers:
       '@types/humanize-duration':
         specifier: ^3.27.4
         version: 3.27.4
-      '@types/lodash-es':
-        specifier: ^4.17.12
-        version: 4.17.12
       '@types/ms':
         specifier: ^2.1.0
         version: 2.1.0
@@ -115,8 +112,8 @@ importers:
         specifier: ^1.2.4
         version: 1.2.4
       '@types/react':
-        specifier: ^19.0.12
-        version: 19.0.12
+        specifier: ^18.3.20
+        version: 18.3.20
       '@types/update-notifier':
         specifier: ^6.0.8
         version: 6.0.8
@@ -818,12 +815,6 @@ packages:
   '@types/jsonfile@6.1.1':
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
 
-  '@types/lodash-es@4.17.12':
-    resolution: {integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==}
-
-  '@types/lodash@4.14.195':
-    resolution: {integrity: sha512-Hwx9EUgdwf2GLarOjQp5ZH8ZmblzcbTBC2wtQWNKARBSxM9ezRIAUpeDTgoQRAFB0+8CNWXVA9+MaSOzOF3nPg==}
-
   '@types/minimist@1.2.2':
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
 
@@ -833,11 +824,14 @@ packages:
   '@types/node@22.13.15':
     resolution: {integrity: sha512-imAbQEEbVni6i6h6Bd5xkCRwLqFc8hihCsi2GbtDoAtUcAFQ6Zs4pFXTZUUbroTkXdImczWM9AI8eZUuybXE3w==}
 
+  '@types/prop-types@15.7.14':
+    resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
+
   '@types/rc@1.2.4':
     resolution: {integrity: sha512-xD6+epQoMH79A1uwmJIq25D+XZ57jUzCQ1DGSvs3tGKdx7QDYOOaMh6m5KBkEIW4+Cy5++bZ7NLDfdpNiYVKYA==}
 
-  '@types/react@19.0.12':
-    resolution: {integrity: sha512-V6Ar115dBDrjbtXSrS+/Oruobc+qVbbUxDFC1RSbRqLt5SYvxxyIDrSC85RWml54g+jfNeEMZhEj7wW07ONQhA==}
+  '@types/react@18.3.20':
+    resolution: {integrity: sha512-IPaCZN7PShZK/3t6Q87pfTkRm6oLTd4vztyoj+cbHUF1g3FfVb2tFIL79uCRKEfv16AhqDMBywP2VW3KIZUvcg==}
 
   '@types/update-notifier@6.0.8':
     resolution: {integrity: sha512-IlDFnfSVfYQD+cKIg63DEXn3RFmd7W1iYtKQsJodcHK9R1yr8aKbKaPKfBxzPpcHCq2DU8zUq4PIPmy19Thjfg==}
@@ -2023,9 +2017,6 @@ packages:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
 
-  lodash-es@4.17.21:
-    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
-
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
@@ -2461,8 +2452,8 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
-  react@19.1.0:
-    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
+  react@18.3.1:
+    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
 
   readable-stream@3.6.0:
@@ -3633,12 +3624,6 @@ snapshots:
     dependencies:
       '@types/node': 22.13.15
 
-  '@types/lodash-es@4.17.12':
-    dependencies:
-      '@types/lodash': 4.14.195
-
-  '@types/lodash@4.14.195': {}
-
   '@types/minimist@1.2.2': {}
 
   '@types/ms@2.1.0': {}
@@ -3647,12 +3632,15 @@ snapshots:
     dependencies:
       undici-types: 6.20.0
 
+  '@types/prop-types@15.7.14': {}
+
   '@types/rc@1.2.4':
     dependencies:
       '@types/minimist': 1.2.2
 
-  '@types/react@19.0.12':
+  '@types/react@18.3.20':
     dependencies:
+      '@types/prop-types': 15.7.14
       csstype: 3.1.2
 
   '@types/update-notifier@6.0.8':
@@ -4793,13 +4781,13 @@ snapshots:
 
   ini@4.1.1: {}
 
-  ink-spinner@5.0.0(ink@5.2.0(@types/react@19.0.12)(react@19.1.0))(react@19.1.0):
+  ink-spinner@5.0.0(ink@5.2.0(@types/react@18.3.20)(react@18.3.1))(react@18.3.1):
     dependencies:
       cli-spinners: 2.9.0
-      ink: 5.2.0(@types/react@19.0.12)(react@19.1.0)
-      react: 19.1.0
+      ink: 5.2.0(@types/react@18.3.20)(react@18.3.1)
+      react: 18.3.1
 
-  ink@5.2.0(@types/react@19.0.12)(react@19.1.0):
+  ink@5.2.0(@types/react@18.3.20)(react@18.3.1):
     dependencies:
       '@alcalzone/ansi-tokenize': 0.1.3
       ansi-escapes: 7.0.0
@@ -4814,8 +4802,8 @@ snapshots:
       indent-string: 5.0.0
       is-in-ci: 1.0.0
       patch-console: 2.0.0
-      react: 19.1.0
-      react-reconciler: 0.29.0(react@19.1.0)
+      react: 18.3.1
+      react-reconciler: 0.29.0(react@18.3.1)
       scheduler: 0.23.0
       signal-exit: 3.0.7
       slice-ansi: 7.1.0
@@ -4827,7 +4815,7 @@ snapshots:
       ws: 8.18.1
       yoga-layout: 3.2.1
     optionalDependencies:
-      '@types/react': 19.0.12
+      '@types/react': 18.3.20
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -5072,8 +5060,6 @@ snapshots:
   locate-path@6.0.0:
     dependencies:
       p-locate: 5.0.0
-
-  lodash-es@4.17.21: {}
 
   lodash.merge@4.6.2: {}
 
@@ -5477,13 +5463,15 @@ snapshots:
   react-is@16.13.1:
     optional: true
 
-  react-reconciler@0.29.0(react@19.1.0):
+  react-reconciler@0.29.0(react@18.3.1):
     dependencies:
       loose-envify: 1.4.0
-      react: 19.1.0
+      react: 18.3.1
       scheduler: 0.23.0
 
-  react@19.1.0: {}
+  react@18.3.1:
+    dependencies:
+      loose-envify: 1.4.0
 
   readable-stream@3.6.0:
     dependencies:
@@ -5971,12 +5959,12 @@ snapshots:
 
   utils-merge@1.0.1: {}
 
-  valtio@2.1.4(@types/react@19.0.12)(react@19.1.0):
+  valtio@2.1.4(@types/react@18.3.20)(react@18.3.1):
     dependencies:
       proxy-compare: 3.0.1
     optionalDependencies:
-      '@types/react': 19.0.12
-      react: 19.1.0
+      '@types/react': 18.3.20
+      react: 18.3.1
 
   vary@1.1.2: {}
 

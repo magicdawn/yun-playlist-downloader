@@ -1,8 +1,8 @@
 import { songUrl } from '$api'
 import { Song, SongPlayUrlInfo } from '$define'
 import { getId } from '$util'
-import { assert } from 'console'
-import { get, trimStart } from 'lodash-es'
+import { invariant } from 'es-toolkit'
+import { get, trimStart } from 'es-toolkit/compat'
 import { extname } from 'path'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
@@ -13,7 +13,7 @@ export class BaseAdapter {
   constructor(url: string) {
     this.url = url
     const id = getId(url)
-    assert(id, 'id is empty')
+    invariant(id, 'id cannot be empty')
     this.id = id!
   }
 

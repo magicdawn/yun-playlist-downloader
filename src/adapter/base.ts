@@ -2,7 +2,7 @@ import { songUrl } from '$api'
 import { Song, SongPlayUrlInfo } from '$define'
 import { getId } from '$util'
 import { invariant } from 'es-toolkit'
-import { get, trimStart } from 'es-toolkit/compat'
+import { get } from 'es-toolkit/compat'
 import { extname } from 'path'
 
 const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
@@ -53,6 +53,13 @@ export class BaseAdapter {
     return songDatas.map(function (songData, index) {
       const url = songData.playUrlInfo?.url
 
+      let ext: string | undefined
+      if (url) {
+        const pathname = new URL(url).pathname
+        ext = extname(pathname)
+        if (ext.startsWith('.')) ext = ext.slice(1)
+      }
+
       return {
         // 歌手
         singer:
@@ -73,7 +80,7 @@ export class BaseAdapter {
         isFreeTrial: songData.playUrlInfo ? Boolean(songData.playUrlInfo.freeTrialInfo) : undefined,
 
         // extension
-        ext: url && trimStart(extname(url), '.'),
+        ext,
 
         // index, first as 01
         index: String(index + 1).padStart(len, '0'),

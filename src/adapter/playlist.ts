@@ -3,25 +3,25 @@ import { Playlist } from '$define'
 import { BaseAdapter } from './base'
 
 export class PlaylistAdapter extends BaseAdapter {
-  #playlist: Playlist
+  private playlist: Playlist
   private async fetchPlaylist() {
-    if (this.#playlist) return
-    this.#playlist = await playlistDetail(this.id)
+    if (this.playlist) return
+    this.playlist = await playlistDetail(this.id)
   }
 
   async getTitle() {
     await this.fetchPlaylist()
-    return this.#playlist.name
+    return this.playlist.name
   }
 
   async getCover() {
     await this.fetchPlaylist()
-    return this.#playlist.coverImgUrl
+    return this.playlist.coverImgUrl
   }
 
   async getSongDatas() {
     await this.fetchPlaylist()
-    const trackIds = this.#playlist.trackIds.map((x) => x.id)
+    const trackIds = this.playlist.trackIds.map((x) => x.id)
     const songDatas = await songDetail(trackIds)
     return songDatas
   }

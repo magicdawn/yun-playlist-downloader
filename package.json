@@ -72,7 +72,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/humanize-duration": "^3.27.4",
     "@types/ms": "^2.1.0",
-    "@types/node": "^22.13.15",
+    "@types/node": "^22.14.0",
     "@types/rc": "^1.2.4",
     "@types/react": "^18.3.20",
     "@types/update-notifier": "^6.0.8",
@@ -84,7 +84,7 @@
     "prettier": "^3.5.3",
     "should": "^13.2.3",
     "tsup": "^8.4.0",
-    "type-fest": "^4.38.0",
+    "type-fest": "^4.39.1",
     "typescript": "^5.8.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.1"
@@ -98,5 +98,5 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
-  "packageManager": "pnpm@10.7.0+sha512.6b865ad4b62a1d9842b61d674a393903b871d9244954f652b8842c2b553c72176b278f64c463e52d40fff8aba385c235c8c9ecf5cc7de4fd78b8bb6d49633ab6"
+  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
 }

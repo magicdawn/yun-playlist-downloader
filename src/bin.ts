@@ -215,7 +215,7 @@ async function defaultCommandAction(options: ExpectedArgv) {
   const adapter = getAdapter(url)
 
   // 基本信息
-  const name = await adapter.getTitle()
+  const name = (await adapter.getTitle()) || ''
   console.log(`${logSymbols.info} 正在下载『${name}』,请稍候...`)
 
   // 封面

@@ -5,9 +5,7 @@ import { invariant } from 'es-toolkit'
 import { get } from 'es-toolkit/compat'
 import { extname } from 'path'
 
-const NOT_IMPLEMENTED = 'not NOT_IMPLEMENTED'
-
-export class BaseAdapter {
+export abstract class BaseAdapter {
   url: string
   id: string
   constructor(url: string) {
@@ -20,30 +18,21 @@ export class BaseAdapter {
   /**
    * get title for a page
    */
-
-  async getTitle(): Promise<string> {
-    throw new Error(NOT_IMPLEMENTED)
-  }
+  abstract getTitle(): Promise<string | undefined>
 
   /**
    * get cover
    */
-
-  async getCover(): Promise<string> {
-    return ''
-  }
+  abstract getCover(): Promise<string | undefined>
 
   /**
    * get songs
    */
-  getSongs(quality: number): Promise<Song[]> {
-    throw new Error(NOT_IMPLEMENTED)
-  }
+  abstract getSongs(quality: number): Promise<Song[]>
 
   /**
    * get songs detail
    */
-
   getSongsFromData<T extends { name: string; playUrlInfo?: SongPlayUrlInfo }>(
     songDatas: T[],
   ): Song[] {

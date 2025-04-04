@@ -1,33 +1,32 @@
 {
-  "include": ["src/**/*"],
+  "include": ["./src"],
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "lib",
     "baseUrl": "./",
     "paths": {
-      "$*": ["src/*.js", "src/*/index.js"]
+      "$*": ["src/*", "src/*/"]
     },
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "target": "ES2021",
-    "module": "ES2022",
+
+    // module
+    "target": "ES2024",
+    "module": "ESNext",
     "moduleResolution": "Bundler",
-    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    // typecheck
+    "strict": true,
+    "noImplicitOverride": true,
     "skipLibCheck": true,
-    "jsx": "react-jsx",
     "types": ["node", "vitest/globals"],
+
+    "jsx": "react-jsx",
     "plugins": [
       // Transform paths in output .js files
       // not working for esm
       // { "transform": "typescript-transform-paths" }
     ]
-  },
-  "ts-node": {
-    "swc": true,
-    "esm": true
-    // only cjs supported
-    // "require": ["typescript-transform-paths/register"]
   }
 }

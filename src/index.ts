@@ -14,15 +14,15 @@ import { downloadSongWithInk } from './download/progress/ink'
  */
 
 const allowedPageTypes = ['playlist', 'album', 'djradio'] as const
-type PageType = typeof allowedPageTypes extends ReadonlyArray<infer T> ? T : never
+type PageType = (typeof allowedPageTypes)[number]
 
-interface TypeItem {
+interface AdapterItem {
   type: PageType
   typeText: string
-  adapter: typeof BaseAdapter
+  adapter: typeof PlaylistAdapter | typeof AlbumAdapter | typeof DjradioAdapter
 }
 
-export const typeItems: TypeItem[] = [
+export const adapterList = [
   {
     type: 'playlist',
     typeText: '列表',
@@ -38,7 +38,7 @@ export const typeItems: TypeItem[] = [
     typeText: '电台',
     adapter: DjradioAdapter,
   },
-]
+] as const
 
 /**
  * 下载一首歌曲
@@ -81,28 +81,27 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
         },
       },
     }))
-  } catch (e) {
+  } catch (e: any) {
     console.log(`${LogSymbols.error} ${song.index}/${totalLength} 下载失败 ${file}`)
     console.error(e.stack || e)
     return
   }
 
   console.log(
-    `${LogSymbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`
+    `${LogSymbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`,
   )
 }
 
 /**
  * check page type
  */
-
-export function getType(url: string): TypeItem {
-  const item = typeItems.find((item) => url.includes(item.type))
+export function getType(url: string): AdapterItem {
+  const item = adapterList.find((item) => url.includes(item.type))
   if (item) return item
 
   // #/radio & #/djradio 是一样的
   if (/#\/radio/.exec(url)) {
-    return typeItems.find((item) => item.type === 'djradio')!
+    return adapterList.find((item) => item.type === 'djradio')!
   }
 
   const msg = 'unsupported type'
@@ -132,13 +131,16 @@ export function getFileName({
   url: string
   name: string
 }) {
-  const typesItem = getType(url)
+  const adapterItem = getType(url)
 
   // 从 type 中取值, 先替换 `长的`
-  ;['typeText', 'type'].forEach((t) => {
-    const val = filenamify(String(typesItem[t]))
-    format = format.replace(new RegExp(':' + t, 'ig'), val)
-  })
+  {
+    const keys: (keyof AdapterItem)[] = ['typeText', 'type']
+    keys.forEach((t) => {
+      const val = filenamify(String(adapterItem[t]))
+      format = format.replace(new RegExp(':' + t, 'ig'), val)
+    })
+  }
 
   // 从 `song` 中取值
   type SongKey = keyof Song
@@ -152,7 +154,7 @@ export function getFileName({
   format = format.replace(new RegExp(':name', 'ig'), filenamify(name))
 
   // djradio only
-  if (typesItem.type === 'djradio') {
+  if (adapterItem.type === 'djradio') {
     const { programDate, programOrder } = song as ProgramSong
     if (programDate) {
       format = format.replace(new RegExp(':programDate'), filenamify(programDate))

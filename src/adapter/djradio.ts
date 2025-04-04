@@ -1,10 +1,7 @@
 import { djradioPrograms } from '$api'
-import { baseDebug } from '$common'
 import { DjradioProgram, Song } from '$define'
 import moment from 'moment'
 import { BaseAdapter } from './base'
-
-const debug = baseDebug.extend('adapter:djradio')
 
 export interface ProgramSong extends Song {
   // 日期
@@ -14,30 +11,29 @@ export interface ProgramSong extends Song {
 }
 
 export class DjradioAdapter extends BaseAdapter {
-  #programs: DjradioProgram[]
+  private programs: DjradioProgram[] | undefined
   async fetchAllPrograms() {
-    if (this.#programs) return
-    const allPrograms = await djradioPrograms(this.id)
-    this.#programs = allPrograms
+    if (this.programs) return
+    this.programs = (await djradioPrograms(this.id)) || []
   }
 
   get radio() {
-    return this.#programs?.[0]?.radio
+    return this.programs?.[0]?.radio
   }
 
-  async getTitle() {
+  override async getTitle() {
     await this.fetchAllPrograms()
     return this.radio?.name
   }
 
-  async getCover() {
+  override async getCover() {
     await this.fetchAllPrograms()
     return this.radio?.picUrl
   }
 
-  async getSongs(quality: number): Promise<ProgramSong[]> {
+  override async getSongs(quality: number): Promise<ProgramSong[]> {
     await this.fetchAllPrograms()
-    const allPrograms = this.#programs
+    const allPrograms = this.programs!
     const mainSongs = allPrograms.map((x) => x.mainSong)
     const { all } = await this.filterSongs(mainSongs, quality)
     const songs = this.getSongsFromData(all)

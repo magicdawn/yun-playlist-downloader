@@ -3,25 +3,25 @@ import { Album, Song, SongData } from '$define'
 import { BaseAdapter } from './base'
 
 export class AlbumAdapter extends BaseAdapter {
-  #detail: { album: Album; songs: SongData[] }
+  private detail: { album: Album; songs: SongData[] } | undefined
   private async fetchDetail() {
-    if (this.#detail) return
-    this.#detail = await album(this.id)
+    if (this.detail) return
+    this.detail = await album(this.id)
   }
 
-  async getTitle() {
+  override async getTitle() {
     await this.fetchDetail()
-    return this.#detail.album.name
+    return this.detail!.album.name
   }
 
-  async getCover() {
+  override async getCover() {
     await this.fetchDetail()
-    return this.#detail.album.picUrl
+    return this.detail!.album.picUrl
   }
 
-  async getSongs(quality: number): Promise<Song[]> {
+  override async getSongs(quality: number): Promise<Song[]> {
     await this.fetchDetail()
-    const { all: songDatas } = await this.filterSongs(this.#detail.songs, quality)
+    const { all: songDatas } = await this.filterSongs(this.detail!.songs, quality)
     return this.getSongsFromData(songDatas)
   }
 }

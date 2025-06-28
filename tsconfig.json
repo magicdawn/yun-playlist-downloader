@@ -6,9 +6,9 @@
     },
 
     // module
-    "target": "ES2024",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "target": "es2022", // vitest -> vite:esbuild -> warning: Unrecognized target environment "es2023"
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
 

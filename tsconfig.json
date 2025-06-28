@@ -1,8 +1,5 @@
 {
-  "include": ["./src"],
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "lib",
     "baseUrl": "./",
     "paths": {
       "$*": ["src/*", "src/*/"]
@@ -20,9 +17,9 @@
     "noImplicitOverride": true,
     "skipLibCheck": true,
     "types": ["node", "vitest/globals"],
-
     "jsx": "react-jsx",
     "resolveJsonModule": true,
+    "noEmit": true,
     "plugins": [
       // Transform paths in output .js files
       // not working for esm

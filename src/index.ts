@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { dl } from 'dl-vampire'
 import filenamify from 'filenamify'
-import LogSymbols from 'log-symbols'
+import logSymbols from 'log-symbols'
 import type { Song } from '$define'
 import { AlbumAdapter } from './adapter/album'
 import { DjradioAdapter, type ProgramSong } from './adapter/djradio'
@@ -51,6 +51,7 @@ export interface DownloadSongOptions {
   retryTimeout: number
   retryTimes: number
   skipExists: boolean
+  skipTrial: boolean
 }
 
 export function downloadSong(options: DownloadSongOptions & { progress?: boolean }) {
@@ -63,10 +64,14 @@ export function downloadSong(options: DownloadSongOptions & { progress?: boolean
 }
 
 export async function downloadSongPlain(options: DownloadSongOptions) {
-  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
+  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists, skipTrial } = options
+
+  if (song.isFreeTrial && skipTrial) {
+    console.log(`${logSymbols.warning} ${song.index}/${totalLength} 跳过试听 ${file}`)
+    return
+  }
 
   let skip = false
-
   try {
     ;({ skip } = await dl({
       url,
@@ -76,17 +81,17 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
         timeout: retryTimeout,
         times: retryTimes,
         onerror(e, i) {
-          console.log(`${LogSymbols.warning} ${song.index}/${totalLength}  ${i + 1}次失败 ${file}`)
+          console.log(`${logSymbols.warning} ${song.index}/${totalLength}  ${i + 1}次失败 ${file}`)
         },
       },
     }))
   } catch (e: any) {
-    console.log(`${LogSymbols.error} ${song.index}/${totalLength} 下载失败 ${file}`)
+    console.log(`${logSymbols.error} ${song.index}/${totalLength} 下载失败 ${file}`)
     console.error(e.stack || e)
     return
   }
 
-  console.log(`${LogSymbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`)
+  console.log(`${logSymbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`)
 }
 
 /**

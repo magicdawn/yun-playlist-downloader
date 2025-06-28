@@ -3,32 +3,36 @@ import { once } from 'es-toolkit'
 import { render, Static, Text, type Instance } from 'ink'
 import Spinner from 'ink-spinner'
 import logSymbols from 'log-symbols'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { proxy, useSnapshot } from 'valtio'
 import type { DownloadSongOptions } from '$index'
 
-type CompletedItem = DownloadSongOptions & { index: number; success: boolean; skip?: boolean }
+type CompletedItem = DownloadSongOptions & {
+  index: number
+  success: boolean
+  skip?: boolean
+}
 type RunningItem = DownloadSongOptions & {
   index: number
   progress: number
   retry?: number
   started: number
 }
-const inkState = proxy<{ completed: CompletedItem[]; running: RunningItem[] }>({
+
+const store = proxy<{ completed: CompletedItem[]; running: RunningItem[] }>({
   completed: [],
   running: [],
 })
 
 export async function downloadSongWithInk(options: DownloadSongOptions) {
+  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists, skipTrial } = options
+
   renderApp()
-
-  const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists } = options
   const index = song.rawIndex
-
-  inkState.running.push({ ...options, index, progress: 0, started: Date.now() })
+  store.running.push({ ...options, index, progress: 0, started: Date.now() })
 
   function updateRunningItem(payload: Partial<RunningItem>) {
-    const runningItem = inkState.running.find((x) => x.index === index)
+    const runningItem = store.running.find((x) => x.index === index)
     if (!runningItem) return
     Object.assign(runningItem, payload)
   }
@@ -36,10 +40,10 @@ export async function downloadSongWithInk(options: DownloadSongOptions) {
   // 类似 Promise, 状态转换只能发生一次
   const moveToComplete = once((payload: Pick<CompletedItem, 'success' | 'skip'>) => {
     // running
-    const idx = inkState.running.findIndex((x) => x.index === index)
-    if (idx !== -1) inkState.running.splice(idx, 1)
+    const idx = store.running.findIndex((x) => x.index === index)
+    if (idx !== -1) store.running.splice(idx, 1)
     // completed
-    inkState.completed.push({ ...options, index, ...payload })
+    store.completed.push({ ...options, index, ...payload })
   })
 
   // 成功, 可能会调用多次, 不知为何
@@ -66,14 +70,17 @@ export async function downloadSongWithInk(options: DownloadSongOptions) {
     })
   }
 
+  if (song.isFreeTrial && skipTrial) {
+    return moveToComplete({ success: false, skip: true })
+  }
+
   let skip = false
   try {
     ;({ skip } = await dl({
       url,
       file,
       skipExists,
-      onprogress(p) {
-        const { percent } = p
+      onprogress({ percent }) {
         if (percent === 1) {
           success()
         } else {
@@ -119,22 +126,12 @@ function useNow(updateInterval = 100) {
 }
 
 function App() {
-  const { completed, running } = useSnapshot(inkState)
+  const { completed, running } = useSnapshot(store)
   const now = useNow()
 
   return (
     <>
-      <Static items={completed}>
-        {(item) => {
-          return (
-            <Text key={item.index}>
-              {item.success ? logSymbols.success : logSymbols.error} {item.song.index}/{item.totalLength}{' '}
-              {item.success ? (item.skip ? '下载跳过' : '下载成功') : '下载失败'} {item.file}
-            </Text>
-          )
-        }}
-      </Static>
-
+      <Static items={completed}>{(item) => <CompletedItemDisplay key={item.url} item={item} />}</Static>
       {running.map((item) => {
         return (
           <Text key={item.index}>
@@ -155,6 +152,24 @@ function App() {
         )
       })}
     </>
+  )
+}
+
+function CompletedItemDisplay({ item }: { item: CompletedItem }) {
+  const symbol = useMemo(() => {
+    if (item.song.isFreeTrial && item.skipTrial) return logSymbols.warning
+    return item.success ? logSymbols.success : logSymbols.error
+  }, [item])
+
+  const statusText = useMemo(() => {
+    if (item.song.isFreeTrial && item.skipTrial) return '跳过试听'
+    return item.success ? (item.skip ? '下载跳过' : '下载成功') : '下载失败'
+  }, [item])
+
+  return (
+    <Text key={item.url}>
+      {symbol} {item.song.index}/{item.totalLength} {statusText} {item.file}
+    </Text>
   )
 }
 

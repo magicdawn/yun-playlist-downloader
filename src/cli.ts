@@ -4,6 +4,7 @@ import { createRequire } from 'node:module'
 import path from 'node:path'
 import CliTable from 'cli-table3'
 import { dl } from 'dl-vampire'
+import { delay } from 'es-toolkit'
 import filenamify from 'filenamify'
 import humanizeDuration from 'humanize-duration'
 import logSymbols from 'log-symbols'
@@ -127,6 +128,12 @@ yargs(hideBin(process.argv))
             type: 'string',
             default: DEFAULT_COOKIE_FILE,
           },
+
+          skipTrial: {
+            desc: '跳过试听歌曲',
+            type: 'boolean',
+            default: false,
+          },
         })
         .config(config)
         .example(`$0 'https://music.163.com/#/playlist?id=7392714527'`, '下载歌单')
@@ -164,10 +171,22 @@ type ExpectedArgv = {
   progress: boolean
   cover: boolean
   cookie: string
+  skipTrial: boolean
 }
 
 async function defaultCommandAction(options: ExpectedArgv) {
-  let { concurrency, format, quality, retryTimeout, retryTimes, skip: skipExists, progress, cover, cookie } = options
+  let {
+    concurrency,
+    format,
+    quality,
+    retryTimeout,
+    retryTimes,
+    skip: skipExists,
+    progress,
+    cover,
+    cookie,
+    skipTrial,
+  } = options
 
   let url = z
     .union([z.string().url(), z.string().regex(/^\d+$/)], {
@@ -176,24 +195,25 @@ async function defaultCommandAction(options: ExpectedArgv) {
     .parse(options.url)
 
   const table = new CliTable({
-    head: [`${logSymbols.info} 当前参数`, '值'],
+    head: [`${logSymbols.info} 当前参数`, '值', '备注'],
   })
   table.push(
-    ['concurrency', concurrency],
-    ['format', format],
-    ['quality', quality],
-    ['retry-timeout', retryTimeout],
-    ['retry-times', retryTimes],
-    ['skip', skipExists],
-    ['progress', progress],
-    ['cover', cover],
-    ['cookie', cookie],
+    ['concurrency', concurrency, '同时下载数量'],
+    ['format', format, '文件名模版'],
+    ['quality', quality, '音质(kbps)'],
+    ['retry-timeout', retryTimeout, '下载超时(分)'],
+    ['retry-times', retryTimes, '下载重试(次)'],
+    ['skip', skipExists, '跳过已下载正常文件'],
+    ['progress', progress, '显示进度条'],
+    ['cover', cover, '下载封面'],
+    ['cookie', cookie, 'cookie文件'],
+    ['skip-trial', skipTrial, '跳过试听歌曲'],
   )
   console.log(`${table.toString()}\n`)
 
   // process argv
   quality *= 1000
-  retryTimeout = ms(`${retryTimeout} minutes`)
+  retryTimeout = ms(`${retryTimeout}m`)
   readCookie(cookie)
 
   // only id as url provided
@@ -206,7 +226,7 @@ async function defaultCommandAction(options: ExpectedArgv) {
 
   // 基本信息
   const name = (await adapter.getTitle()) || ''
-  console.log(`${logSymbols.info} 正在下载『${name}』,请稍候...`)
+  console.log(`${logSymbols.info} 正在下载「${name}」,请稍候...`)
 
   // 封面
   if (cover) {
@@ -226,7 +246,6 @@ async function defaultCommandAction(options: ExpectedArgv) {
 
   const removed = songs.filter((x) => !x.url)
   const keeped = songs.filter((x) => x.url) as SongValid[]
-
   if (removed.length) {
     console.log(`${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`)
     for (const i of removed) {
@@ -238,7 +257,8 @@ async function defaultCommandAction(options: ExpectedArgv) {
   // process.exit()
 
   // 开始下载
-  console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length} 首`)
+  const freeTrialCount = keeped.filter((x) => x.isFreeTrial).length
+  console.log(`${logSymbols.info} 可下载 ${keeped.length}/${songs.length}, 试听 ${freeTrialCount}/${keeped.length}`)
 
   // fix index
   const len = keeped.length.toString().length
@@ -260,13 +280,15 @@ async function defaultCommandAction(options: ExpectedArgv) {
         totalLength: keeped.length,
         retryTimeout,
         retryTimes,
-        skipExists,
         progress,
+        skipExists,
+        skipTrial,
       })
     },
     concurrency,
   )
 
+  await delay(100) // time for ink render (moveToComplete)
   const dur = humanizeDuration(Date.now() - start, { language: 'zh_CN' })
   console.log('下载完成, 耗时%s', dur)
   process.exit(0)

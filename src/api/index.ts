@@ -1,5 +1,4 @@
-import delay from 'delay'
-import { chunk } from 'es-toolkit'
+import { chunk, delay } from 'es-toolkit'
 import Api from 'NeteaseCloudMusicApi'
 import pmap from 'promise.map'
 import { COOKIE_CONTENT } from '$auth/cookie'

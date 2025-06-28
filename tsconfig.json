@@ -2,6 +2,7 @@
   "include": ["./src"],
   "compilerOptions": {
     "rootDir": "src",
+    "outDir": "lib",
     "baseUrl": "./",
     "paths": {
       "$*": ["src/*", "src/*/"]
@@ -22,7 +23,6 @@
 
     "jsx": "react-jsx",
     "resolveJsonModule": true,
-    "outDir": "lib",
     "plugins": [
       // Transform paths in output .js files
       // not working for esm

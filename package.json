@@ -67,7 +67,7 @@
     "zod-validation-error": "^3.5.2"
   },
   "devDependencies": {
-    "@magicdawn/eslint-config": "^1.5.4",
+    "@magicdawn/eslint-config": "^1.5.5",
     "@magicdawn/prettier-config": "^0.1.0",
     "@types/debug": "^4.1.12",
     "@types/fs-extra": "^11.0.4",

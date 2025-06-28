@@ -2,7 +2,6 @@
   "include": ["./src"],
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "lib",
     "baseUrl": "./",
     "paths": {
       "$*": ["src/*", "src/*/"]
@@ -14,7 +13,6 @@
     "moduleResolution": "Bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
 
     // typecheck
     "strict": true,
@@ -23,6 +21,8 @@
     "types": ["node", "vitest/globals"],
 
     "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "outDir": "lib",
     "plugins": [
       // Transform paths in output .js files
       // not working for esm

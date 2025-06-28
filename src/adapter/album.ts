@@ -1,5 +1,5 @@
 import { album } from '$api'
-import { Album, Song, SongData } from '$define'
+import type { Album, Song, SongData } from '$define'
 import { BaseAdapter } from './base'
 
 export class AlbumAdapter extends BaseAdapter {

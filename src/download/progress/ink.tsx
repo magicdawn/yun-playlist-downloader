@@ -1,11 +1,11 @@
-import { DownloadSongOptions } from '$index'
 import { dl } from 'dl-vampire'
-import { Instance, Static, Text, render } from 'ink'
-import Spinner from 'ink-spinner'
 import { once } from 'es-toolkit'
+import { render, Static, Text, type Instance } from 'ink'
+import Spinner from 'ink-spinner'
 import logSymbols from 'log-symbols'
 import { useEffect, useState } from 'react'
 import { proxy, useSnapshot } from 'valtio'
+import type { DownloadSongOptions } from '$index'
 
 type CompletedItem = DownloadSongOptions & { index: number; success: boolean; skip?: boolean }
 type RunningItem = DownloadSongOptions & {
@@ -83,12 +83,12 @@ export async function downloadSongWithInk(options: DownloadSongOptions) {
       retry: {
         timeout: retryTimeout,
         times: retryTimes,
-        onerror: function (e, i) {
+        onerror(e, i) {
           retry(i)
         },
       },
     }))
-  } catch (e) {
+  } catch {
     fail()
     return
   }
@@ -128,9 +128,8 @@ function App() {
         {(item) => {
           return (
             <Text key={item.index}>
-              {item.success ? logSymbols.success : logSymbols.error} {item.song.index}/
-              {item.totalLength} {item.success ? (item.skip ? '下载跳过' : '下载成功') : '下载失败'}{' '}
-              {item.file}
+              {item.success ? logSymbols.success : logSymbols.error} {item.song.index}/{item.totalLength}{' '}
+              {item.success ? (item.skip ? '下载跳过' : '下载成功') : '下载失败'} {item.file}
             </Text>
           )
         }}
@@ -149,8 +148,7 @@ function App() {
             )}{' '}
             {item.song.index}/{item.totalLength} 下载中
             {'   '}
-            <ProgressBar progress={item.progress} />{' '}
-            {`(${Math.round(item.progress * 100)}%)`.padStart(5, ' ')}{' '}
+            <ProgressBar progress={item.progress} /> {`(${Math.round(item.progress * 100)}%)`.padStart(5, ' ')}{' '}
             {item.retry ? `第${item.retry}次重试中 ` : null}
             {item.file}
           </Text>

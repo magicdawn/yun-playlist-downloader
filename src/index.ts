@@ -1,11 +1,10 @@
-import { Song } from '$define'
+import path from 'node:path'
 import { dl } from 'dl-vampire'
 import filenamify from 'filenamify'
 import LogSymbols from 'log-symbols'
-import path from 'path'
+import type { Song } from '$define'
 import { AlbumAdapter } from './adapter/album'
-import { BaseAdapter } from './adapter/base'
-import { DjradioAdapter, ProgramSong } from './adapter/djradio'
+import { DjradioAdapter, type ProgramSong } from './adapter/djradio'
 import { PlaylistAdapter } from './adapter/playlist'
 import { downloadSongWithInk } from './download/progress/ink'
 
@@ -54,7 +53,7 @@ export interface DownloadSongOptions {
   skipExists: boolean
 }
 
-export async function downloadSong(options: DownloadSongOptions & { progress?: boolean }) {
+export function downloadSong(options: DownloadSongOptions & { progress?: boolean }) {
   const { progress } = options
   if (progress) {
     return downloadSongWithInk(options)
@@ -76,7 +75,7 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
       retry: {
         timeout: retryTimeout,
         times: retryTimes,
-        onerror: function (e, i) {
+        onerror(e, i) {
           console.log(`${LogSymbols.warning} ${song.index}/${totalLength}  ${i + 1}次失败 ${file}`)
         },
       },
@@ -87,9 +86,7 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
     return
   }
 
-  console.log(
-    `${LogSymbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`,
-  )
+  console.log(`${LogSymbols.success} ${song.index}/${totalLength} ${skip ? '下载跳过' : '下载成功'} ${file}`)
 }
 
 /**
@@ -100,7 +97,7 @@ export function getType(url: string): AdapterItem {
   if (item) return item
 
   // #/radio & #/djradio 是一样的
-  if (/#\/radio/.exec(url)) {
+  if (/#\/radio/.test(url)) {
     return adapterList.find((item) => item.type === 'djradio')!
   }
 
@@ -138,7 +135,7 @@ export function getFileName({
     const keys: (keyof AdapterItem)[] = ['typeText', 'type']
     keys.forEach((t) => {
       const val = filenamify(String(adapterItem[t]))
-      format = format.replace(new RegExp(':' + t, 'ig'), val)
+      format = format.replaceAll(new RegExp(`:${t}`, 'gi'), val)
     })
   }
 
@@ -147,20 +144,20 @@ export function getFileName({
   const keys = ['songName', 'singer', 'albumName', 'rawIndex', 'index', 'ext'] satisfies SongKey[]
   keys.forEach((token) => {
     const val = filenamify(String(song[token]))
-    format = format.replace(new RegExp(':' + token, 'ig'), val)
+    format = format.replaceAll(new RegExp(`:${token}`, 'gi'), val)
   })
 
   // name
-  format = format.replace(new RegExp(':name', 'ig'), filenamify(name))
+  format = format.replaceAll(/:name/gi, filenamify(name))
 
   // djradio only
   if (adapterItem.type === 'djradio') {
     const { programDate, programOrder } = song as ProgramSong
     if (programDate) {
-      format = format.replace(new RegExp(':programDate'), filenamify(programDate))
+      format = format.replace(/:programDate/, filenamify(programDate))
     }
     if (programOrder) {
-      format = format.replace(new RegExp(':programOrder'), filenamify(programOrder.toString()))
+      format = format.replace(/:programOrder/, filenamify(programOrder.toString()))
     }
   }
 

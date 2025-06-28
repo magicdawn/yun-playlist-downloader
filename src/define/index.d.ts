@@ -1,5 +1,7 @@
-import { Track } from './playlist-detail.js'
-import { SongPlayUrlInfo } from './song-url-info.js'
+import type { Track } from './playlist-detail.js'
+import type { SongPlayUrlInfo } from './song-url-info.js'
+
+import type { SetRequired } from 'type-fest'
 
 export { Album } from './album.js'
 export { DjradioProgram } from './djradio.js'
@@ -34,8 +36,6 @@ export type Song = {
   // rawIndex: 0,1 ...
   rawIndex: number
 }
-
-import { type SetRequired } from 'type-fest'
 export type SongValid = SetRequired<Song, 'url' | 'ext'>
 
 export type SongData = Track

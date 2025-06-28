@@ -1,25 +1,25 @@
 #!/usr/bin/env node
 
-import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
-import { baseDebug } from '$common'
-import { SongValid } from '$define'
+import { createRequire } from 'node:module'
+import path from 'node:path'
 import CliTable from 'cli-table3'
 import { dl } from 'dl-vampire'
 import filenamify from 'filenamify'
 import humanizeDuration from 'humanize-duration'
 import logSymbols from 'log-symbols'
-import { createRequire } from 'module'
 import ms from 'ms'
-import path from 'path'
 import pmap from 'promise.map'
 import rcFactory from 'rc'
-import { PackageJson } from 'type-fest'
 import updateNotifier from 'update-notifier'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
 import { z, ZodError } from 'zod'
 import { fromError } from 'zod-validation-error'
+import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
+import { baseDebug } from '$common'
+import type { SongValid } from '$define'
 import { downloadSong, getAdapter, getFileName } from './index'
+import type { PackageJson } from 'type-fest'
 
 const debug = baseDebug.extend('cli')
 
@@ -167,17 +167,7 @@ type ExpectedArgv = {
 }
 
 async function defaultCommandAction(options: ExpectedArgv) {
-  let {
-    concurrency,
-    format,
-    quality,
-    retryTimeout,
-    retryTimes,
-    skip: skipExists,
-    progress,
-    cover,
-    cookie,
-  } = options
+  let { concurrency, format, quality, retryTimeout, retryTimes, skip: skipExists, progress, cover, cookie } = options
 
   let url = z
     .union([z.string().url(), z.string().regex(/^\d+$/)], {
@@ -199,7 +189,7 @@ async function defaultCommandAction(options: ExpectedArgv) {
     ['cover', cover],
     ['cookie', cookie],
   )
-  console.log(table.toString() + '\n')
+  console.log(`${table.toString()}\n`)
 
   // process argv
   quality *= 1000
@@ -239,7 +229,7 @@ async function defaultCommandAction(options: ExpectedArgv) {
 
   if (removed.length) {
     console.log(`${logSymbols.warning} [版权受限] 不可下载 ${removed.length}/${songs.length}`)
-    for (let i of removed) {
+    for (const i of removed) {
       console.log(`  ${i.singer} - ${i.songName}`)
     }
   }
@@ -261,7 +251,7 @@ async function defaultCommandAction(options: ExpectedArgv) {
     keeped,
     (song) => {
       // 文件名
-      const file = getFileName({ format: format, song: song, url: url, name: name })
+      const file = getFileName({ format, song, url, name })
       // 下载
       return downloadSong({
         url: song.url,

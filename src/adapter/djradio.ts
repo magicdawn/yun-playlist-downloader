@@ -1,6 +1,6 @@
-import { djradioPrograms } from '$api'
-import { DjradioProgram, Song } from '$define'
 import moment from 'moment'
+import { djradioPrograms } from '$api'
+import type { DjradioProgram, Song } from '$define'
 import { BaseAdapter } from './base'
 
 export interface ProgramSong extends Song {

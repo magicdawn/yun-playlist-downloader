@@ -1,6 +1,6 @@
-import { existsSync, readFileSync } from 'fs'
+import { existsSync, readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import logSymbols from 'log-symbols'
-import { resolve } from 'path'
 
 export const DEFAULT_COOKIE_FILE = 'yun.cookie.txt'
 

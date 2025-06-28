@@ -1,9 +1,9 @@
-import { songUrl } from '$api'
-import { Song, SongPlayUrlInfo } from '$define'
-import { getId } from '$util'
+import { extname } from 'node:path'
 import { invariant } from 'es-toolkit'
 import { get } from 'es-toolkit/compat'
-import { extname } from 'path'
+import { songUrl } from '$api'
+import { getId } from '$util'
+import type { Song, SongPlayUrlInfo } from '$define'
 
 export abstract class BaseAdapter {
   url: string
@@ -33,9 +33,7 @@ export abstract class BaseAdapter {
   /**
    * get songs detail
    */
-  getSongsFromData<T extends { name: string; playUrlInfo?: SongPlayUrlInfo }>(
-    songDatas: T[],
-  ): Song[] {
+  getSongsFromData<T extends { name: string; playUrlInfo?: SongPlayUrlInfo }>(songDatas: T[]): Song[] {
     // e.g 100 songDatas -> len = 3
     const len = String(songDatas.length).length
 
@@ -51,10 +49,7 @@ export abstract class BaseAdapter {
 
       return {
         // 歌手
-        singer:
-          (get(songData, 'ar.0.name') as string) ||
-          (get(songData, 'artists.0.name') as string) ||
-          '',
+        singer: (get(songData, 'ar.0.name') as string) || (get(songData, 'artists.0.name') as string) || '',
 
         // 歌曲名
         songName: songData.name,
@@ -95,7 +90,7 @@ export abstract class BaseAdapter {
       all: WithOptionalPlayUrlInfo[]
     } = { songs: [], removed: [], all: [] }
 
-    for (let songData of songDatas) {
+    for (const songData of songDatas) {
       const { id } = songData
       const info = playUrlInfos.find((x) => String(x.id) === String(id))
 

@@ -1,10 +1,10 @@
-import { COOKIE_CONTENT } from '$auth/cookie'
-import { baseDebug } from '$common'
-import { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '$define'
-import Api from 'NeteaseCloudMusicApi'
 import delay from 'delay'
 import { chunk } from 'es-toolkit'
+import Api from 'NeteaseCloudMusicApi'
 import pmap from 'promise.map'
+import { COOKIE_CONTENT } from '$auth/cookie'
+import { baseDebug } from '$common'
+import type { Album, DjradioProgram, Playlist, SongData, SongPlayUrlInfo } from '$define'
 
 const debug = baseDebug.extend('api:index')
 
@@ -120,11 +120,7 @@ export async function songUrl(ids: Id[], quality?: string | number) {
   }
 
   const chunks = chunk(ids, BATCH_ID_SIZE)
-  const infosArr = await pmap(
-    chunks,
-    (chunk) => singleRequest(chunk.join(',')),
-    BATCH_ID_CONCURRENCY,
-  )
+  const infosArr = await pmap(chunks, (chunk) => singleRequest(chunk.join(',')), BATCH_ID_CONCURRENCY)
   return infosArr.flat()
 }
 
@@ -145,7 +141,7 @@ export async function album(id: Id) {
 
 export async function djradioPrograms(id: Id) {
   let hasMore = true
-  let pagesize = 100
+  const pagesize = 100
   let pagenum = 1
   let allPrograms: DjradioProgram[] = []
 

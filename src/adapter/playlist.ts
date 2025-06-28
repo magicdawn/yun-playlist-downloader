@@ -1,5 +1,5 @@
 import { playlistDetail, songDetail } from '$api'
-import { Playlist } from '$define'
+import type { Playlist } from '$define'
 import { BaseAdapter } from './base'
 
 export class PlaylistAdapter extends BaseAdapter {

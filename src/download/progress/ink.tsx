@@ -6,6 +6,7 @@ import logSymbols from 'log-symbols'
 import { useEffect, useMemo, useState } from 'react'
 import { proxy, useSnapshot } from 'valtio'
 import type { DownloadSongOptions } from '$index'
+import { removeFileNameFromTracker } from '../../index'
 
 type CompletedItem = DownloadSongOptions & {
   index: number
@@ -26,6 +27,8 @@ const store = proxy<{ completed: CompletedItem[]; running: RunningItem[] }>({
 
 export async function downloadSongWithInk(options: DownloadSongOptions) {
   const { url, file, song, totalLength, retryTimeout, retryTimes, skipExists, skipTrial } = options
+  const expectedSize =
+    song.raw && song.raw.playUrlInfo && song.raw.playUrlInfo.size ? Number(song.raw.playUrlInfo.size) : null
 
   renderApp()
   const index = song.rawIndex
@@ -44,6 +47,8 @@ export async function downloadSongWithInk(options: DownloadSongOptions) {
     if (idx !== -1) store.running.splice(idx, 1)
     // completed
     store.completed.push({ ...options, index, ...payload })
+    // 判重数据移除
+    removeFileNameFromTracker(file, expectedSize)
   })
 
   // 成功, 可能会调用多次, 不知为何
@@ -71,7 +76,8 @@ export async function downloadSongWithInk(options: DownloadSongOptions) {
   }
 
   if (song.isFreeTrial && skipTrial) {
-    return moveToComplete({ success: false, skip: true })
+    moveToComplete({ success: false, skip: true })
+    return
   }
 
   let skip = false

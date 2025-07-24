@@ -19,7 +19,7 @@ import { fromError } from 'zod-validation-error'
 import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
 import { baseDebug } from '$common'
 import type { SongValid } from '$define'
-import { downloadSong, getAdapter, getFileName } from './index'
+import { downloadSong, getAdapter, getFileName, resetFileNameTracker, SKIP_DOWNLOAD } from './index'
 import type { PackageJson } from 'type-fest'
 
 const debug = baseDebug.extend('cli')
@@ -267,23 +267,34 @@ async function defaultCommandAction(options: ExpectedArgv) {
     item.index = String(index + 1).padStart(len, '0') // index, first as 01
   })
 
+  // 重置文件名跟踪器，避免重名文件问题
+  resetFileNameTracker()
+
   await pmap(
     keeped,
     (song) => {
       // 文件名
       const file = getFileName({ format, song, url, name })
+      // 如果文件已存在且大小一致，跳过下载
+      if (file === SKIP_DOWNLOAD) {
+        console.log(`${logSymbols.success} 跳过已存在文件: ${song.singer} - ${song.songName}`)
+        return Promise.resolve()
+      }
       // 下载
-      return downloadSong({
-        url: song.url,
-        file,
-        song,
-        totalLength: keeped.length,
-        retryTimeout,
-        retryTimes,
-        progress,
-        skipExists,
-        skipTrial,
-      })
+      if (typeof file === 'string') {
+        return downloadSong({
+          url: song.url,
+          file,
+          song,
+          totalLength: keeped.length,
+          retryTimeout,
+          retryTimes,
+          progress,
+          skipExists,
+          skipTrial,
+        })
+      }
+      return Promise.resolve()
     },
     concurrency,
   )

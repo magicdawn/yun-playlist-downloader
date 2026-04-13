@@ -1,13 +1,11 @@
 {
   "compilerOptions": {
     "paths": {
-      "$*": ["./src/*", "./src/*/"]
+      "$*": ["./src/*"]
     },
-    // module
-    "target": "es2022", // vitest -> vite:esbuild -> warning: Unrecognized target environment "es2023"
+    "target": "es2025",
     "module": "preserve",
     "moduleResolution": "bundler",
-    // typecheck
     "strict": true,
     "noImplicitOverride": true,
     "skipLibCheck": true,

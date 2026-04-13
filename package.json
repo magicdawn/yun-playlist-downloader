@@ -34,8 +34,8 @@
   "scripts": {
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "dev": "tsdown --watch",
+    "build": "tsdown",
     "test": "vitest run",
     "test:watch": "vitest",
     "test-cover": "vitest run --coverage",
@@ -80,10 +80,9 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.2",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.21.7",
     "type-fest": "^5.5.0",
     "typescript": "^6.0.2",
-    "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.4"
   },
   "lint-staged": {

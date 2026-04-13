@@ -1,8 +1,9 @@
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  resolve: {},
-  // plugins: [tsconfigPaths()],
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: {
     globals: true,
     testTimeout: 60000,

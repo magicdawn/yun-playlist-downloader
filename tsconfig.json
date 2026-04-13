@@ -1,29 +1,18 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
-      "$*": ["src/*", "src/*/"]
+      "$*": ["./src/*", "./src/*/"]
     },
-
     // module
     "target": "es2022", // vitest -> vite:esbuild -> warning: Unrecognized target environment "es2023"
-    "module": "esnext",
+    "module": "preserve",
     "moduleResolution": "bundler",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-
     // typecheck
     "strict": true,
     "noImplicitOverride": true,
     "skipLibCheck": true,
     "types": ["node", "vitest/globals"],
     "jsx": "react-jsx",
-    "resolveJsonModule": true,
-    "noEmit": true,
-    "plugins": [
-      // Transform paths in output .js files
-      // not working for esm
-      // { "transform": "typescript-transform-paths" }
-    ]
+    "noEmit": true
   }
 }

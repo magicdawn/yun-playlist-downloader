@@ -1,3 +1,3 @@
-import debug from 'debug'
+import { createDebug } from 'obug'
 
-export const baseDebug = debug('yun')
+export const baseDebug = createDebug('yun')

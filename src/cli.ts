@@ -14,18 +14,19 @@ import rcFactory from 'rc'
 import updateNotifier from 'update-notifier'
 import { hideBin } from 'yargs/helpers'
 import yargs from 'yargs/yargs'
-import { z, ZodError } from 'zod'
-import { fromError } from 'zod-validation-error'
+import { z } from 'zod'
 import { DEFAULT_COOKIE_FILE, readCookie } from '$auth/cookie'
 import { baseDebug } from '$common'
-import type { SongValid } from '$define'
 import { downloadSong, getAdapter, getFileName } from './index'
 import type { PackageJson } from 'type-fest'
+import type { SongValid } from '$define'
+
+z.config(z.locales.zhCN())
 
 const debug = baseDebug.extend('cli')
 
-const _require = createRequire(__filename)
-const rawPackageJson = _require('../package.json')
+const require = createRequire(__filename)
+const rawPackageJson = require('../package.json')
 const { version } = rawPackageJson as PackageJson
 
 // check update
@@ -142,18 +143,8 @@ yargs(hideBin(process.argv))
         .example('$0 -f ":singer - :songName.:ext" <url>', '下载文件名为 "歌手 - 歌名"')
         .epilog('帮助 & 文档: https://github.com/magicdawn/yun-playlist-downloader')
     },
-    async (parsed) => {
-      try {
-        await defaultCommandAction(parsed)
-      } catch (e) {
-        if (e instanceof ZodError) {
-          const validationError = fromError(e)
-          console.error(validationError.toString())
-          throw validationError
-        } else {
-          throw e
-        }
-      }
+    (options) => {
+      return defaultCommandAction(options)
     },
   )
   .version(version!)
@@ -188,11 +179,18 @@ async function defaultCommandAction(options: ExpectedArgv) {
     skipTrial,
   } = options
 
-  let url = z
-    .union([z.string().url(), z.string().regex(/^\d+$/)], {
-      errorMap: () => ({ message: 'url 参数错误: 支持 url 或 歌单ID' }),
-    })
-    .parse(options.url)
+  const urlResult = z
+    .union([z.url(), z.string().trim().regex(/^\d+$/)], 'url 参数错误: 支持 url 或 歌单ID')
+    .safeParse(options.url)
+  if (!urlResult.success) {
+    console.error(z.prettifyError(urlResult.error))
+    process.exit(1)
+  }
+  let url = urlResult.data
+  // only id as url provided
+  if (url && /^\d+$/.test(url)) {
+    url = `https://music.163.com/#/playlist?id=${url}`
+  }
 
   const table = new CliTable({
     head: [`${logSymbols.info} 当前参数`, '值', '备注'],
@@ -215,11 +213,6 @@ async function defaultCommandAction(options: ExpectedArgv) {
   quality *= 1000
   retryTimeout = ms(`${retryTimeout}m`)
   readCookie(cookie)
-
-  // only id as url provided
-  if (url && /^\d+$/.test(url)) {
-    url = `https://music.163.com/#/playlist?id=${url}`
-  }
 
   const start = Date.now()
   const adapter = getAdapter(url)

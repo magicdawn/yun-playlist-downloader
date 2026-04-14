@@ -47,7 +47,7 @@
     "dl-vampire": "^2.1.7",
     "es-toolkit": "^1.45.1",
     "filenamify": "^7.0.1",
-    "got": "^15.0.1",
+    "got": "^15.0.2",
     "humanize-duration": "^3.33.2",
     "ink": "^7.0.0",
     "ink-spinner": "^5.0.0",
@@ -80,7 +80,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.2",
-    "tsdown": "^0.21.7",
+    "tsdown": "^0.21.8",
     "type-fest": "^5.5.0",
     "typescript": "^6.0.2",
     "vitest": "^4.1.4"

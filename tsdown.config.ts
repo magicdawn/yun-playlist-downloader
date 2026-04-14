@@ -8,8 +8,4 @@ export default defineConfig({
   shims: true,
   dts: false,
   fixedExtension: false,
-  deps: {
-    // https://github.com/rolldown/tsdown/issues/907
-    onlyBundle: ['tsdown'],
-  },
 })

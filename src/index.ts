@@ -2,11 +2,11 @@ import path from 'node:path'
 import { dl } from 'dl-vampire'
 import filenamify from 'filenamify'
 import logSymbols from 'log-symbols'
-import type { Song } from '$define'
 import { AlbumAdapter } from './adapter/album'
 import { DjradioAdapter, type ProgramSong } from './adapter/djradio'
 import { PlaylistAdapter } from './adapter/playlist'
 import { downloadSongWithInk } from './download/progress/ink'
+import type { Song } from '$define'
 
 /**
  * page type
@@ -71,7 +71,7 @@ export async function downloadSongPlain(options: DownloadSongOptions) {
     return
   }
 
-  let skip = false
+  let skip: boolean
   try {
     ;({ skip } = await dl({
       url,
